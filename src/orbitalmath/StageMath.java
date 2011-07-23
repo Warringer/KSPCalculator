@@ -2,7 +2,6 @@ package orbitalmath;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import constants.Constants;
@@ -115,7 +114,7 @@ public class StageMath {
 	/**
 	 * @return the combinedDV
 	 */
-	public double getCombinedDV() {
+	public double getDV() {
 		return DV;
 	}
 
@@ -123,7 +122,7 @@ public class StageMath {
 	/**
 	 * @return the combinedSI
 	 */
-	public double getCombinedSI() {
+	public double getSI() {
 		return SI;
 	}
 

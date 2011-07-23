@@ -49,6 +49,7 @@ public class Calculator extends javax.swing.JFrame {
 	private LaunchOrbitCalculatorPanel orbitLaunchCalculatorPanel1;
 	private OrbitDisplayFrame orbitDisplay;
 	private JLabel jLabel5;
+	private StageCalculator stageCalculator1;
 	private AbstractAction OkayAction;
 	private JButton OkayButton;
 	private JLabel jLabel4;
@@ -131,6 +132,7 @@ public class Calculator extends javax.swing.JFrame {
 				{
 					orbitLaunchCalculatorPanel1 = new LaunchOrbitCalculatorPanel();
 					jTabbedPane1.addTab("Launch Orbit", null, orbitLaunchCalculatorPanel1, null);
+					jTabbedPane1.addTab("Stage Calculator", null, getStageCalculator1(), null);
 				}
 			}
 			pack();
@@ -267,4 +269,11 @@ public class Calculator extends javax.swing.JFrame {
 	      }
 	      return hs;
 	   }
+	
+	private StageCalculator getStageCalculator1() {
+		if(stageCalculator1 == null) {
+			stageCalculator1 = new StageCalculator();
+		}
+		return stageCalculator1;
+	}
 }
