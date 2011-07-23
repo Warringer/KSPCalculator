@@ -60,8 +60,8 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 		}
 	}
 	
-	public void setOrbits(double apo, double peri) {
-		orbitDisplay1.setAlts((int) apo, (int) peri);
+	public void setOrbits(double apo, double peri, boolean hohmann) {
+		orbitDisplay1.setAlts((int) apo, (int) peri, hohmann);
 		this.setVisible(true);
 	}
 

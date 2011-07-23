@@ -79,7 +79,7 @@ public class Calculator extends javax.swing.JFrame {
 					jTabbedPane1.addTab("Elliptic Orbit", null, ellipticOrbitCalculatorPanel1, null);
 				}
 				{
-					hohmannTransferCalculatorPanel1 = new HohmannTransferCalculatorPanel();
+					hohmannTransferCalculatorPanel1 = new HohmannTransferCalculatorPanel(this);
 					jTabbedPane1.addTab("Hohmann Transfer Orbit", null, hohmannTransferCalculatorPanel1, null);
 				}
 				{
@@ -95,8 +95,8 @@ public class Calculator extends javax.swing.JFrame {
 		}
 	}
 	
-	public void setOrbitDisplay(double apo, double peri) {
-		orbitDisplay.setOrbits(apo, peri);
+	public void setOrbitDisplay(double apo, double peri, boolean hohmann) {
+		orbitDisplay.setOrbits(apo, peri, hohmann);
 	}
 
 }

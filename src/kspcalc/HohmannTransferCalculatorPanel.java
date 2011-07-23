@@ -33,9 +33,9 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 	private JTextField hohHiOrbAltField;
 	private JLabel jLabel1;
 	private JTextField hohLoOrbAltField;
-
-	private HohmannTransferCalculatorPanel panel;
 	private JLabel hohTransFinalVel;
+	private AbstractAction showOrbitAction;
+	private JButton showOrbitButton;
 	private JLabel hohTransInitVel;
 	private JLabel hohTransTimeOut;
 	private JLabel jLabel8;
@@ -56,20 +56,25 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 	private JRadioButton hohHiLoTransRadio;
 	private JRadioButton hohLoHiTransRadio;
 	private JLabel jLabel3;
-	private boolean kilometer;
-	private boolean upwards;
+	
+	private HohmannTransferCalculatorPanel panel;	// This Panel!
+	private Calculator frame;	// Display Frame
+	private boolean kilometer;	// Altitude in Kilometers?
+	private boolean upwards;	// Transfer Orbit direction?
+	private double apo, peri;	// Orbit Parameters 
 	
 	/**
 	* Auto-generated main method to display this 
 	* JPanel inside a new JFrame.
 	*/
 		
-	public HohmannTransferCalculatorPanel() {
+	public HohmannTransferCalculatorPanel(Calculator frame) {
 		super();
-		panel = this;
-		kilometer = false;
-		upwards = true;
-		initGUI();
+		this.panel = this;
+		this.kilometer = false;
+		this.upwards = true;
+		this.frame = frame;
+		this.initGUI();
 	}
 	
 	private void initGUI() {
@@ -79,6 +84,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 			this.setPreferredSize(new java.awt.Dimension(400, 300));
 			{
 				hohAltKiloRadio = new JRadioButton();
+				this.add(getShowOrbitButton(), new AnchorConstraint(325, 776, 398, 533, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransFinalVel(), new AnchorConstraint(728, 971, 775, 668, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransInitVel(), new AnchorConstraint(581, 348, 631, 58, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransTimeOut(), new AnchorConstraint(925, 958, 975, 718, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
@@ -307,6 +313,8 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 							loAltitude *= 1000d;
 							hiAltitude *= 1000d;
 						}
+						panel.apo = hiAltitude;
+						panel.peri = loAltitude;
 						HohmannTransferOrbit hohmann = new HohmannTransferOrbit(loAltitude, hiAltitude, panel.upwards);
 						panel.hohTransInjVelOut.setText("Final: " + Constants.formatVel(hohmann.getHohVelInjection()));
 						panel.hohTargetInjVelOut.setText("Initial: " + Constants.formatVel(hohmann.getHohVelExit()));
@@ -413,6 +421,32 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 			hohTransFinalVel.setPreferredSize(new java.awt.Dimension(121, 14));
 		}
 		return hohTransFinalVel;
+	}
+	
+	private JButton getShowOrbitButton() {
+		if(showOrbitButton == null) {
+			showOrbitButton = new JButton();
+			showOrbitButton.setText("Show Orbits");
+			showOrbitButton.setPreferredSize(new java.awt.Dimension(97, 22));
+			showOrbitButton.setAction(getShowOrbitAction());
+		}
+		return showOrbitButton;
+	}
+	
+	private AbstractAction getShowOrbitAction() {
+		if(showOrbitAction == null) {
+			showOrbitAction = new AbstractAction("Show Orbits", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8829065951929157204L;
+
+				public void actionPerformed(ActionEvent evt) {
+					panel.frame.setOrbitDisplay(panel.apo / 1000d, panel.peri / 1000d, true);
+				}
+			};
+		}
+		return showOrbitAction;
 	}
 
 }

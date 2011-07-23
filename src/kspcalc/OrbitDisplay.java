@@ -22,6 +22,7 @@ public class OrbitDisplay extends JComponent {
 	private int apogeeAlt;					// Apogee Altitude
 	private int perigeeAlt;					// Perigee Altitude
 	private int a, b;						// Axis of the Orbit
+	private boolean hohmann;				// Hohmann Transfer Orbit?
 
 	
 	/**
@@ -36,13 +37,15 @@ public class OrbitDisplay extends JComponent {
 		this.zoom = 2;
 		this.apogeeAlt = apo + this.planetSize;
 		this.perigeeAlt = peri + this.planetSize;
+		this.hohmann = false;
 		this.calcOrbit();
 	}
 
-	public void setAlts(int apo, int peri) {
+	public void setAlts(int apo, int peri, boolean hohmann) {
 		this.zoom = 2;
 		this.apogeeAlt = apo + this.planetSize;
 		this.perigeeAlt = peri + this.planetSize;
+		this.hohmann = hohmann;
 		this.calcOrbit();
 	}
 
@@ -178,7 +181,7 @@ public class OrbitDisplay extends JComponent {
 			this.a = (this.apogeeAlt + this.perigeeAlt) / 2;
 			this.b = (int) Math.sqrt(this.apogeeAlt * this.perigeeAlt);
 		}
-		while ((this.a + this.windowWidth) / (this.zoom) > this.windowWidth / 2) {
+		while ((this.apogeeAlt + this.windowWidth) / (this.zoom) > this.windowWidth / 2) {
 			this.zoom++;
 		}
 		System.out.println("Apogee: " + apogeeAlt + ", Perigee: "+ perigeeAlt);
@@ -211,11 +214,22 @@ public class OrbitDisplay extends JComponent {
 		this.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize / this.zoom, ig);
 		
 		// Paint Orbit
-		ig.setColor(Color.black);
+		if (this.hohmann) {
+			ig.setColor(Color.red);
+		} else {
+			ig.setColor(Color.black);
+		}
 		if (this.apogeeAlt == this.perigeeAlt) {
 			this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, ig);
 		} else {
 			this.drawEllipse(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, this.b / this.zoom , ig);
+		}
+		
+		// Paint Circular Orbits for the Hohmann Transfer Orbit
+		if (this.hohmann) {
+			ig.setColor(Color.black);
+			this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, ig);
+			this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, ig);
 		}
 		
 		ig.drawString("Zoom Factor: " + this.zoom + "x", 5, this.windowHeight - 30);
