@@ -1,9 +1,12 @@
 package kspcalc;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JTabbedPane;
 
 import javax.swing.*;
+
+import orbitalmath.Constants;
 
 
 /**
@@ -40,7 +43,22 @@ public class Calculator extends javax.swing.JFrame {
 	private EllipticOrbitCalculatorPanel ellipticOrbitCalculatorPanel1;
 	private LaunchOrbitCalculatorPanel orbitLaunchCalculatorPanel1;
 	private OrbitDisplayFrame orbitDisplay;
+	private JLabel jLabel5;
+	private AbstractAction OkayAction;
+	private JButton OkayButton;
+	private JLabel jLabel4;
+	private JLabel versionLabel;
+	private JLabel jLabel3;
+	private JLabel jLabel2;
+	private JLabel jLabel1;
+	private JMenu Help;
+	private JDialog AboutDialog;
+	private AbstractAction AboutAction;
+	private JMenuItem AboutItem;
+	private JMenuBar jMenuBar1;
 	
+	private Calculator frame;
+
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
@@ -60,12 +78,28 @@ public class Calculator extends javax.swing.JFrame {
 		orbitDisplay = new OrbitDisplayFrame(100, 100);
 		orbitDisplay.setLocationRelativeTo(null);
 		orbitDisplay.setVisible(false);
+		frame = this;
 	}
 	
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			this.setTitle("KSP Calculator");
+			{
+				jMenuBar1 = new JMenuBar();
+				setJMenuBar(jMenuBar1);
+				{
+					Help = new JMenu();
+					jMenuBar1.add(Help);
+					Help.setText("Help");
+					{
+						AboutItem = new JMenuItem();
+						Help.add(AboutItem);
+						AboutItem.setText("About");
+						AboutItem.setAction(getAboutAction());
+					}
+				}
+			}
 			{
 				jTabbedPane1 = new JTabbedPane();
 				getContentPane().add(jTabbedPane1, BorderLayout.CENTER);
@@ -88,7 +122,7 @@ public class Calculator extends javax.swing.JFrame {
 				}
 			}
 			pack();
-			this.setSize(480, 385);
+			this.setSize(476, 411);
 		} catch (Exception e) {
 		    //add your error handling code here
 			e.printStackTrace();
@@ -97,6 +131,102 @@ public class Calculator extends javax.swing.JFrame {
 	
 	public void setOrbitDisplay(double apo, double peri, boolean hohmann) {
 		orbitDisplay.setOrbits(apo, peri, hohmann);
+	}
+	
+	private AbstractAction getAboutAction() {
+		if(AboutAction == null) {
+			AboutAction = new AbstractAction("About", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 952771346385077936L;
+
+				public void actionPerformed(ActionEvent evt) {
+					frame.getAboutDialog().setVisible(true);
+				}
+			};
+		}
+		return AboutAction;
+	}
+	
+	private JDialog getAboutDialog() {
+		if(AboutDialog == null) {
+			AboutDialog = new JDialog(this);
+			AboutDialog.getContentPane().setLayout(null);
+			AboutDialog.setPreferredSize(new java.awt.Dimension(268, 195));
+			{
+				jLabel1 = new JLabel();
+				AboutDialog.getContentPane().add(jLabel1);
+				jLabel1.setText("Kerbal Space Program");
+				jLabel1.setBounds(43, 12, 205, 34);
+				jLabel1.setFont(new java.awt.Font("Arial",0,20));
+			}
+			{
+				jLabel2 = new JLabel();
+				AboutDialog.getContentPane().add(jLabel2);
+				jLabel2.setText("Calculator");
+				jLabel2.setBounds(98, 52, 109, 21);
+				jLabel2.setFont(new java.awt.Font("Arial",0,20));
+			}
+			{
+				jLabel3 = new JLabel();
+				AboutDialog.getContentPane().add(jLabel3);
+				jLabel3.setText("Version:");
+				jLabel3.setBounds(43, 89, 64, 15);
+			}
+			{
+				jLabel4 = new JLabel();
+				AboutDialog.getContentPane().add(jLabel4);
+				jLabel4.setText("by:");
+				jLabel4.setBounds(43, 110, 55, 15);
+			}
+			{
+				versionLabel = new JLabel();
+				AboutDialog.getContentPane().add(versionLabel);
+				AboutDialog.getContentPane().add(getJLabel5());
+				AboutDialog.getContentPane().add(getOkayButton());
+				versionLabel.setText(Constants.Version);
+				versionLabel.setBounds(106, 89, 85, 15);
+			}
+			AboutDialog.setSize(268, 195);
+		}
+		AboutDialog.setLocationRelativeTo(null);
+		return AboutDialog;
+	}
+	
+	private JLabel getJLabel5() {
+		if(jLabel5 == null) {
+			jLabel5 = new JLabel();
+			jLabel5.setText("Warringer");
+			jLabel5.setBounds(106, 110, 85, 15);
+		}
+		return jLabel5;
+	}
+	
+	private JButton getOkayButton() {
+		if(OkayButton == null) {
+			OkayButton = new JButton();
+			OkayButton.setText("Okay");
+			OkayButton.setBounds(106, 137, 44, 22);
+			OkayButton.setAction(getOkayAction());
+		}
+		return OkayButton;
+	}
+	
+	private AbstractAction getOkayAction() {
+		if(OkayAction == null) {
+			OkayAction = new AbstractAction("Okay", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8848019343344314900L;
+
+				public void actionPerformed(ActionEvent evt) {
+					frame.getAboutDialog().setVisible(false);
+				}
+			};
+		}
+		return OkayAction;
 	}
 
 }

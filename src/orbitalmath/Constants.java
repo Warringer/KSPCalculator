@@ -25,6 +25,9 @@ public final class Constants {
 	// KEarth Mass
 	public static final double MASS = 5.29E+22d;
 	
+	// KEarth Version
+	public static final String Version = "0.6.6";
+	
 	public static final double square(double d) {
 		return d * d;
 	}
