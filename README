@@ -1,0 +1,50 @@
+This program is intended as a calculator for the Kerbal Space Program.
+
+It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (experimental)
+
+Changelog:
+
+V0.7:
+
+Added a stage Calculator
+
+v0.6.6:
+
+Added Orbit Display Usability to the Hohmann Orbit Calculator
+Added a Help System
+
+v0.6.5:
+
+Fixed a little bug in the Elliptic Orbit Calculator
+Added an Orbit Display Utility
+
+v0.6:
+
+Added an Elliptic Orbit Calculator
+
+v0.5.1:
+
+Added startscripts for Windows and Linux
+Reworked the Math engine
+Added Initial and Final Velocities for each Velocity change in the Hohmann orbit
+
+V0.5:
+
+Added an experimantal Launch Orbit Calculator
+
+V0.4:
+
+Added a Delta-v and Orbital Period Display to the Hohmann Orbit Calculator
+
+V0.3:
+
+Reworked the Display Engine
+Added Hohmann Transfer Orbit Calculator
+
+V0.2:
+
+Added escape Velocity to the Circular Orbit Calculator
+
+V0.1:
+
+Added Orbit Calculator
