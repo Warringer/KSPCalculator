@@ -2,11 +2,12 @@ package kspcalc;
 
 import com.cloudgarden.layout.*;
 
+import constants.Constants;
+
 
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
-import orbitalmath.Constants;
 import orbitalmath.EllipticOrbit;
 import orbitalmath.EllipticOrbitCalcType;
 

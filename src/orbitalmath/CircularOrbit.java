@@ -1,5 +1,7 @@
 package orbitalmath;
 
+import constants.Constants;
+
 public class CircularOrbit {
 
 	private double Alt;	// Orbital Altitude

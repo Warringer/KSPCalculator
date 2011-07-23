@@ -3,6 +3,8 @@
  */
 package orbitalmath;
 
+import constants.Constants;
+
 /**
  * @author warringer
  *

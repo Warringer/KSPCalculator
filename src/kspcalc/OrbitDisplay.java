@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-import orbitalmath.Constants;
+import constants.Constants;
+
 
 public class OrbitDisplay extends JComponent {
 

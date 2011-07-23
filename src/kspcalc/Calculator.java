@@ -10,7 +10,8 @@ import javax.swing.*;
 import javax.help.*;
 import javax.help.CSH.DisplayHelpFromSource;
 
-import orbitalmath.Constants;
+import constants.Constants;
+
 
 
 /**

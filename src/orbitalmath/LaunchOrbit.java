@@ -1,5 +1,7 @@
 package orbitalmath;
 
+import constants.Constants;
+
 public class LaunchOrbit {
 	private double launchBurnVel;	// Burnout Velocity
 	private double launchBurnAlt;	// Burnout Altitude

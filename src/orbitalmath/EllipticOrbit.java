@@ -1,5 +1,7 @@
 package orbitalmath;
 
+import constants.Constants;
+
 public class EllipticOrbit {
 	private double ApoVel;	// Apogee Velocity
 	private double PerVel;	// Perigee Velocity
