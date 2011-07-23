@@ -1,10 +1,8 @@
 package kspcalc;
-import java.awt.event.ActionEvent;
 import java.util.HashMap;
 
-import javax.swing.JButton;
-
 import javax.swing.*;
+import javax.swing.event.*;
 
 import orbitalmath.StageMath;
 
@@ -37,12 +35,10 @@ public class StageCalculator extends javax.swing.JPanel {
 	private JLabel jLabel14;
 	private JLabel jLabel13;
 	private JLabel jLabel12;
-	private JButton doCalcButton;
 	private JLabel jLabel11;
 	private JSpinner SASSpinner;
 	private JLabel jLabel10;
 	private JSpinner eSFBSpinner;
-	private AbstractAction doCalcAction;
 	private JLabel jLabel9;
 	private JLabel jLabel8;
 	private JSpinner RadialSpinner;
@@ -66,19 +62,8 @@ public class StageCalculator extends javax.swing.JPanel {
 	private JSpinner CPSpinner;
 	
 	private StageCalculator panel;
+	private ChangeListener SpinnerListener;
 
-	/**
-	* Auto-generated main method to display this 
-	* JPanel inside a new JFrame.
-	*/
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.getContentPane().add(new StageCalculator());
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
-	}
-	
 	public StageCalculator() {
 		super();
 		this.panel = this;
@@ -106,6 +91,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(ChuteSpinner);
 				ChuteSpinner.setModel(ChuteSpinnerModel);
 				ChuteSpinner.setBounds(24, 33, 40, 22);
+				ChuteSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				SpinnerNumberModel CPSpinnerModel = new SpinnerNumberModel(value, min, max, step);
@@ -113,6 +99,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(CPSpinner);
 				CPSpinner.setModel(CPSpinnerModel);
 				CPSpinner.setBounds(24, 55, 40, 22);
+				CPSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				SpinnerNumberModel LFTSpinnerModel = new SpinnerNumberModel(value, min, max, step);
@@ -120,6 +107,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(LFTSpinner);
 				LFTSpinner.setModel(LFTSpinnerModel);
 				LFTSpinner.setBounds(24, 77, 40, 22);
+				LFTSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel2 = new JLabel();
@@ -145,6 +133,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(LFESpinner);
 				LFESpinner.setModel(LFESpinnerModel);
 				LFESpinner.setBounds(24, 99, 40, 22);
+				LFESpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel5 = new JLabel();
@@ -158,6 +147,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(SRBSpinner);
 				SRBSpinner.setModel(SRBSpinnerModel);
 				SRBSpinner.setBounds(24, 121, 40, 22);
+				SRBSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel6 = new JLabel();
@@ -171,6 +161,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(StackSpinner);
 				StackSpinner.setModel(StackSpinnerModel);
 				StackSpinner.setBounds(24, 145, 40, 22);
+				StackSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel7 = new JLabel();
@@ -184,6 +175,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(RadialSpinner);
 				RadialSpinner.setModel(RadialSpinnerModel);
 				RadialSpinner.setBounds(24, 169, 40, 22);
+				RadialSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel8 = new JLabel();
@@ -197,6 +189,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(TriSpinner);
 				TriSpinner.setModel(TriSpinnerModel);
 				TriSpinner.setBounds(24, 193, 40, 22);
+				TriSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel9 = new JLabel();
@@ -210,6 +203,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(eSFBSpinner);
 				eSFBSpinner.setModel(eSFBSpinnerModel);
 				eSFBSpinner.setBounds(24, 215, 40, 22);
+				eSFBSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel10 = new JLabel();
@@ -223,6 +217,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				this.add(SASSpinner);
 				SASSpinner.setModel(SASSpinnerModel);
 				SASSpinner.setBounds(24, 239, 40, 22);
+				SASSpinner.addChangeListener(getSpinnerListener());
 			}
 			{
 				jLabel11 = new JLabel();
@@ -231,125 +226,122 @@ public class StageCalculator extends javax.swing.JPanel {
 				jLabel11.setBounds(70, 242, 125, 15);
 			}
 			{
-				doCalcButton = new JButton();
-				this.add(doCalcButton);
-				doCalcButton.setText("Calculate");
-				doCalcButton.setBounds(236, 33, 95, 22);
-				doCalcButton.setAction(getDoCalcAction());
-			}
-			{
 				jLabel12 = new JLabel();
 				this.add(jLabel12);
 				jLabel12.setText("Stage Weight:");
-				jLabel12.setBounds(236, 66, 108, 15);
+				jLabel12.setBounds(234, 36, 108, 15);
 			}
 			{
 				jLabel13 = new JLabel();
 				this.add(jLabel13);
 				jLabel13.setText("before Burnout:");
-				jLabel13.setBounds(244, 84, 107, 15);
+				jLabel13.setBounds(242, 54, 107, 15);
 			}
 			{
 				jLabel14 = new JLabel();
 				this.add(jLabel14);
 				jLabel14.setText("after Burnout:");
-				jLabel14.setBounds(244, 115, 107, 15);
+				jLabel14.setBounds(242, 85, 107, 15);
 			}
 			{
 				massIOut = new JLabel();
 				this.add(massIOut);
 				massIOut.setText("0.0 tons");
-				massIOut.setBounds(256, 102, 89, 15);
+				massIOut.setBounds(254, 72, 89, 15);
 			}
 			{
 				massFOut = new JLabel();
 				this.add(massFOut);
 				massFOut.setText("0.0 tons");
-				massFOut.setBounds(256, 136, 89, 15);
+				massFOut.setBounds(254, 106, 89, 15);
 			}
 			{
 				jLabel15 = new JLabel();
 				this.add(jLabel15);
 				jLabel15.setText("Thrust:");
-				jLabel15.setBounds(236, 157, 76, 15);
+				jLabel15.setBounds(234, 127, 76, 15);
 			}
 			{
 				thrustOut = new JLabel();
 				this.add(thrustOut);
 				thrustOut.setText("0 kNewton");
-				thrustOut.setBounds(312, 157, 93, 15);
+				thrustOut.setBounds(310, 127, 93, 15);
 			}
 			{
 				jLabel16 = new JLabel();
 				this.add(jLabel16);
-				jLabel16.setText("SI:");
-				jLabel16.setBounds(236, 178, 76, 15);
+				jLabel16.setText("Specific Impulse:");
+				jLabel16.setBounds(234, 148, 115, 15);
 			}
 			{
 				siOut = new JLabel();
 				this.add(siOut);
-				siOut.setText("0");
-				siOut.setBounds(312, 178, 93, 15);
+				siOut.setText("0 s");
+				siOut.setBounds(310, 163, 93, 15);
 			}
 			{
 				jLabel17 = new JLabel();
 				this.add(jLabel17);
 				jLabel17.setText("Delta-v:");
-				jLabel17.setBounds(236, 199, 76, 15);
+				jLabel17.setBounds(234, 184, 76, 15);
 			}
 			{
 				dvOut = new JLabel();
 				this.add(dvOut);
 				dvOut.setText("0.0 m/s");
-				dvOut.setBounds(312, 199, 93, 15);
+				dvOut.setBounds(310, 184, 93, 15);
 			}
 			{
 				jLabel18 = new JLabel();
 				this.add(jLabel18);
 				jLabel18.setText("Thrust to Weight Ratio:");
-				jLabel18.setBounds(236, 220, 144, 15);
+				jLabel18.setBounds(234, 205, 144, 15);
 			}
 			{
 				twrOut = new JLabel();
 				this.add(twrOut);
 				twrOut.setText("0.0");
-				twrOut.setBounds(312, 242, 93, 15);
+				twrOut.setBounds(310, 227, 93, 15);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private AbstractAction getDoCalcAction() {
-		if(doCalcAction == null) {
-			doCalcAction = new AbstractAction("Calculate", null) {
-				public void actionPerformed(ActionEvent evt) {
-					doMath(panel);
-				}
 
-				private void doMath(StageCalculator panel) {
-					HashMap<Parts, Integer> parts = new HashMap<Parts, Integer>();
-					parts.put(Parts.LFT, (Integer) panel.LFTSpinner.getValue());
-					parts.put(Parts.LFE, (Integer) panel.LFESpinner.getValue());
-					parts.put(Parts.SRB, (Integer) panel.SRBSpinner.getValue());
-					parts.put(Parts.SAS, (Integer) panel.SASSpinner.getValue());
-					parts.put(Parts.CP, (Integer) panel.CPSpinner.getValue());
-					parts.put(Parts.Radial, (Integer) panel.RadialSpinner.getValue());
-					parts.put(Parts.Stack, (Integer) panel.StackSpinner.getValue());
-					parts.put(Parts.Tri, (Integer) panel.TriSpinner.getValue());
-					parts.put(Parts.Chute, (Integer) panel.ChuteSpinner.getValue());
-					parts.put(Parts.EmptySRB, (Integer) panel.eSFBSpinner.getValue());
-					StageMath calc = new StageMath(parts, 0);
-					panel.massFOut.setText(Constants.formatDouble(calc.getCombinedMassF()) + " tons");
-					panel.massIOut.setText(Constants.formatDouble(calc.getCombinedMassI()) + " tons");
-					panel.thrustOut.setText(Constants.formatDouble(calc.getCombinedThrust()) + " kN");
-					panel.siOut.setText(Constants.formatDouble(calc.getSI()));
-					panel.twrOut.setText(Constants.formatDouble(calc.getTWR()));
-					panel.dvOut.setText(Constants.formatVel(calc.getDV()));
+	private ChangeListener getSpinnerListener() {
+		if (SpinnerListener == null) {
+			SpinnerListener = new ChangeListener() {
+				public void stateChanged(ChangeEvent evt) {
+					panel.doMath();
 				}
 			};
 		}
-		return doCalcAction;
+		return SpinnerListener;
+	}
+	
+	private void doMath() {
+		HashMap<Parts, Integer> parts = new HashMap<Parts, Integer>();
+		parts.put(Parts.LFT, (Integer) this.LFTSpinner.getValue());
+		parts.put(Parts.LFE, (Integer) this.LFESpinner.getValue());
+		parts.put(Parts.SRB, (Integer) this.SRBSpinner.getValue());
+		parts.put(Parts.SAS, (Integer) this.SASSpinner.getValue());
+		parts.put(Parts.CP, (Integer) this.CPSpinner.getValue());
+		parts.put(Parts.Radial, (Integer) this.RadialSpinner.getValue());
+		parts.put(Parts.Stack, (Integer) this.StackSpinner.getValue());
+		parts.put(Parts.Tri, (Integer) this.TriSpinner.getValue());
+		parts.put(Parts.Chute, (Integer) this.ChuteSpinner.getValue());
+		parts.put(Parts.EmptySRB, (Integer) this.eSFBSpinner.getValue());
+		StageMath calc = new StageMath(parts, 0);
+		this.massFOut.setText(Constants.formatDouble(calc.getCombinedMassF()) + " tons");
+		this.massIOut.setText(Constants.formatDouble(calc.getCombinedMassI()) + " tons");
+		this.thrustOut.setText(Constants.formatDouble(calc.getCombinedThrust()) + " kN");
+		this.siOut.setText(Constants.formatDouble(calc.getSI()) + " s");
+		this.twrOut.setText(Constants.formatDouble(calc.getTWR()));
+		if (calc.getDV() > 10000d) {
+			this.dvOut.setText(Constants.formatVelKilo(calc.getDV()));
+		} else {
+			this.dvOut.setText(Constants.formatVel(calc.getDV()));
+		}
 	}
 
 }

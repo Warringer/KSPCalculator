@@ -1,9 +1,9 @@
 package constants;
 
 public enum Parts {
-	LFT(2.5, 0.3, 0, 0, 500, 0.0044),
-	LFE(2, 2, 200, 5682, 0, 0),
-	SRB(1.8, 0.36, 130, 2257, 100, 0.0144),
+	LFT(2.5, 0.3, 0, 0, 500),
+	LFE(2, 2, 200, 5682, 0),
+	SRB(1.8, 0.36, 130, 2257, 100),
 	SAS(0.8),
 	CP(1),
 	Radial(0.4),
@@ -28,13 +28,13 @@ public enum Parts {
 	 * @param massPerFuel
 	 */
 	private Parts(double massI, double massF, double thrust, double sI,
-			double fuel, double massPerFuel) {
+			double fuel) {
 		this.massI = massI;
 		this.massF = massF;
 		this.thrust = thrust;
 		this.SI = sI;
 		this.fuel = fuel;
-		this.massPerFuel = massPerFuel;
+		this.massPerFuel = (massI - massF) / fuel;
 	}
 
 	/**

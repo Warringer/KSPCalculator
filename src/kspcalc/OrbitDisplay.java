@@ -185,8 +185,6 @@ public class OrbitDisplay extends JComponent {
 		while ((this.apogeeAlt + this.windowWidth) / (this.zoom) > this.windowWidth / 2) {
 			this.zoom++;
 		}
-		System.out.println("Apogee: " + apogeeAlt + ", Perigee: "+ perigeeAlt);
-		System.out.println("a: " + a + ", b: " + b + ", zoom: " + zoom);
 	}
 
 	/* (non-Javadoc)

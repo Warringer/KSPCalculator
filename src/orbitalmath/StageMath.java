@@ -13,7 +13,7 @@ public class StageMath {
 	private double combinedMassF = 0;			// Combined Final Mass (after Burnout)
 	private double combinedThrust = 0;			// Combined Thrust if the Stage
 	private double DV = 0;						// Delta-V of the Stage 
-	private double SI = 0;						// SI ??
+	private double SI = 0;						// Specific Impulse
 	private double combinedFuel = 0;			// Fuel reserves of the Stage
 	private double TWR;							// Thrust to Weight ratio
 	private double DWC;							// Weight of any stage carried by this one
@@ -52,6 +52,7 @@ public class StageMath {
 		this.calculateTWR();
 		this.calculateSI();
 		this.calculateDV();
+		this.checkMath();
 	}
 	
 	/**
@@ -68,7 +69,11 @@ public class StageMath {
 	}
 	
 	private void calculateTWR() {
-		this.TWR = this.combinedThrust / (this.combinedMassI * Constants.GRAVITY);
+		try {
+			this.TWR = this.combinedThrust / (this.combinedMassI * Constants.GRAVITY);
+		} catch (ArithmeticException e) {
+			this.TWR = 0;
+		}
 	}
 	
 	private void calculateSI() {
@@ -77,14 +82,28 @@ public class StageMath {
 			double lftMassF = this.stageParts.get(Parts.LFT) * Parts.LFT.getMassF();
 			double srbMassI = this.stageParts.get(Parts.SRB) * Parts.SRB.getMassI();
 			double srbMassF = this.stageParts.get(Parts.SRB) * Parts.SRB.getMassF();
-			this.SI = (((lftMassI - lftMassF) / (lftMassI + srbMassI - lftMassF - srbMassF)) * (Parts.LFE.getSI() - Parts.SRB.getSI()))- Parts.SRB.getSI();
+			this.SI = (((lftMassI - lftMassF) / (lftMassI + srbMassI - lftMassF - srbMassF)) * (Parts.LFE.getSI() - Parts.SRB.getSI())) + Parts.SRB.getSI();
 		} catch (ArithmeticException e) {
 			this.SI = 0;
 		}
 	}
 	
 	private void calculateDV() {
-		this.DV = this.SI * Math.log(this.combinedMassI - this.combinedMassF);
+		try {
+			this.DV = this.SI * Math.log(this.combinedMassI / this.combinedMassF);
+		} catch (ArithmeticException e) {
+			this.DV = 0;
+		}
+	}
+	
+	private void checkMath() {
+		int getTanks = this.stageParts.get(Parts.LFT) + this.stageParts.get(Parts.SRB);
+		int getEngines = this.stageParts.get(Parts.LFE) + this.stageParts.get(Parts.SRB);
+		if (getTanks <= 0 || getEngines <= 0) {
+			this.TWR = 0;
+			this.DV = 0;
+			this.SI = 0;
+		}
 	}
 	
 	/**

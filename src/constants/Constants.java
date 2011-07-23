@@ -40,6 +40,11 @@ public final class Constants {
 		return format.format(d) + " m/s";
 	}
 	
+	public static final String formatVelKilo(double d) {
+		d /= 1000d;
+		return format.format(d) + " km/s";
+	}
+	
 	public static final String formatPer(double d) {
 		return format.format(d) + " minutes";
 	}
