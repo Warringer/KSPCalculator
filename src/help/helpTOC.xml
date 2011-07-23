@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
+<toc version="1.0">
+	<tocitem text="Help" image="chapter" >
+		<tocitem text="KSP Help" target="item1" image="topic" />
+		<tocitem text="Orbits" image="chapter" >
+			<tocitem text="Circular Orbits" target="item2" image="topic" />
+			<tocitem text="Elliptic Orbits" target="item3" image="topic" />
+			<tocitem text="Hohmann Orbits" target="item4" image="topic" />
+			<tocitem text="Launch Orbits" target="item5" image="topic" />
+		</tocitem>
+		<tocitem text="Glossary" target="item6" image="topic" />
+	</tocitem>
+</toc>

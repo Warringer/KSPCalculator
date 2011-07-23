@@ -1,10 +1,14 @@
 package kspcalc;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 
 import javax.swing.JTabbedPane;
 
 import javax.swing.*;
+
+import javax.help.*;
+import javax.help.CSH.DisplayHelpFromSource;
 
 import orbitalmath.Constants;
 
@@ -55,6 +59,7 @@ public class Calculator extends javax.swing.JFrame {
 	private JDialog AboutDialog;
 	private AbstractAction AboutAction;
 	private JMenuItem AboutItem;
+	private JMenuItem HelpItem;
 	private JMenuBar jMenuBar1;
 	
 	private Calculator frame;
@@ -88,10 +93,16 @@ public class Calculator extends javax.swing.JFrame {
 			{
 				jMenuBar1 = new JMenuBar();
 				setJMenuBar(jMenuBar1);
+				jMenuBar1.add(Box.createHorizontalGlue());
 				{
 					Help = new JMenu();
 					jMenuBar1.add(Help);
-					Help.setText("Help");
+					Help.setText("?");
+					Help.setToolTipText("Help Menu");
+					{
+						HelpItem = startJavaHelp();
+						Help.add(HelpItem);
+					}
 					{
 						AboutItem = new JMenuItem();
 						Help.add(AboutItem);
@@ -229,4 +240,30 @@ public class Calculator extends javax.swing.JFrame {
 		return OkayAction;
 	}
 
+	private JMenuItem startJavaHelp() {
+		JMenuItem mi = null;
+		try {
+			HelpSet hs = this.getHelpSet("help/help.hs");
+			HelpBroker hb = hs.createHelpBroker();
+			mi = new JMenuItem("Help");
+			DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(hb);
+			mi.addActionListener(csh);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mi;
+	}
+	
+	public HelpSet getHelpSet(String helpsetfile) {
+	      HelpSet hs = null;
+	      ClassLoader cl = this.getClass().getClassLoader();
+	      try {
+	        URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
+	        hs = new HelpSet(null, hsURL);
+	      } catch(Exception ee) {
+	        System.out.println("HelpSet: "+ee.getMessage());
+	        System.out.println("HelpSet: "+ helpsetfile + " not found");
+	      }
+	      return hs;
+	   }
 }
