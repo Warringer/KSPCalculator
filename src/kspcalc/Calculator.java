@@ -1,12 +1,7 @@
 package kspcalc;
 import java.awt.BorderLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.net.URL;
-
-import javax.swing.ImageIcon;
-import javax.swing.JTabbedPane;
 
 import javax.swing.*;
 
@@ -53,7 +48,6 @@ public class Calculator extends javax.swing.JFrame {
 	private OrbitDisplayFrame orbitDisplay;
 	private StagingCalculatorPanel stagingCalculatorPanel1;
 	private JLabel jLabel5;
-	private JLabel jLabel6;
 	private StageCalculator stageCalculator1;
 	private AbstractAction OkayAction;
 	private JButton OkayButton;
@@ -70,7 +64,6 @@ public class Calculator extends javax.swing.JFrame {
 	private JMenuBar jMenuBar1;
 	
 	private Calculator frame;
-	private ImageIcon icon;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -92,9 +85,6 @@ public class Calculator extends javax.swing.JFrame {
 		orbitDisplay.setLocationRelativeTo(null);
 		orbitDisplay.setVisible(false);
 		frame = this;
-		icon = createImageIcon("../image/KSPsticker.png", "An Icon");
-		this.setIconImage(icon.getImage());
-		orbitDisplay.setIconImage(icon.getImage());
 		orbitDisplay.setTitle("KSP Calculator - Orbit Display");
 	}
 	
@@ -178,43 +168,42 @@ public class Calculator extends javax.swing.JFrame {
 		if(AboutDialog == null) {
 			AboutDialog = new JDialog(this);
 			AboutDialog.getContentPane().setLayout(null);
-			AboutDialog.setPreferredSize(new java.awt.Dimension(379, 199));
+			AboutDialog.setPreferredSize(new java.awt.Dimension(235, 198));
 			{
 				jLabel1 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel1);
 				jLabel1.setText("Kerbal Space Program");
-				jLabel1.setBounds(152, 12, 205, 34);
+				jLabel1.setBounds(12, 12, 205, 34);
 				jLabel1.setFont(new java.awt.Font("Arial",0,20));
 			}
 			{
 				jLabel2 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel2);
 				jLabel2.setText("Calculator");
-				jLabel2.setBounds(198, 45, 109, 21);
+				jLabel2.setBounds(58, 45, 109, 21);
 				jLabel2.setFont(new java.awt.Font("Arial",0,20));
 			}
 			{
 				jLabel3 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel3);
 				jLabel3.setText("Version:");
-				jLabel3.setBounds(164, 79, 64, 15);
+				jLabel3.setBounds(24, 79, 64, 15);
 			}
 			{
 				jLabel4 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel4);
 				jLabel4.setText("by:");
-				jLabel4.setBounds(164, 101, 55, 15);
+				jLabel4.setBounds(24, 101, 55, 15);
 			}
 			{
 				versionLabel = new JLabel();
 				AboutDialog.getContentPane().add(versionLabel);
 				AboutDialog.getContentPane().add(getJLabel5());
 				AboutDialog.getContentPane().add(getOkayButton());
-				AboutDialog.getContentPane().add(getJLabel6());
 				versionLabel.setText(Constants.Version);
-				versionLabel.setBounds(234, 79, 85, 15);
+				versionLabel.setBounds(94, 79, 85, 15);
 			}
-			AboutDialog.setSize(379, 199);
+			AboutDialog.setSize(235, 198);
 		}
 		AboutDialog.setLocationRelativeTo(null);
 		return AboutDialog;
@@ -224,7 +213,7 @@ public class Calculator extends javax.swing.JFrame {
 		if(jLabel5 == null) {
 			jLabel5 = new JLabel();
 			jLabel5.setText("Warringer");
-			jLabel5.setBounds(234, 101, 85, 15);
+			jLabel5.setBounds(94, 101, 85, 15);
 		}
 		return jLabel5;
 	}
@@ -233,7 +222,7 @@ public class Calculator extends javax.swing.JFrame {
 		if(OkayButton == null) {
 			OkayButton = new JButton();
 			OkayButton.setText("Okay");
-			OkayButton.setBounds(210, 136, 44, 22);
+			OkayButton.setBounds(70, 136, 44, 22);
 			OkayButton.setAction(getOkayAction());
 		}
 		return OkayButton;
@@ -288,27 +277,6 @@ public class Calculator extends javax.swing.JFrame {
 		}
 		return stageCalculator1;
 	}
-	
-	private JLabel getJLabel6() {
-		if(jLabel6 == null) {
-			jLabel6 = new JLabel(icon);			
-			jLabel6.setBounds(12, 17, 67, 44);
-			jLabel6.setSize(128, 128);
-		}
-		return jLabel6;
-	}
-	
-	/** Returns an ImageIcon, or null if the path was invalid. */
-    protected static ImageIcon createImageIcon(String path,
-                                               String description) {
-        java.net.URL imgURL = Calculator.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
 	
 	private StagingCalculatorPanel getStagingCalculatorPanel1() {
 		if(stagingCalculatorPanel1 == null) {
