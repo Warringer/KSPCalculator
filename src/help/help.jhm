@@ -8,4 +8,5 @@
 	<mapID target="item5" url="html/Launch.html" />
 	<mapID target="item6" url="html/Glossary.html" />
 	<mapID target="item7" url="html/Stage.html" />
+	<mapID target="item8" url="html/MultiStage.html" />
 </map>

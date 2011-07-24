@@ -9,7 +9,10 @@
 			<tocitem text="Hohmann Orbits" target="item4" image="topic" />
 			<tocitem text="Launch Orbits" target="item5" image="topic" />
 		</tocitem>
-		<tocitem text="Stage Calculator" target="item7" image="topic" />
+		<tocitem text="Staging" image="chapter">
+			<tocitem text="Stage Calculator" target="item7" image="topic" />
+			<tocitem text="Multi Stage Rockets" target="item8" image="topic" />
+		</tocitem>
 		<tocitem text="Glossary" target="item6" image="topic" />
 	</tocitem>
 </toc>
