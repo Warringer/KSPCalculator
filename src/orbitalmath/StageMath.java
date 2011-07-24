@@ -15,8 +15,8 @@ public class StageMath {
 	private double DV = 0;						// Delta-V of the Stage 
 	private double SI = 0;						// Specific Impulse
 	private double combinedFuel = 0;			// Fuel reserves of the Stage
-	private double TWR;							// Thrust to Weight ratio
-	private double DWC;							// Weight of any stage carried by this one
+	private double TWR = 0;						// Thrust to Weight ratio
+	// private double DWC = 0;						// Weight of any stage carried by this one
 	
 
 	public static void main(String[] args) {
@@ -34,11 +34,29 @@ public class StageMath {
 	 */
 	@Override
 	public String toString() {
-		return String
-				.format("StageMath [\n\tstageParts=%s, \n\tcombinedMassI=%s, \n\tcombinedMassF=%s, \n\tcombinedThrust=%s, \n\tcombinedDV=%s, \n\tcombinedSI=%s, \n\tcombinedFuel=%s, \n\tTWR=%s, \n\tDWC=%s\n]",
-						stageParts, combinedMassI, combinedMassF,
-						combinedThrust, DV, SI, combinedFuel,
-						TWR, DWC);
+		String stage = "";
+		Iterator<Entry<Parts, Integer>> i = this.stageParts.entrySet().iterator();
+		while (i.hasNext()) {
+			Entry<Parts, Integer> part = i.next();
+			if (part.getValue() > 0) {
+				stage += "  " + part.getValue() + "x " + part.getKey().getName() + "\n";
+			}
+		}
+		stage += "  Initial Mass:\t\t" + Constants.formatDouble(this.combinedMassI) + " tons\n";
+		stage += "  Empty Mass:\t\t" + Constants.formatDouble(this.combinedMassF) + " tons\n";
+		if (this.SI > 0) {
+			stage += "  Specific Impulse:\t\t" + Constants.formatDouble(this.SI) + " s\n";
+		}
+		if (this.combinedThrust > 0) {
+			stage += "  Thrust:\t\t\t" + Constants.formatDouble(this.combinedThrust) + " kN\n";
+		}
+		if (this.DV > 0 ) {
+			stage += "  \u0394v:\t\t\t" + Constants.formatDouble(this.DV) + " m/s\n";
+		}
+		if (this.TWR > 0) {
+			stage += "  Thrust to Weight Ratio:\t" + Constants.formatDouble(this.TWR) + "";
+		}
+		return stage;
 	}
 
 	/**
@@ -53,6 +71,16 @@ public class StageMath {
 		this.calculateSI();
 		this.calculateDV();
 		this.checkMath();
+	}
+	
+	/**
+	 * @return the stageParts
+	 */
+	public HashMap<Parts, Integer> getStageParts() {
+		return stageParts;
+	}
+
+	public StageMath() {
 	}
 	
 	/**

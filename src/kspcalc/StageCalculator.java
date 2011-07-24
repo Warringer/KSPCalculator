@@ -52,6 +52,13 @@ public class StageCalculator extends javax.swing.JPanel {
 	private JLabel jLabel16;
 	private JLabel thrustOut;
 	private JLabel jLabel15;
+	/**
+	 * @return the stage
+	 */
+	public StageMath getStage() {
+		return stage;
+	}
+
 	private JLabel massFOut;
 	private JLabel massIOut;
 	private JLabel jLabel6;
@@ -63,11 +70,28 @@ public class StageCalculator extends javax.swing.JPanel {
 	
 	private StageCalculator panel;
 	private ChangeListener SpinnerListener;
+	private StageMath stage;
+	private int stageIndex = -1;
 
 	public StageCalculator() {
 		super();
 		this.panel = this;
+		this.stage = new StageMath();
 		initGUI();
+	}
+	
+	public void setStageCalculator(HashMap<Parts, Integer> stageParts, int stage) {
+		this.LFTSpinner.setValue(stageParts.get(Parts.LFT));
+		this.LFESpinner.setValue(stageParts.get(Parts.LFE));
+		this.SRBSpinner.setValue(stageParts.get(Parts.SRB));
+		this.SASSpinner.setValue(stageParts.get(Parts.SAS));
+		this.CPSpinner.setValue(stageParts.get(Parts.CP));
+		this.RadialSpinner.setValue(stageParts.get(Parts.Radial));
+		this.StackSpinner.setValue(stageParts.get(Parts.Stack));
+		this.TriSpinner.setValue(stageParts.get(Parts.Tri));
+		this.ChuteSpinner.setValue(stageParts.get(Parts.Chute));
+		this.eSFBSpinner.setValue(stageParts.get(Parts.EmptySRB));
+		this.setStageIndex(stage);
 	}
 	
 	private void initGUI() {
@@ -342,6 +366,15 @@ public class StageCalculator extends javax.swing.JPanel {
 		} else {
 			this.dvOut.setText(Constants.formatVel(calc.getDV()));
 		}
+		this.stage = calc;
+	}
+
+	public void setStageIndex(int stageIndex) {
+		this.stageIndex = stageIndex;
+	}
+
+	public int getStageIndex() {
+		return stageIndex;
 	}
 
 }

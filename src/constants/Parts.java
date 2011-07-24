@@ -1,23 +1,31 @@
 package constants;
 
 public enum Parts {
-	LFT(2.5, 0.3, 0, 0, 500),
-	LFE(2, 2, 200, 5682, 0),
-	SRB(1.8, 0.36, 130, 2257, 100),
-	SAS(0.8),
-	CP(1),
-	Radial(0.4),
-	Stack(0.8),
-	Tri(0.8),
-	Chute(0.3),
-	EmptySRB(1.8);
+	LFT(2.5, 0.3, 0, 0, 500, "Liquid Fuel Tank"),
+	LFE(2, 2, 200, 5682, 0, "Liquid Fuel Engine"),
+	SRB(1.8, 0.36, 130, 2257, 100, "Solid Fuel Booster"),
+	SAS(0.8, "SAS"),
+	CP(1, "Command Module"),
+	Radial(0.4, "Radial Decoupler"),
+	Stack(0.8, "Stack Decoupler"),
+	Tri(0.8, "Tri-Coupler"),
+	Chute(0.3, "Parachute"),
+	EmptySRB(1.8, "Empty Solid Fuel Booster");
 	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
 	private final double massI;
 	private final double massF;
 	private final double thrust;
 	private final double SI;
 	private final double fuel;
 	private final double massPerFuel;
+	private final String name;
 	
 	/**
 	 * @param massI
@@ -28,25 +36,27 @@ public enum Parts {
 	 * @param massPerFuel
 	 */
 	private Parts(double massI, double massF, double thrust, double sI,
-			double fuel) {
+			double fuel, String name) {
 		this.massI = massI;
 		this.massF = massF;
 		this.thrust = thrust;
 		this.SI = sI;
 		this.fuel = fuel;
 		this.massPerFuel = (massI - massF) / fuel;
+		this.name = name;
 	}
 
 	/**
 	 * @param massI
 	 */
-	private Parts(double mass) {
+	private Parts(double mass, String name) {
 		this.massI = mass;
 		this.massF = mass;
 		this.thrust = 0;
 		this.SI = 0;
 		this.fuel = 0;
 		this.massPerFuel = 0;
+		this.name = name;
 	}
 
 	/**
