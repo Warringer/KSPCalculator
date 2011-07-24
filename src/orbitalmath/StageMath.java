@@ -65,7 +65,7 @@ public class StageMath {
 	public StageMath(HashMap<Parts, Integer> stageParts, double DWC) {
 		super();
 		this.stageParts = stageParts;
-		this.DWC = DWC;
+		// this.DWC = DWC;
 		this.combineParts();
 		this.calculateTWR();
 		this.calculateSI();
