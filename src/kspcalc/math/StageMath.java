@@ -1,11 +1,12 @@
-package orbitalmath;
+package kspcalc.math;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import constants.Constants;
-import constants.Parts;
+import kspcal.constants.Constants;
+import kspcal.constants.Parts;
+
 
 public class StageMath {
 	private HashMap<Parts, Integer> stageParts;	// HashMap containing all vanilla parts and how many times they are in the Stage
@@ -17,17 +18,6 @@ public class StageMath {
 	private double combinedFuel = 0;			// Fuel reserves of the Stage
 	private double TWR = 0;						// Thrust to Weight ratio
 	// private double DWC = 0;						// Weight of any stage carried by this one
-	
-
-	public static void main(String[] args) {
-		HashMap<Parts, Integer> parts = new HashMap<Parts, Integer>();
-		parts.put(Parts.CP, 1);
-		parts.put(Parts.LFE, 1);
-		parts.put(Parts.LFT, 6);
-		parts.put(Parts.SRB, 0);
-		StageMath math = new StageMath(parts, 0);
-		System.out.println(math);
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

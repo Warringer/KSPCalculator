@@ -8,7 +8,8 @@ import javax.swing.*;
 import javax.help.*;
 import javax.help.CSH.DisplayHelpFromSource;
 
-import constants.Constants;
+import kspcal.constants.Constants;
+
 
 
 

@@ -2,14 +2,15 @@ package kspcalc;
 import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
-import constants.Constants;
 
-import orbitalmath.*;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
+
+import kspcal.constants.Constants;
+import kspcalc.math.*;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo

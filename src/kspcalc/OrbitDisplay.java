@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-import constants.Constants;
+import kspcal.constants.Constants;
+
 
 
 public class OrbitDisplay extends JComponent {

@@ -4,10 +4,11 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import orbitalmath.StageMath;
+import kspcal.constants.Constants;
+import kspcal.constants.Parts;
+import kspcalc.math.StageMath;
 
-import constants.Constants;
-import constants.Parts;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -27,23 +28,9 @@ public class StageCalculator extends javax.swing.JPanel {
 	 */
 	private static final long serialVersionUID = -1360305272816831155L;
 	private JLabel jLabel1;
-	private JSpinner ChuteSpinner;
-	private JLabel jLabel4;
-	private JSpinner LFESpinner;
-	private JLabel jLabel5;
-	private JSpinner TriSpinner;
 	private JLabel jLabel14;
 	private JLabel jLabel13;
 	private JLabel jLabel12;
-	private JLabel jLabel11;
-	private JSpinner SASSpinner;
-	private JLabel jLabel10;
-	private JSpinner eSFBSpinner;
-	private JLabel jLabel9;
-	private JLabel jLabel8;
-	private JSpinner RadialSpinner;
-	private JLabel jLabel7;
-	private JSpinner StackSpinner;
 	private JLabel twrOut;
 	private JLabel jLabel18;
 	private JLabel dvOut;
@@ -52,21 +39,10 @@ public class StageCalculator extends javax.swing.JPanel {
 	private JLabel jLabel16;
 	private JLabel thrustOut;
 	private JLabel jLabel15;
-	/**
-	 * @return the stage
-	 */
-	public StageMath getStage() {
-		return stage;
-	}
+	private HashMap<Parts, SpinnerLabelComponent> spinners;
 
 	private JLabel massFOut;
 	private JLabel massIOut;
-	private JLabel jLabel6;
-	private JSpinner SRBSpinner;
-	private JLabel jLabel3;
-	private JLabel jLabel2;
-	private JSpinner LFTSpinner;
-	private JSpinner CPSpinner;
 	
 	private StageCalculator panel;
 	private ChangeListener SpinnerListener;
@@ -81,16 +57,9 @@ public class StageCalculator extends javax.swing.JPanel {
 	}
 	
 	public void setStageCalculator(HashMap<Parts, Integer> stageParts, int stage) {
-		this.LFTSpinner.setValue(stageParts.get(Parts.LFT));
-		this.LFESpinner.setValue(stageParts.get(Parts.LFE));
-		this.SRBSpinner.setValue(stageParts.get(Parts.SRB));
-		this.SASSpinner.setValue(stageParts.get(Parts.SAS));
-		this.CPSpinner.setValue(stageParts.get(Parts.CP));
-		this.RadialSpinner.setValue(stageParts.get(Parts.Radial));
-		this.StackSpinner.setValue(stageParts.get(Parts.Stack));
-		this.TriSpinner.setValue(stageParts.get(Parts.Tri));
-		this.ChuteSpinner.setValue(stageParts.get(Parts.Chute));
-		this.eSFBSpinner.setValue(stageParts.get(Parts.EmptySRB));
+		for (Parts part : Parts.values()) {
+			this.spinners.get(part).setValue(stageParts.get(part));
+		}
 		this.setStageIndex(stage);
 	}
 	
@@ -99,155 +68,20 @@ public class StageCalculator extends javax.swing.JPanel {
 			this.setPreferredSize(new java.awt.Dimension(425, 300));
 			this.setLayout(null);
 			this.setSize(425, 300);
-			Integer value = new Integer(0); 
-			Integer min = new Integer(0);
-			Integer max = new Integer(100); 
-			Integer step = new Integer(1);
 			{
 				jLabel1 = new JLabel();
 				this.add(jLabel1);
 				jLabel1.setText("Stage Parts:");
 				jLabel1.setBounds(12, 12, 109, 15);
 			}
-			{
-				SpinnerNumberModel ChuteSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				ChuteSpinner = new JSpinner();
-				this.add(ChuteSpinner);
-				ChuteSpinner.setModel(ChuteSpinnerModel);
-				ChuteSpinner.setBounds(24, 33, 40, 22);
-				ChuteSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				SpinnerNumberModel CPSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				CPSpinner = new JSpinner();
-				this.add(CPSpinner);
-				CPSpinner.setModel(CPSpinnerModel);
-				CPSpinner.setBounds(24, 55, 40, 22);
-				CPSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				SpinnerNumberModel LFTSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				LFTSpinner = new JSpinner();
-				this.add(LFTSpinner);
-				LFTSpinner.setModel(LFTSpinnerModel);
-				LFTSpinner.setBounds(24, 77, 40, 22);
-				LFTSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel2 = new JLabel();
-				this.add(jLabel2);
-				jLabel2.setText("Parachutes");
-				jLabel2.setBounds(70, 36, 125, 15);
-			}
-			{
-				jLabel3 = new JLabel();
-				this.add(jLabel3);
-				jLabel3.setText("Command Modules");
-				jLabel3.setBounds(70, 58, 125, 15);
-			}
-			{
-				jLabel4 = new JLabel();
-				this.add(jLabel4);
-				jLabel4.setText("Liquid Fuel Tanks");
-				jLabel4.setBounds(70, 80, 125, 15);
-			}
-			{
-				SpinnerNumberModel LFESpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				LFESpinner = new JSpinner();
-				this.add(LFESpinner);
-				LFESpinner.setModel(LFESpinnerModel);
-				LFESpinner.setBounds(24, 99, 40, 22);
-				LFESpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel5 = new JLabel();
-				this.add(jLabel5);
-				jLabel5.setText("Liquid Fuel Engines");
-				jLabel5.setBounds(70, 102, 125, 15);
-			}
-			{
-				SpinnerNumberModel SRBSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				SRBSpinner = new JSpinner();
-				this.add(SRBSpinner);
-				SRBSpinner.setModel(SRBSpinnerModel);
-				SRBSpinner.setBounds(24, 121, 40, 22);
-				SRBSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel6 = new JLabel();
-				this.add(jLabel6);
-				jLabel6.setText("Solid Fuel Booster");
-				jLabel6.setBounds(70, 124, 125, 15);
-			}
-			{
-				SpinnerNumberModel StackSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				StackSpinner = new JSpinner();
-				this.add(StackSpinner);
-				StackSpinner.setModel(StackSpinnerModel);
-				StackSpinner.setBounds(24, 145, 40, 22);
-				StackSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel7 = new JLabel();
-				this.add(jLabel7);
-				jLabel7.setText("Stack Decouplers");
-				jLabel7.setBounds(70, 148, 125, 15);
-			}
-			{
-				SpinnerNumberModel RadialSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				RadialSpinner = new JSpinner();
-				this.add(RadialSpinner);
-				RadialSpinner.setModel(RadialSpinnerModel);
-				RadialSpinner.setBounds(24, 169, 40, 22);
-				RadialSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel8 = new JLabel();
-				this.add(jLabel8);
-				jLabel8.setText("Radial Decouplers");
-				jLabel8.setBounds(70, 172, 125, 15);
-			}
-			{
-				SpinnerNumberModel TriSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				TriSpinner = new JSpinner();
-				this.add(TriSpinner);
-				TriSpinner.setModel(TriSpinnerModel);
-				TriSpinner.setBounds(24, 193, 40, 22);
-				TriSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel9 = new JLabel();
-				this.add(jLabel9);
-				jLabel9.setText("Tri Coupler");
-				jLabel9.setBounds(70, 196, 125, 15);
-			}
-			{
-				SpinnerNumberModel eSFBSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				eSFBSpinner = new JSpinner();
-				this.add(eSFBSpinner);
-				eSFBSpinner.setModel(eSFBSpinnerModel);
-				eSFBSpinner.setBounds(24, 215, 40, 22);
-				eSFBSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel10 = new JLabel();
-				this.add(jLabel10);
-				jLabel10.setText("Empty Booster");
-				jLabel10.setBounds(70, 218, 125, 15);
-			}
-			{
-				SpinnerNumberModel SASSpinnerModel = new SpinnerNumberModel(value, min, max, step);
-				SASSpinner = new JSpinner();
-				this.add(SASSpinner);
-				SASSpinner.setModel(SASSpinnerModel);
-				SASSpinner.setBounds(24, 239, 40, 22);
-				SASSpinner.addChangeListener(getSpinnerListener());
-			}
-			{
-				jLabel11 = new JLabel();
-				this.add(jLabel11);
-				jLabel11.setText("SAS Modules");
-				jLabel11.setBounds(70, 242, 125, 15);
+			spinners = new HashMap<Parts, SpinnerLabelComponent>();
+			int y = 25;
+			for (Parts part : Parts.values()) {
+				SpinnerLabelComponent spinner = getSpinnerLabelComponent(24, y, part.getName());
+				this.add(spinner);
+				spinners.put(part, spinner);
+				spinner.addChangeListener(getSpinnerListener());
+				y += 25;
 			}
 			{
 				jLabel12 = new JLabel();
@@ -345,16 +179,9 @@ public class StageCalculator extends javax.swing.JPanel {
 	
 	private void doMath() {
 		HashMap<Parts, Integer> parts = new HashMap<Parts, Integer>();
-		parts.put(Parts.LFT, (Integer) this.LFTSpinner.getValue());
-		parts.put(Parts.LFE, (Integer) this.LFESpinner.getValue());
-		parts.put(Parts.SRB, (Integer) this.SRBSpinner.getValue());
-		parts.put(Parts.SAS, (Integer) this.SASSpinner.getValue());
-		parts.put(Parts.CP, (Integer) this.CPSpinner.getValue());
-		parts.put(Parts.Radial, (Integer) this.RadialSpinner.getValue());
-		parts.put(Parts.Stack, (Integer) this.StackSpinner.getValue());
-		parts.put(Parts.Tri, (Integer) this.TriSpinner.getValue());
-		parts.put(Parts.Chute, (Integer) this.ChuteSpinner.getValue());
-		parts.put(Parts.EmptySRB, (Integer) this.eSFBSpinner.getValue());
+		for (Parts part : Parts.values()) {
+			parts.put(part, this.spinners.get(part).getValue());
+		}
 		StageMath calc = new StageMath(parts, 0);
 		this.massFOut.setText(Constants.formatDouble(calc.getCombinedMassF()) + " tons");
 		this.massIOut.setText(Constants.formatDouble(calc.getCombinedMassI()) + " tons");
@@ -375,6 +202,20 @@ public class StageCalculator extends javax.swing.JPanel {
 
 	public int getStageIndex() {
 		return stageIndex;
+	}
+	
+	private SpinnerLabelComponent getSpinnerLabelComponent(int x, int y, String name) {
+		SpinnerLabelComponent spinner = new SpinnerLabelComponent(name);
+		spinner.setBounds(x, y, 250, 24);
+		return spinner;
+		
+	}
+	
+	/**
+	 * @return the stage
+	 */
+	public StageMath getStage() {
+		return stage;
 	}
 
 }

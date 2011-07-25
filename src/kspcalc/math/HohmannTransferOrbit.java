@@ -1,9 +1,9 @@
 /**
  * 
  */
-package orbitalmath;
+package kspcalc.math;
 
-import constants.Constants;
+import kspcal.constants.Constants;
 
 /**
  * @author warringer

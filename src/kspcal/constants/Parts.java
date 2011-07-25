@@ -1,16 +1,17 @@
-package constants;
+package kspcal.constants;
 
 public enum Parts {
+
+	Chute(0.3, "Parachute"),
+	CP(1, "Command Module"),
 	LFT(2.5, 0.3, 0, 0, 500, "Liquid Fuel Tank"),
 	LFE(2, 2, 200, 5682, 0, "Liquid Fuel Engine"),
 	SRB(1.8, 0.36, 130, 2257, 100, "Solid Fuel Booster"),
 	SAS(0.8, "SAS"),
-	CP(1, "Command Module"),
 	Radial(0.4, "Radial Decoupler"),
 	Stack(0.8, "Stack Decoupler"),
 	Tri(0.8, "Tri-Coupler"),
-	Chute(0.3, "Parachute"),
-	EmptySRB(1.8, "Empty Solid Fuel Booster");
+	/*EmptySRB(1.8, "Empty Solid Fuel Booster")//*/;
 	
 	/**
 	 * @return the name

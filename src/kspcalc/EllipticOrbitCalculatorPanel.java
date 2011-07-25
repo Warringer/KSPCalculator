@@ -2,14 +2,15 @@ package kspcalc;
 
 import com.cloudgarden.layout.*;
 
-import constants.Constants;
 
 
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
-import orbitalmath.EllipticOrbit;
-import orbitalmath.EllipticOrbitCalcType;
+import kspcal.constants.Constants;
+import kspcalc.math.EllipticOrbit;
+import kspcalc.math.EllipticOrbitCalcType;
+
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI

@@ -1,4 +1,4 @@
-package orbitalmath;
+package kspcalc.math;
 
 // Types of Input values
 public enum EllipticOrbitCalcType {

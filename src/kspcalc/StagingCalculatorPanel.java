@@ -11,9 +11,10 @@ import javax.swing.JDialog;
 
 import javax.swing.*;
 
-import constants.Constants;
+import kspcal.constants.Constants;
+import kspcalc.math.StageMath;
 
-import orbitalmath.StageMath;
+
 
 
 /**
