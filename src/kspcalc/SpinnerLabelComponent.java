@@ -2,7 +2,6 @@ package kspcalc;
 
 import javax.swing.*;
 import javax.swing.event.*;
-import java.awt.Color;
 
 
 /**
@@ -48,14 +47,25 @@ public class SpinnerLabelComponent extends JComponent {
 		}
 	}
 	
+	/**
+	 * Add a Change Listener to the Component
+	 * @param listener
+	 */
 	public void addChangeListener(ChangeListener listener) {
 		spinner.addChangeListener(listener);
 	}
 	
+	/**
+	 * @return Value of the Spinner in the Component
+	 */
 	public int getValue() {
 		return (Integer) spinner.getValue();
 	}
 
+	/**
+	 * Sets the Value of the Spinner in the Component
+	 * @param value
+	 */
 	public void setValue(int value) {
 		spinner.setValue(value);
 	}

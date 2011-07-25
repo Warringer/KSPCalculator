@@ -26,16 +26,26 @@ public class LaunchOrbit {
 		this.doMath();
 	}
 	
+	/**
+	 * Does the Math.
+	 */
 	private void doMath() {
 		this.doHelpers();
 		this.doAlts();
 	}
 	
+	/**
+	 * Calculates a few helper variables
+	 */
 	private void doHelpers() {
 		this.c = (2d * Constants.GM) / (this.launchBurnAlt * this.launchBurnVel * this.launchBurnVel);
 		this.a = this.launchApoAlt + this.launchPerAlt;
 	}
 	
+	/**
+	 * Calculates the Perigee and Apogee Altitudes
+	 * Based on Formulas from http://www.braeunig.us/space/orbmech.htm#launch
+	 */
 	private void doAlts() {
 		double rpri1 = ( -this.c + Math.sqrt(Constants.square(this.c) - 4d * (1d - this.c) * (- Constants.square(Math.sin(this.launchBurnAng))))) / (2d * (1d - this.c));
 		double rpri2 = ( -this.c - Math.sqrt(Constants.square(this.c) - 4d * (1d - this.c) * (- Constants.square(Math.sin(this.launchBurnAng))))) / (2d * (1d - this.c));
@@ -48,6 +58,9 @@ public class LaunchOrbit {
 		}
 	}
 	
+	/**
+	 * Calculates the Velocities at Perigee and Apogee
+	 */
 	@SuppressWarnings("unused")
 	private void doVels() {
 		this.launchPerVel = Math.sqrt((2d * Constants.GM * this.launchApoAlt) / (this.launchPerAlt * this.a));

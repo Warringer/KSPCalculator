@@ -17,20 +17,32 @@ public class CircularOrbit {
 		this.doMath();
 	}
 	
+	/**
+	 * Does the Math!
+	 */
 	private void doMath() {
 		this.orbitalVelocity();
 		this.orbitalPeriod();
 		this.escapeVelocity();
 	};
 	
+	/**
+	 * Calculate the orbital velocity
+	 */
 	private void orbitalVelocity() {
 		this.Vel = Math.sqrt(Constants.GM / this.Alt);
 	}
 	
+	/** 
+	 * Calculates the orbital period
+	 */
 	private void orbitalPeriod() {
 		this.Per = 2d * Math.PI * (this.Alt) / (this.Vel * 60d);
 	}
 	
+	/**
+	 * Calculates the escape velocity
+	 */
 	private void escapeVelocity() {
 		this.escVel = Math.sqrt((2d * Constants.GM) / (this.Alt));
 	}

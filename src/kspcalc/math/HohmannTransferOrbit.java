@@ -33,6 +33,9 @@ public class HohmannTransferOrbit {
 		this.doMath();
 	}
 	
+	/**
+	 * Does the Math!
+	 */
 	private void doMath() {
 		this.doAtx();
 		this.doPeroid();
@@ -40,14 +43,23 @@ public class HohmannTransferOrbit {
 		this.doOrbit();
 	}
 	
+	/**
+	 * Calculates the Semi-Major axis of the Transfer Ellipse
+	 */
 	private void doAtx() {
 		this.atx = (this.highOrbit + this.lowOrbit) / 2d;
 	}
 	
+	/**
+	 * Calculates the orbital period
+	 */
 	private void doPeroid() {
 		this.period = 2d * Math.PI * Math.sqrt(Constants.cube(this.atx) / Constants.GM) / 60d;
 	}
 	
+	/** 
+	 * Calculates the Orbit
+	 */
 	private void doOrbit() {
 		if (this.upwards) {
 			this.doOrbitUp();
@@ -56,6 +68,9 @@ public class HohmannTransferOrbit {
 		}
 	}
 	
+	/**
+	 * Calculates the Orbit when going from lower to higher orbit
+	 */
 	private void doOrbitUp() {
 		this.hohVelInjection = Math.sqrt(Constants.GM * ((2d / (this.lowOrbit)) - (1d / this.atx)));
 		this.hohVelFinal = Math.sqrt(Constants.GM * ((2d / (this.highOrbit)) - (1d / this.atx)));
@@ -63,6 +78,9 @@ public class HohmannTransferOrbit {
 		this.dvExit = Math.abs(this.hohVelFinal - this.velHigh);
 	}
 	
+	/**
+	 * Calculates the Orbit when going from higher to lower orbit
+	 */
 	private void doOrbitDown() {
 		this.hohVelInjection = Math.sqrt(Constants.GM * ((2d / (this.highOrbit)) - (1d / this.atx)));
 		this.hohVelFinal = Math.sqrt(Constants.GM * ((2d / (this.lowOrbit)) - (1d / this.atx)));
@@ -70,6 +88,9 @@ public class HohmannTransferOrbit {
 		this.dvExit = Math.abs(this.hohVelFinal - this.velLow);
 	}
 	
+	/**
+	 * Calculate the Circular Orbit Velocities
+	 */
 	private void doCircularOrbits() {
 		this.velHigh = this.doCircularOrbitMath(this.highOrbit);
 		this.velLow = this.doCircularOrbitMath(this.lowOrbit);

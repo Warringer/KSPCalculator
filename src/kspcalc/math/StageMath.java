@@ -74,7 +74,7 @@ public class StageMath {
 	}
 	
 	/**
-	 * Calculates the Initial and final mass as well as the combined thrust of the stage via interating over the stageParts HashMap
+	 * Calculates the Initial and final mass as well as the combined thrust of the stage via iterating over the stageParts HashMap
 	 */
 	private void combineParts() {
 		Iterator<Entry<Parts, Integer>> i = this.stageParts.entrySet().iterator();
@@ -86,6 +86,9 @@ public class StageMath {
 		}
 	}
 	
+	/**
+	 * Calculates the Thrust to Weight Ration of the Stage
+	 */
 	private void calculateTWR() {
 		try {
 			this.TWR = this.combinedThrust / (this.combinedMassI * Constants.GRAVITY);
@@ -94,6 +97,9 @@ public class StageMath {
 		}
 	}
 	
+	/**
+	 * Calculate the Specific Impulse of the Stage
+	 */
 	private void calculateSI() {
 		try {
 			double lftMassI = this.stageParts.get(Parts.LFT) * Parts.LFT.getMassI();
@@ -106,6 +112,9 @@ public class StageMath {
 		}
 	}
 	
+	/**
+	 * Calculates the Delta-V of the Stage
+	 */
 	private void calculateDV() {
 		try {
 			this.DV = this.SI * Math.log(this.combinedMassI / this.combinedMassF);
@@ -114,6 +123,10 @@ public class StageMath {
 		}
 	}
 	
+	/**
+	 * Checks the Math, if there are only tanks or only engines in the stage (or neither)
+	 * Thrust to Weight Ratio, Delta-V and Specific Impulse are set to 0 
+	 */
 	private void checkMath() {
 		int getTanks = this.stageParts.get(Parts.LFT) + this.stageParts.get(Parts.SRB);
 		int getEngines = this.stageParts.get(Parts.LFE) + this.stageParts.get(Parts.SRB);
