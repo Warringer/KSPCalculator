@@ -2,9 +2,14 @@ package kspcal.constants;
 
 import java.text.DecimalFormat;
 
+import javax.swing.ImageIcon;
+
+import kspcalc.Calculator;
+
 public final class Constants {
 	
 	static DecimalFormat format;
+	static ImageIcon icon;
 	
 	static {
 		format = new DecimalFormat("#.###");
@@ -59,5 +64,18 @@ public final class Constants {
 	
 	public static final String formatDouble(double d) {
 		return format.format(d);
+	}
+	
+	public static final ImageIcon getIcon() {
+		if (icon == null) {
+			java.net.URL imgURL = Calculator.class.getResource("/image/KSPsticker.png");
+	        if (imgURL != null) {
+	            icon = new ImageIcon(imgURL, "An Icon");
+	        } else {
+	        	System.err.println("Couldn't find file: " + "/image/KSPsticker.png");
+	        	icon = null;
+	        }
+		}
+		return icon;
 	}
 }

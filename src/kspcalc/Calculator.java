@@ -1,5 +1,5 @@
 package kspcalc;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.net.URL;
 
@@ -47,6 +47,7 @@ public class Calculator extends javax.swing.JFrame {
 	private EllipticOrbitCalculatorPanel ellipticOrbitCalculatorPanel1;
 	private LaunchOrbitCalculatorPanel orbitLaunchCalculatorPanel1;
 	private OrbitDisplayFrame orbitDisplay;
+	private JLabel jLabel6;
 	private StagingCalculatorPanel stagingCalculatorPanel1;
 	private JLabel jLabel5;
 	private StageCalculator stageCalculator1;
@@ -65,6 +66,7 @@ public class Calculator extends javax.swing.JFrame {
 	private JMenuBar jMenuBar1;
 	
 	private Calculator frame;
+	private ImageIcon icon;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -86,6 +88,11 @@ public class Calculator extends javax.swing.JFrame {
 		orbitDisplay.setLocationRelativeTo(null);
 		orbitDisplay.setVisible(false);
 		frame = this;
+		try {
+			icon = Constants.getIcon();
+			this.setIconImage(icon.getImage());
+			orbitDisplay.setIconImage(icon.getImage());
+		} catch (NullPointerException e) {}
 		orbitDisplay.setTitle("KSP Calculator - Orbit Display");
 	}
 	
@@ -169,42 +176,43 @@ public class Calculator extends javax.swing.JFrame {
 		if(AboutDialog == null) {
 			AboutDialog = new JDialog(this);
 			AboutDialog.getContentPane().setLayout(null);
-			AboutDialog.setPreferredSize(new java.awt.Dimension(235, 198));
+			AboutDialog.setPreferredSize(new java.awt.Dimension(371, 197));
 			{
 				jLabel1 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel1);
 				jLabel1.setText("Kerbal Space Program");
-				jLabel1.setBounds(12, 12, 205, 34);
+				jLabel1.setBounds(145, 10, 205, 34);
 				jLabel1.setFont(new java.awt.Font("Arial",0,20));
 			}
 			{
 				jLabel2 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel2);
 				jLabel2.setText("Calculator");
-				jLabel2.setBounds(58, 45, 109, 21);
+				jLabel2.setBounds(191, 43, 109, 21);
 				jLabel2.setFont(new java.awt.Font("Arial",0,20));
 			}
 			{
 				jLabel3 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel3);
 				jLabel3.setText("Version:");
-				jLabel3.setBounds(24, 79, 64, 15);
+				jLabel3.setBounds(157, 77, 64, 15);
 			}
 			{
 				jLabel4 = new JLabel();
 				AboutDialog.getContentPane().add(jLabel4);
 				jLabel4.setText("by:");
-				jLabel4.setBounds(24, 101, 55, 15);
+				jLabel4.setBounds(157, 99, 55, 15);
 			}
 			{
 				versionLabel = new JLabel();
 				AboutDialog.getContentPane().add(versionLabel);
 				AboutDialog.getContentPane().add(getJLabel5());
 				AboutDialog.getContentPane().add(getOkayButton());
+				AboutDialog.getContentPane().add(getJLabel6());
 				versionLabel.setText(Constants.Version);
-				versionLabel.setBounds(94, 79, 85, 15);
+				versionLabel.setBounds(227, 77, 85, 15);
 			}
-			AboutDialog.setSize(235, 198);
+			AboutDialog.setSize(371, 197);
 		}
 		AboutDialog.setLocationRelativeTo(null);
 		return AboutDialog;
@@ -214,7 +222,7 @@ public class Calculator extends javax.swing.JFrame {
 		if(jLabel5 == null) {
 			jLabel5 = new JLabel();
 			jLabel5.setText("Warringer");
-			jLabel5.setBounds(94, 101, 85, 15);
+			jLabel5.setBounds(227, 99, 85, 15);
 		}
 		return jLabel5;
 	}
@@ -223,7 +231,7 @@ public class Calculator extends javax.swing.JFrame {
 		if(OkayButton == null) {
 			OkayButton = new JButton();
 			OkayButton.setText("Okay");
-			OkayButton.setBounds(70, 136, 44, 22);
+			OkayButton.setBounds(203, 134, 44, 22);
 			OkayButton.setAction(getOkayAction());
 		}
 		return OkayButton;
@@ -249,6 +257,7 @@ public class Calculator extends javax.swing.JFrame {
 		JMenuItem mi = null;
 		try {
 			HelpSet hs = this.getHelpSet("help/help.hs");
+			hs.setTitle("KSP Calculator - Help");
 			HelpBroker hb = hs.createHelpBroker();
 			mi = new JMenuItem("Help");
 			DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(hb);
@@ -284,5 +293,14 @@ public class Calculator extends javax.swing.JFrame {
 			stagingCalculatorPanel1 = new StagingCalculatorPanel();
 		}
 		return stagingCalculatorPanel1;
+	}
+	
+	private JLabel getJLabel6() {
+		if(jLabel6 == null) {
+			jLabel6 = new JLabel(Constants.getIcon());
+			jLabel6.setBounds(12, 12, 10, 10);
+			jLabel6.setSize(128, 128);
+		}
+		return jLabel6;
 	}
 }

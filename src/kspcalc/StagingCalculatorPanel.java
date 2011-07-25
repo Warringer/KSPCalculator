@@ -109,19 +109,24 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 				private static final long serialVersionUID = -8815680798550047202L;
 
 				public void actionPerformed(ActionEvent evt) {
-					panel.getStageDialog().setVisible(true);
+					panel.getStageDialog("Add Stage").setVisible(true);
 				}
 			};
 		}
 		return addStageAction;
 	}
 	
-	private JDialog getStageDialog() {
+	private JDialog getStageDialog(String title) {
 		if(StageDialog == null) {
 			StageDialog = new JDialog();
 			StageDialog.setPreferredSize(new java.awt.Dimension(454, 336));
 			StageDialog.getContentPane().setLayout(null);
 			StageDialog.setSize(454, 336);
+			try {
+				ImageIcon icon = Constants.getIcon();
+				StageDialog.setIconImage(icon.getImage());
+			} catch (NullPointerException e) {}
+			StageDialog.setTitle("KSP Calculator - "+ title);
 			{
 				stageCalculator1 = new StageCalculator();
 				StageDialog.getContentPane().add(stageCalculator1, "Center");
@@ -134,6 +139,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 					jButton1.setBounds(230, 261, 105, 22);
 					jButton1.setAction(getAbstractAction1());
 				}
+				
 			}
 		}
 		StageDialog.setLocationRelativeTo(null);
@@ -399,7 +405,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 
 				public void actionPerformed(ActionEvent evt) {
 					panel.getEditStageDialog().setVisible(false);
-					panel.getStageDialog().setVisible(true);
+					panel.getStageDialog("Edit Stage").setVisible(true);
 					int stage = panel.stageComboBox.getSelectedIndex();
 					panel.stageCalculator1.setStageCalculator(stageList.get(stage).getStageParts(), stage);
 					panel.editStageDialog = null;

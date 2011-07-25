@@ -209,7 +209,6 @@ public class StageCalculator extends javax.swing.JPanel {
 		SpinnerLabelComponent spinner = new SpinnerLabelComponent(name);
 		spinner.setBounds(x, y, 250, 24);
 		return spinner;
-		
 	}
 	
 	/**
