@@ -74,6 +74,7 @@ public class StageCalculator extends javax.swing.JPanel {
 				jLabel1.setText("Stage Parts:");
 				jLabel1.setBounds(12, 12, 109, 15);
 			}
+			// Setup the Spinners dynamically
 			spinners = new HashMap<Parts, SpinnerLabelComponent>();
 			int y = 25;
 			for (Parts part : Parts.values()) {

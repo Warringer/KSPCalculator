@@ -12,13 +12,6 @@ public enum Parts {
 	Stack(0.8, "Stack Decoupler"),
 	Tri(0.8, "Tri-Coupler"),
 	/*EmptySRB(1.8, "Empty Solid Fuel Booster")//*/;
-	
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
 
 	private final double massI;
 	private final double massF;
@@ -46,9 +39,9 @@ public enum Parts {
 		//this.SI = sI;
 		this.fuel = fuel;
 		if (this.massI != this.massF) {
-			this.massPerFuel = ((massI - massF) / fuel) * 1000;
+			this.massPerFuel = ((massI - massF) / fuel) * 100;
 		} else {
-			this.massPerFuel = 4.6;
+			this.massPerFuel = 0.46;
 		}
 		if (fuelNeed > 0) {
 			this.SI = (this.thrust * 1000) / (Constants.GRAVITY * this.fuelNeed * this.massPerFuel);
@@ -60,6 +53,7 @@ public enum Parts {
 
 	/**
 	 * @param massI
+	 * @param name
 	 */
 	private Parts(double mass, String name) {
 		this.massI = mass;
@@ -112,6 +106,13 @@ public enum Parts {
 	 */
 	public double getMassPerFuel() {
 		return massPerFuel;
+	}
+	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 	
 }
