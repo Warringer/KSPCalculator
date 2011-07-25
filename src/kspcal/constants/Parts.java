@@ -46,16 +46,15 @@ public enum Parts {
 		//this.SI = sI;
 		this.fuel = fuel;
 		if (this.massI != this.massF) {
-			this.massPerFuel = ((massI - massF) / fuel) * 100;
+			this.massPerFuel = ((massI - massF) / fuel) * 1000;
 		} else {
-			this.massPerFuel = 0.46;
+			this.massPerFuel = 4.6;
 		}
 		if (fuelNeed > 0) {
 			this.SI = (this.thrust * 1000) / (Constants.GRAVITY * this.fuelNeed * this.massPerFuel);
 		} else {
 			this.SI = 0;
 		}
-		System.out.println(this.SI);
 		this.name = name;
 	}
 
