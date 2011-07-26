@@ -10,6 +10,7 @@ import javax.help.CSH.DisplayHelpFromSource;
 
 import kspcal.utils.Constants;
 import kspcalc.dialogs.AboutDialog;
+import kspcalc.dialogs.ConfigDialog;
 
 
 
@@ -48,14 +49,8 @@ public class Calculator extends javax.swing.JFrame {
 	private EllipticOrbitCalculatorPanel ellipticOrbitCalculatorPanel1;
 	private LaunchOrbitCalculatorPanel orbitLaunchCalculatorPanel1;
 	private OrbitDisplayFrame orbitDisplay;
-	private JLabel jLabel6;
 	private StagingCalculatorPanel stagingCalculatorPanel1;
 	private StageCalculator stageCalculator1;
-	private JLabel jLabel4;
-	private JLabel versionLabel;
-	private JLabel jLabel3;
-	private JLabel jLabel2;
-	private JLabel jLabel1;
 	private JMenu Help;
 	private AboutDialog aboutDialog;
 	private AbstractAction AboutAction;
@@ -65,6 +60,9 @@ public class Calculator extends javax.swing.JFrame {
 	
 	private Calculator frame;
 	private ImageIcon icon;
+	private AbstractAction ConfigurationAction;
+	private JMenuItem ConfigItem;
+	private JMenu Calc;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -101,6 +99,7 @@ public class Calculator extends javax.swing.JFrame {
 			{
 				jMenuBar1 = new JMenuBar();
 				setJMenuBar(jMenuBar1);
+				jMenuBar1.add(getCalc());
 				jMenuBar1.add(Box.createHorizontalGlue());
 				{
 					Help = new JMenu();
@@ -219,5 +218,39 @@ public class Calculator extends javax.swing.JFrame {
 		return stagingCalculatorPanel1;
 	}
 	
+	private JMenu getCalc() {
+		if(Calc == null) {
+			Calc = new JMenu();
+			Calc.setText("Calculator");
+			Calc.add(getConfigItem());
+		}
+		return Calc;
+	}
 	
+	private JMenuItem getConfigItem() {
+		if(ConfigItem == null) {
+			ConfigItem = new JMenuItem();
+			ConfigItem.setText("Configuration");
+			ConfigItem.setAction(getConfigurationAction());
+		}
+		return ConfigItem;
+	}
+	
+	private AbstractAction getConfigurationAction() {
+		if(ConfigurationAction == null) {
+			ConfigurationAction = new AbstractAction("Configuration", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8848019343344314900L;
+
+				public void actionPerformed(ActionEvent evt) {
+					ConfigDialog config = new ConfigDialog(frame);
+					config.setVisible(true);
+				}
+			};
+		}
+		return ConfigurationAction;
+	}
+
 }
