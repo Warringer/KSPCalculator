@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-import kspcal.constants.Constants;
+import kspcal.utils.Constants;
 
 
 

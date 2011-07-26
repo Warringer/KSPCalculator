@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-import kspcal.constants.Constants;
+import kspcal.utils.Constants;
 import kspcalc.math.*;
 
 

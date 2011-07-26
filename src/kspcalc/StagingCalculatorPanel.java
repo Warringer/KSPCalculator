@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import kspcal.constants.Constants;
+import kspcal.utils.Constants;
 import kspcalc.dialogs.EditStageDialog;
 import kspcalc.dialogs.StaceCalculatorDialog;
 import kspcalc.math.StageMath;
@@ -29,8 +29,6 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 3507249344197244600L;
-	private JButton jButton1;
-	private AbstractAction abstractAction1;
 	private StageCalculator stageCalculator1;
 	private JDialog StageDialog;
 	private AbstractAction addStageAction;

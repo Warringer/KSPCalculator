@@ -4,8 +4,8 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.*;
 
-import kspcal.constants.Constants;
-import kspcal.constants.Parts;
+import kspcal.utils.Constants;
+import kspcal.utils.Parts;
 import kspcalc.math.StageMath;
 
 

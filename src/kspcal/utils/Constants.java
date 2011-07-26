@@ -1,4 +1,4 @@
-package kspcal.constants;
+package kspcal.utils;
 
 import java.text.DecimalFormat;
 

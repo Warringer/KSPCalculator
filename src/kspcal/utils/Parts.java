@@ -1,4 +1,4 @@
-package kspcal.constants;
+package kspcal.utils;
 
 public enum Parts {
 

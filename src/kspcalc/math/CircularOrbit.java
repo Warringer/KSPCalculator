@@ -1,6 +1,6 @@
 package kspcalc.math;
 
-import kspcal.constants.Constants;
+import kspcal.utils.Constants;
 
 public class CircularOrbit {
 

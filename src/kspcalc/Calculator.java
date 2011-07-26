@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.help.*;
 import javax.help.CSH.DisplayHelpFromSource;
 
-import kspcal.constants.Constants;
+import kspcal.utils.Constants;
 import kspcalc.dialogs.AboutDialog;
 
 

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import kspcal.constants.Constants;
-import kspcal.constants.Parts;
+import kspcal.utils.Constants;
+import kspcal.utils.Parts;
 
 
 public class StageMath {
