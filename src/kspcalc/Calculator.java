@@ -9,6 +9,7 @@ import javax.help.*;
 import javax.help.CSH.DisplayHelpFromSource;
 
 import kspcal.constants.Constants;
+import kspcalc.dialogs.AboutDialog;
 
 
 
@@ -49,17 +50,14 @@ public class Calculator extends javax.swing.JFrame {
 	private OrbitDisplayFrame orbitDisplay;
 	private JLabel jLabel6;
 	private StagingCalculatorPanel stagingCalculatorPanel1;
-	private JLabel jLabel5;
 	private StageCalculator stageCalculator1;
-	private AbstractAction OkayAction;
-	private JButton OkayButton;
 	private JLabel jLabel4;
 	private JLabel versionLabel;
 	private JLabel jLabel3;
 	private JLabel jLabel2;
 	private JLabel jLabel1;
 	private JMenu Help;
-	private JDialog AboutDialog;
+	private AboutDialog aboutDialog;
 	private AbstractAction AboutAction;
 	private JMenuItem AboutItem;
 	private JMenuItem HelpItem;
@@ -172,85 +170,11 @@ public class Calculator extends javax.swing.JFrame {
 		return AboutAction;
 	}
 	
-	private JDialog getAboutDialog() {
-		if(AboutDialog == null) {
-			AboutDialog = new JDialog(this);
-			AboutDialog.getContentPane().setLayout(null);
-			AboutDialog.setPreferredSize(new java.awt.Dimension(371, 197));
-			{
-				jLabel1 = new JLabel();
-				AboutDialog.getContentPane().add(jLabel1);
-				jLabel1.setText("Kerbal Space Program");
-				jLabel1.setBounds(145, 10, 205, 34);
-				jLabel1.setFont(new java.awt.Font("Arial",0,20));
-			}
-			{
-				jLabel2 = new JLabel();
-				AboutDialog.getContentPane().add(jLabel2);
-				jLabel2.setText("Calculator");
-				jLabel2.setBounds(191, 43, 109, 21);
-				jLabel2.setFont(new java.awt.Font("Arial",0,20));
-			}
-			{
-				jLabel3 = new JLabel();
-				AboutDialog.getContentPane().add(jLabel3);
-				jLabel3.setText("Version:");
-				jLabel3.setBounds(157, 77, 64, 15);
-			}
-			{
-				jLabel4 = new JLabel();
-				AboutDialog.getContentPane().add(jLabel4);
-				jLabel4.setText("by:");
-				jLabel4.setBounds(157, 99, 55, 15);
-			}
-			{
-				versionLabel = new JLabel();
-				AboutDialog.getContentPane().add(versionLabel);
-				AboutDialog.getContentPane().add(getJLabel5());
-				AboutDialog.getContentPane().add(getOkayButton());
-				AboutDialog.getContentPane().add(getJLabel6());
-				versionLabel.setText(Constants.Version);
-				versionLabel.setBounds(227, 77, 85, 15);
-			}
-			AboutDialog.setSize(371, 197);
+	public JDialog getAboutDialog() {
+		if(aboutDialog == null) {
+			aboutDialog = new AboutDialog(this);
 		}
-		AboutDialog.setLocationRelativeTo(null);
-		return AboutDialog;
-	}
-	
-	private JLabel getJLabel5() {
-		if(jLabel5 == null) {
-			jLabel5 = new JLabel();
-			jLabel5.setText("Warringer");
-			jLabel5.setBounds(227, 99, 85, 15);
-		}
-		return jLabel5;
-	}
-	
-	private JButton getOkayButton() {
-		if(OkayButton == null) {
-			OkayButton = new JButton();
-			OkayButton.setText("Okay");
-			OkayButton.setBounds(203, 134, 44, 22);
-			OkayButton.setAction(getOkayAction());
-		}
-		return OkayButton;
-	}
-	
-	private AbstractAction getOkayAction() {
-		if(OkayAction == null) {
-			OkayAction = new AbstractAction("Okay", null) {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 8848019343344314900L;
-
-				public void actionPerformed(ActionEvent evt) {
-					frame.getAboutDialog().setVisible(false);
-				}
-			};
-		}
-		return OkayAction;
+		return aboutDialog;
 	}
 
 	private JMenuItem startJavaHelp() {
@@ -290,17 +214,10 @@ public class Calculator extends javax.swing.JFrame {
 	
 	private StagingCalculatorPanel getStagingCalculatorPanel1() {
 		if(stagingCalculatorPanel1 == null) {
-			stagingCalculatorPanel1 = new StagingCalculatorPanel();
+			stagingCalculatorPanel1 = new StagingCalculatorPanel(this);
 		}
 		return stagingCalculatorPanel1;
 	}
 	
-	private JLabel getJLabel6() {
-		if(jLabel6 == null) {
-			jLabel6 = new JLabel(Constants.getIcon());
-			jLabel6.setBounds(12, 12, 10, 10);
-			jLabel6.setSize(128, 128);
-		}
-		return jLabel6;
-	}
+	
 }
