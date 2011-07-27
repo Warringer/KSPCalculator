@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import kspcal.utils.KSPConfig;
+import kspcal.utils.PartsConfig;
 
 public class DirectoryReadTest {
 
@@ -27,9 +28,11 @@ public class DirectoryReadTest {
 			BufferedWriter out = new BufferedWriter(new FileWriter("test.txt"));
 			out.write(dirmap.toString());
 			Set<Entry<String, String>> set = dirmap.entrySet(); 
-			Iterator<Entry<String, String>> i = set.iterator(); 
+			Iterator<Entry<String, String>> i = set.iterator();
+			PartsConfig partConfig = PartsConfig.getConfig();
 			while (i.hasNext()) {
 				Map.Entry<String, String> next = (Map.Entry<String, String>)i.next();
+				partlist.add(next.getKey());
 				Properties properties = new Properties();
 				properties.load(new FileInputStream(config.getDirectory() + "/Parts/" + next.getKey() + "/" + next.getValue()));
 				out.write(properties.getProperty("name")+ ": " + properties.getProperty("module") + "\n");
@@ -45,6 +48,8 @@ public class DirectoryReadTest {
 			}
 			out.write(partslist.toString());
 			out.close();
+			partConfig.setMods(partlist);
+			partConfig.saveConfig();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
