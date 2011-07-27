@@ -1,12 +1,13 @@
 package kspcalc.dialogs;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
 import kspcal.utils.Constants;
-import kspcalc.StageCalculator;
 import kspcalc.StagingCalculatorPanel;
+import kspcalc.stagecalc.*;
 
 
 public class StaceCalculatorDialog extends javax.swing.JDialog {
@@ -36,13 +37,13 @@ public class StaceCalculatorDialog extends javax.swing.JDialog {
 			} catch (NullPointerException e) {}
 			this.setTitle("KSP Calculator - "+ title);
 			{
-				panel.setStageCalculator1(new StageCalculator());
-				this.getContentPane().add(panel.getStageCalculator1(), "Center");
-				panel.getStageCalculator1().setPreferredSize(new java.awt.Dimension(400, 300));
-				panel.getStageCalculator1().setBounds(0, 0, 444, 306);
+				panel.setStageCalculator1(StageCalculator.getStageCalculator());
+				this.getContentPane().add((JPanel) panel.getStageCalculator1(), "Center");
+				((JComponent) panel.getStageCalculator1()).setPreferredSize(new java.awt.Dimension(400, 300));
+				((JComponent) panel.getStageCalculator1()).setBounds(0, 0, 444, 306);
 				{
 					jButton1 = new JButton();
-					panel.getStageCalculator1().add(jButton1);
+					((JComponent) panel.getStageCalculator1()).add(jButton1);
 					jButton1.setText("Save Stage");
 					jButton1.setBounds(230, 261, 105, 22);
 					jButton1.setAction(getAbstractAction1());

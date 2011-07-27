@@ -51,7 +51,7 @@ public class ConfigDialog extends javax.swing.JDialog {
 	
 	public ConfigDialog(JFrame frame) {
 		super(frame);
-		config = new KSPConfig();
+		config = KSPConfig.getConfig();
 		initGUI();
 	}
 	

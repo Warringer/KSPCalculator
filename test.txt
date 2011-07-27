@@ -1,0 +1,68 @@
+{parachute_single=part.cfg, largefuelTank=part.cfg, Decoupler shroud 1=part.cfg, lateral coupler R=part.cfg, 3m to 5X1m adapter=part.cfg, quad coupler=part.cfg, lateral coupler=part.cfg, solidBooster=part.cfg, 3m Decoupler=part.cfg, 2m_fueltank=part.cfg, fuelTank=part.cfg, advDecouplerShroud=part.cfg, 4X liquid=part.cfg, miniLiquidEngine=part.cfg, opaModule=part.cfg, small fuel tank=part.cfg, microtank=part.cfg, 2m_sas=part.cfg, stackDecoupler2=part.cfg, advDecouplerClutch=part.cfg, Radialparachute=part.cfg, largeSRB=part.cfg, smallsolidmotor=part.cfg, dual coupler R=part.cfg, lateral tricoupler R=part.cfg, sasModule=part.cfg, 2m_1m_adapter=part.cfg, RCS Module=part.cfg, radialDecoupler=part.cfg, decouplerStrut=part.cfg, externalFuelTankCap=part.cfg, medium fuel tank=part.cfg, NERVA engine=part.cfg, 3 to 1 adapter=part.cfg, medsolidBooster=part.cfg, externalFuelTank=part.cfg, miniLiquidEngine1=part.cfg, advDecouplerBase=part.cfg, 1 to 3 adapter=part.cfg, nuclearEngine1=part.cfg, nuclearEngine2=part.cfg, stackTriCoupler=part.cfg, liquidEngine1=part.cfg, 3m Decoupler shroud1=part.cfg, Decoupler shroud=part.cfg, 2m_engine=part.cfg, dual coupler=part.cfg, Escape tower=part.cfg, microengine=part.cfg, opaTank=part.cfg, externalFuelTankCapParachute=part.cfg, winglet2=part.cfg, winglet=part.cfg, Medium liquid engine=part.cfg, commsat=part.cfg, miniFuelTank=part.cfg, sidemountSRB=part.cfg, 1m nosecone=part.cfg, Small liquid engine=part.cfg, lateral tricoupler=part.cfg, stackDecoupler=part.cfg, Large liquid engine=part.cfg, mk1pod=part.cfg, Decoupler shroud5=part.cfg, Decoupler shroud3=part.cfg, Decoupler shroud2=part.cfg, Retro pack=part.cfg}parachuteSingle: Parachutes
+largefuelTank: FuelTank
+ShroudDecoupler1: Decoupler
+lateralcouplerR: FuelTank
+3m to 5X1m adapter: FuelTank
+QuadCoupler: FuelTank
+lateralcoupler: FuelTank
+solidBooster: SolidRocket
+3 metrestackDecoupler: Decoupler
+2m_fueltank: FuelTank
+fuelTank: FuelTank
+advDecouplerShroud: Winglet
+4XliquidEngine: LiquidEngine
+liquidEngine2: LiquidEngine
+opaModule: LiquidEngine
+smallfuelTank: FuelTank
+microtank: FuelTank
+2m_sas: SASModule
+stackDecoupler2: Decoupler
+advDecouplerClutch: RadialDecoupler
+Radialparachute: Parachutes
+largeSRB: SolidRocket
+small solid motor: SolidRocket
+DualCouplerR: FuelTank
+lateraltricouplerR: FuelTank
+sasModule: SASModule
+2m_1m_adapter: Strut
+RCSModule: CommandPod
+radialDecoupler: RadialDecoupler
+decouplerStrut: RadialDecoupler
+externalFuelTankCap: Strut
+mediumfuelTank: FuelTank
+NERVAEngine: LiquidEngine
+3to1 adapter: FuelTank
+medsolidBooster: SolidRocket
+externalFuelTank: FuelTank
+miniLiquidEngine: LiquidEngine
+advDecouplerBase: Decoupler
+1to3 adapter: FuelTank
+nuclearEngine: LiquidEngine
+nuclearEngine2: LiquidEngine
+stackTriCoupler: Strut
+liquidEngine: LiquidEngine
+3mShroudDecoupler1: Decoupler
+ShroudDecouplerclone: Decoupler
+2m_engine: LiquidEngine
+DualCoupler: FuelTank
+EscapeTower: SolidRocket
+microengine: LiquidEngine
+opaTank: FuelTank
+ExternalFuelTankCapParachute: Parachutes
+R8winglet: Winglet
+winglet: Winglet
+medliquidEngine: LiquidEngine
+commsat: Strut
+miniFuelTank: FuelTank
+sidemountSRB: SolidRocket
+1mNose: Winglet
+smallliquidEngine: LiquidEngine
+lateraltricoupler: FuelTank
+stackDecoupler: Decoupler
+largeliquidEngine: LiquidEngine
+mk1pod: CommandPod
+ShroudDecoupler5: Decoupler
+ShroudDecoupler3: Decoupler
+ShroudDecoupler2: Decoupler
+RetroPack: SolidRocket
+{Decoupler=[ShroudDecoupler1, 3 metrestackDecoupler, stackDecoupler2, advDecouplerBase, 3mShroudDecoupler1, ShroudDecouplerclone, stackDecoupler, ShroudDecoupler5, ShroudDecoupler3, ShroudDecoupler2], RadialDecoupler=[advDecouplerClutch, radialDecoupler, decouplerStrut], SASModule=[2m_sas, sasModule], Strut=[2m_1m_adapter, externalFuelTankCap, stackTriCoupler, commsat], SolidRocket=[solidBooster, largeSRB, small solid motor, medsolidBooster, EscapeTower, sidemountSRB, RetroPack], FuelTank=[largefuelTank, lateralcouplerR, 3m to 5X1m adapter, QuadCoupler, lateralcoupler, 2m_fueltank, fuelTank, smallfuelTank, microtank, DualCouplerR, lateraltricouplerR, mediumfuelTank, 3to1 adapter, externalFuelTank, 1to3 adapter, DualCoupler, opaTank, miniFuelTank, lateraltricoupler], CommandPod=[RCSModule, mk1pod], LiquidEngine=[4XliquidEngine, liquidEngine2, opaModule, NERVAEngine, miniLiquidEngine, nuclearEngine, nuclearEngine2, liquidEngine, 2m_engine, microengine, medliquidEngine, smallliquidEngine, largeliquidEngine], Winglet=[advDecouplerShroud, R8winglet, winglet, 1mNose], Parachutes=[parachuteSingle, Radialparachute, ExternalFuelTankCapParachute]}

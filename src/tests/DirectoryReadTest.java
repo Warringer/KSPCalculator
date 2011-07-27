@@ -1,6 +1,7 @@
 package tests;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,8 +18,10 @@ public class DirectoryReadTest {
 	 * @param args
 	 */
 	public static void main (String args[]) {
-		KSPConfig config = new KSPConfig();
+		KSPConfig config = KSPConfig.getConfig();
 		dirmap = new HashMap<String, String>();
+		ArrayList<String> partlist = new ArrayList<String>();
+		HashMap<String, ArrayList<String>> partslist= new HashMap<String, ArrayList<String>>();
 		displayIt(new File(config.getDirectory() + "/Parts"));
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter("test.txt"));
@@ -29,8 +32,18 @@ public class DirectoryReadTest {
 				Map.Entry<String, String> next = (Map.Entry<String, String>)i.next();
 				Properties properties = new Properties();
 				properties.load(new FileInputStream(config.getDirectory() + "/Parts/" + next.getKey() + "/" + next.getValue()));
-				out.write(properties.getProperty("name") + "\n");
+				out.write(properties.getProperty("name")+ ": " + properties.getProperty("module") + "\n");
+				ArrayList<String> list = new ArrayList<String>();
+				if (!partslist.containsKey(properties.getProperty("module"))) {
+					list.add(properties.getProperty("name"));
+					partslist.put(properties.getProperty("module"), list);
+				} else {
+					list = partslist.get(properties.getProperty("module"));
+					list.add(properties.getProperty("name"));
+					partslist.put(properties.getProperty("module"), list);
+				}
 			}
+			out.write(partslist.toString());
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();

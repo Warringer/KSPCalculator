@@ -11,6 +11,9 @@ import javax.help.CSH.DisplayHelpFromSource;
 import kspcal.utils.Constants;
 import kspcalc.dialogs.AboutDialog;
 import kspcalc.dialogs.ConfigDialog;
+import kspcalc.stagecalc.StageCalc;
+import kspcalc.stagecalc.StageCalculator;
+import kspcalc.stagecalc.StageCalculatorVanilla;
 
 
 
@@ -50,7 +53,7 @@ public class Calculator extends javax.swing.JFrame {
 	private LaunchOrbitCalculatorPanel orbitLaunchCalculatorPanel1;
 	private OrbitDisplayFrame orbitDisplay;
 	private StagingCalculatorPanel stagingCalculatorPanel1;
-	private StageCalculator stageCalculator1;
+	private StageCalc stageCalculator1;
 	private JMenu Help;
 	private AboutDialog aboutDialog;
 	private AbstractAction AboutAction;
@@ -60,6 +63,9 @@ public class Calculator extends javax.swing.JFrame {
 	
 	private Calculator frame;
 	private ImageIcon icon;
+	private AbstractAction closeAction1;
+	private JMenuItem CloseItem;
+	private JSeparator jSeparator1;
 	private AbstractAction ConfigurationAction;
 	private JMenuItem ConfigItem;
 	private JMenu Calc;
@@ -137,7 +143,7 @@ public class Calculator extends javax.swing.JFrame {
 				{
 					orbitLaunchCalculatorPanel1 = new LaunchOrbitCalculatorPanel();
 					jTabbedPane1.addTab("Launch Orbit", null, orbitLaunchCalculatorPanel1, null);
-					jTabbedPane1.addTab("Stage Calculator", null, getStageCalculator1(), null);
+					jTabbedPane1.addTab("Stage Calculator", null, (JPanel) getStageCalculator1(), null);
 					jTabbedPane1.addTab("Multi Stage Calculator", null, getStagingCalculatorPanel1(), null);
 				}
 			}
@@ -204,9 +210,9 @@ public class Calculator extends javax.swing.JFrame {
 	      return hs;
 	   }
 	
-	private StageCalculator getStageCalculator1() {
+	private StageCalc getStageCalculator1() {
 		if(stageCalculator1 == null) {
-			stageCalculator1 = new StageCalculator();
+			stageCalculator1 = StageCalculator.getStageCalculator();
 		}
 		return stageCalculator1;
 	}
@@ -223,6 +229,8 @@ public class Calculator extends javax.swing.JFrame {
 			Calc = new JMenu();
 			Calc.setText("Calculator");
 			Calc.add(getConfigItem());
+			Calc.add(getJSeparator1());
+			Calc.add(getCloseItem());
 		}
 		return Calc;
 	}
@@ -230,7 +238,7 @@ public class Calculator extends javax.swing.JFrame {
 	private JMenuItem getConfigItem() {
 		if(ConfigItem == null) {
 			ConfigItem = new JMenuItem();
-			ConfigItem.setText("Configuration");
+			ConfigItem.setText("Calculator");
 			ConfigItem.setAction(getConfigurationAction());
 		}
 		return ConfigItem;
@@ -251,6 +259,33 @@ public class Calculator extends javax.swing.JFrame {
 			};
 		}
 		return ConfigurationAction;
+	}
+	
+	private JSeparator getJSeparator1() {
+		if(jSeparator1 == null) {
+			jSeparator1 = new JSeparator();
+		}
+		return jSeparator1;
+	}
+	
+	private JMenuItem getCloseItem() {
+		if(CloseItem == null) {
+			CloseItem = new JMenuItem();
+			CloseItem.setText("Close");
+			CloseItem.setAction(getCloseAction1());
+		}
+		return CloseItem;
+	}
+	
+	private AbstractAction getCloseAction1() {
+		if(closeAction1 == null) {
+			closeAction1 = new AbstractAction("Close", null) {
+				public void actionPerformed(ActionEvent evt) {
+					System.exit(0);
+				}
+			};
+		}
+		return closeAction1;
 	}
 
 }

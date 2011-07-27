@@ -1,4 +1,4 @@
-package kspcalc;
+package kspcalc.stagecalc;
 import java.util.HashMap;
 
 import javax.swing.*;
@@ -6,6 +6,7 @@ import javax.swing.event.*;
 
 import kspcal.utils.Constants;
 import kspcal.utils.Parts;
+import kspcalc.SpinnerLabelComponent;
 import kspcalc.math.StageMath;
 
 
@@ -22,7 +23,7 @@ import kspcalc.math.StageMath;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class StageCalculator extends javax.swing.JPanel {
+public class StageCalculatorVanilla extends javax.swing.JPanel implements StageCalc{
 	/**
 	 * 
 	 */
@@ -44,14 +45,13 @@ public class StageCalculator extends javax.swing.JPanel {
 	private JLabel massFOut;
 	private JLabel massIOut;
 	
-	private StageCalculator panel;
+	private static StageCalc panel;
 	private ChangeListener SpinnerListener;
 	private StageMath stage;
 	private int stageIndex = -1;
 
-	public StageCalculator() {
+	public StageCalculatorVanilla() {
 		super();
-		this.panel = this;
 		this.stage = new StageMath();
 		initGUI();
 	}
@@ -171,14 +171,14 @@ public class StageCalculator extends javax.swing.JPanel {
 		if (SpinnerListener == null) {
 			SpinnerListener = new ChangeListener() {
 				public void stateChanged(ChangeEvent evt) {
-					panel.doMath();
+					doMath();
 				}
 			};
 		}
 		return SpinnerListener;
 	}
 	
-	private void doMath() {
+	public void doMath() {
 		HashMap<Parts, Integer> parts = new HashMap<Parts, Integer>();
 		for (Parts part : Parts.values()) {
 			parts.put(part, this.spinners.get(part).getValue());
