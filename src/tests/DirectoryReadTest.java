@@ -9,8 +9,8 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import kspcal.utils.CustomParts;
 import kspcal.utils.KSPConfig;
-import kspcal.utils.PartsConfig;
 
 public class DirectoryReadTest {
 
@@ -29,7 +29,6 @@ public class DirectoryReadTest {
 			out.write(dirmap.toString());
 			Set<Entry<String, String>> set = dirmap.entrySet(); 
 			Iterator<Entry<String, String>> i = set.iterator();
-			PartsConfig partConfig = PartsConfig.getConfig();
 			while (i.hasNext()) {
 				Map.Entry<String, String> next = (Map.Entry<String, String>)i.next();
 				partlist.add(next.getKey());
@@ -46,10 +45,11 @@ public class DirectoryReadTest {
 					partslist.put(properties.getProperty("module"), list);
 				}
 			}
-			out.write(partslist.toString());
+			out.write(partslist.toString()+"\n\n");
+			CustomParts test = new CustomParts();
+			out.write(test.toString());
+			System.out.println(test);
 			out.close();
-			partConfig.setMods(partlist);
-			partConfig.saveConfig();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
