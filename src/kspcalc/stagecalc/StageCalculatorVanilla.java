@@ -6,8 +6,8 @@ import javax.swing.event.*;
 
 import kspcal.utils.Constants;
 import kspcal.utils.Parts;
-import kspcalc.SpinnerLabelComponent;
-import kspcalc.math.StageMath;
+import kspcalc.components.SpinnerLabelComponent;
+import kspcalc.math.StageMathVanilla;
 
 
 
@@ -47,12 +47,12 @@ public class StageCalculatorVanilla extends javax.swing.JPanel implements StageC
 	
 	private static StageCalc panel;
 	private ChangeListener SpinnerListener;
-	private StageMath stage;
+	private StageMathVanilla stage;
 	private int stageIndex = -1;
 
 	public StageCalculatorVanilla() {
 		super();
-		this.stage = new StageMath();
+		this.stage = new StageMathVanilla();
 		initGUI();
 	}
 	
@@ -183,7 +183,7 @@ public class StageCalculatorVanilla extends javax.swing.JPanel implements StageC
 		for (Parts part : Parts.values()) {
 			parts.put(part, this.spinners.get(part).getValue());
 		}
-		StageMath calc = new StageMath(parts, 0);
+		StageMathVanilla calc = new StageMathVanilla(parts, 0);
 		this.massFOut.setText(Constants.formatDouble(calc.getCombinedMassF()) + " tons");
 		this.massIOut.setText(Constants.formatDouble(calc.getCombinedMassI()) + " tons");
 		this.thrustOut.setText(Constants.formatDouble(calc.getCombinedThrust()) + " kN");
@@ -214,7 +214,7 @@ public class StageCalculatorVanilla extends javax.swing.JPanel implements StageC
 	/**
 	 * @return the stage
 	 */
-	public StageMath getStage() {
+	public StageMathVanilla getStage() {
 		return stage;
 	}
 

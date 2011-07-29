@@ -5,11 +5,12 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import kspcal.utils.Constants;
+import kspcal.utils.CustomParts;
 import kspcal.utils.Parts;
 
 
-public class StageMath {
-	private HashMap<Parts, Integer> stageParts;	// HashMap containing all vanilla parts and how many times they are in the Stage
+public class StageMathCustom {
+	private CustomParts stageParts;	// HashMap containing all vanilla parts and how many times they are in the Stage
 	private double combinedMassI = 0;			// Combined Initial Mass (before Burnout)
 	private double combinedMassF = 0;			// Combined Final Mass (after Burnout)
 	private double combinedThrust = 0;			// Combined Thrust if the Stage
@@ -52,7 +53,7 @@ public class StageMath {
 	/**
 	 * @param stageParts
 	 */
-	public StageMath(HashMap<Parts, Integer> stageParts, double DWC) {
+	public StageMathCustom(CustomParts stageParts, double DWC) {
 		super();
 		this.stageParts = stageParts;
 		// this.DWC = DWC;
@@ -66,11 +67,11 @@ public class StageMath {
 	/**
 	 * @return the stageParts
 	 */
-	public HashMap<Parts, Integer> getStageParts() {
+	public CustomParts getStageParts() {
 		return stageParts;
 	}
 
-	public StageMath() {
+	public StageMathCustom() {
 	}
 	
 	/**

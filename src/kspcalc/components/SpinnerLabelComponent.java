@@ -1,4 +1,4 @@
-package kspcalc;
+package kspcalc.components;
 
 import javax.swing.*;
 import javax.swing.event.*;

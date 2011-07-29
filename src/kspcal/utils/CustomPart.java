@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import kspcalc.components.SpinnerLabelComponent;
+
 public class CustomPart {
 
 	private double massI = 0;
@@ -16,6 +18,7 @@ public class CustomPart {
 	private double massPerFuel = 0;
 	private CustomPartType type;
 	private String name = "";
+	private SpinnerLabelComponent spinner = null;
 	
 	public CustomPart(String partPath) {
 		super();
@@ -216,6 +219,27 @@ public class CustomPart {
 						massI, massF, thrust, SI, fuel, fuelNeed, massPerFuel,
 						type, name);
 	}
+
+	/**
+	 * @return the spinner
+	 */
+	public SpinnerLabelComponent getSpinner(int x, int y, String name) {
+		if (this.spinner == null) {
+			this.spinner = new SpinnerLabelComponent(name);
+		}
+		this.spinner.setBounds(x, y, 250, 24);
+		return this.spinner;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setNumber(int value) {
+		this.spinner.setValue(value);
+	}
 	
+	public int getNumber() {
+		return this.spinner.getValue();
+	}
 	
 }

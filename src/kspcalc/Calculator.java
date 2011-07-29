@@ -11,9 +11,7 @@ import javax.help.CSH.DisplayHelpFromSource;
 import kspcal.utils.Constants;
 import kspcalc.dialogs.AboutDialog;
 import kspcalc.dialogs.ConfigDialog;
-import kspcalc.stagecalc.StageCalc;
-import kspcalc.stagecalc.StageCalculator;
-import kspcalc.stagecalc.StageCalculatorVanilla;
+import kspcalc.stagecalc.*;
 
 
 
