@@ -84,9 +84,9 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 			}
 			{
 				orbPerOut = new JLabel();
-				this.add(orbPerOut, new AnchorConstraint(348, 668, 398, 353, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(orbPerOut, new AnchorConstraint(348, 861, 398, 353, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				orbPerOut.setText("0 minutes");
-				orbPerOut.setPreferredSize(new java.awt.Dimension(126, 15));
+				orbPerOut.setPreferredSize(new java.awt.Dimension(203, 15));
 			}
 			{
 				orbVelOut = new JLabel();

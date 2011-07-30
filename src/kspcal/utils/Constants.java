@@ -51,7 +51,12 @@ public final class Constants {
 	}
 	
 	public static final String formatPer(double d) {
-		return format.format(d) + " minutes";
+		if (d < 120) {
+			return format.format(d) + " minutes";
+		}
+		int hours = (int) d / 60;
+		double minutes = d - (double) (hours * 60);
+		return hours + " hours " + format.format(minutes) + " minutes"; 
 	}
 	
 	public static final String formatMeter(double d) {

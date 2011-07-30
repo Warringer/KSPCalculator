@@ -84,7 +84,7 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 				orbPerOut = new JLabel();
 				this.add(orbPerOut, new AnchorConstraint(931,613,981,371,AnchorConstraint.ANCHOR_REL,AnchorConstraint.ANCHOR_REL,AnchorConstraint.ANCHOR_REL,AnchorConstraint.ANCHOR_REL));
 				orbPerOut.setText("0 minutes");
-				orbPerOut.setBounds(148, 279, 125, 15);
+				orbPerOut.setBounds(148, 279, 222, 15);
 			}
 			{
 				apoVelOut = new JLabel();

@@ -90,9 +90,9 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 				this.add(getShowOrbitButton(), new AnchorConstraint(325, 776, 398, 533, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransFinalVel(), new AnchorConstraint(728, 971, 775, 668, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransInitVel(), new AnchorConstraint(581, 348, 631, 58, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				this.add(getHohTransTimeOut(), new AnchorConstraint(925, 958, 975, 718, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				this.add(getJLabel8(), new AnchorConstraint(921, 498, 971, 31, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				this.add(getHohTransPerOut(), new AnchorConstraint(875, 958, 925, 718, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getHohTransTimeOut(), new AnchorConstraint(921, 958, 971, 551, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getJLabel8(), new AnchorConstraint(921, 536, 971, 31, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getHohTransPerOut(), new AnchorConstraint(871, 958, 921, 551, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getJLabel7(), new AnchorConstraint(875, 448, 925, 31, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohDVSumOut(), new AnchorConstraint(825, 958, 875, 718, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getJLabel6(), new AnchorConstraint(825, 718, 875, 31, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
@@ -385,7 +385,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 		if(hohTransPerOut == null) {
 			hohTransPerOut = new JLabel();
 			hohTransPerOut.setText("0 minutes");
-			hohTransPerOut.setPreferredSize(new java.awt.Dimension(96, 15));
+			hohTransPerOut.setPreferredSize(new java.awt.Dimension(163, 15));
 		}
 		return hohTransPerOut;
 	}
@@ -394,7 +394,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 		if(jLabel8 == null) {
 			jLabel8 = new JLabel();
 			jLabel8.setText("Hohmann Transfer Orbit Time:");
-			jLabel8.setPreferredSize(new java.awt.Dimension(187, 15));
+			jLabel8.setPreferredSize(new java.awt.Dimension(202, 15));
 		}
 		return jLabel8;
 	}
@@ -403,7 +403,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 		if(hohTransTimeOut == null) {
 			hohTransTimeOut = new JLabel();
 			hohTransTimeOut.setText("0 minutes");
-			hohTransTimeOut.setPreferredSize(new java.awt.Dimension(96, 15));
+			hohTransTimeOut.setPreferredSize(new java.awt.Dimension(163, 15));
 		}
 		return hohTransTimeOut;
 	}
