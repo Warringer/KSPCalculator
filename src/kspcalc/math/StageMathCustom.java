@@ -1,24 +1,15 @@
 package kspcalc.math;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import kspcal.utils.Constants;
-import kspcal.utils.CustomParts;
-import kspcal.utils.Parts;
+import kspcal.utils.*;
 
 
-public class StageMathCustom {
-	private CustomParts stageParts;	// HashMap containing all vanilla parts and how many times they are in the Stage
-	private double combinedMassI = 0;			// Combined Initial Mass (before Burnout)
-	private double combinedMassF = 0;			// Combined Final Mass (after Burnout)
-	private double combinedThrust = 0;			// Combined Thrust if the Stage
-	private double DV = 0;						// Delta-V of the Stage 
-	private double SI = 0;						// Specific Impulse
-	private double combinedFuel = 0;			// Fuel reserves of the Stage
-	private double TWR = 0;						// Thrust to Weight ratio
-	// private double DWC = 0;						// Weight of any stage carried by this one
+public class StageMathCustom extends StageMath {
+	private HashMap<CustomPartType, HashMap<String, CustomPart>> stageParts;	// HashMap containing all vanilla parts and how many times they are in the Stage
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -26,48 +17,34 @@ public class StageMathCustom {
 	@Override
 	public String toString() {
 		String stage = "";
-		Iterator<Entry<Parts, Integer>> i = this.stageParts.entrySet().iterator();
+		Iterator<Entry<CustomPartType, HashMap<String, CustomPart>>> i = this.stageParts.entrySet().iterator();
 		while (i.hasNext()) {
-			Entry<Parts, Integer> part = i.next();
-			if (part.getValue() > 0) {
-				stage += "  " + part.getValue() + "x " + part.getKey().getName() + "\n";
+			Iterator<Entry<String, CustomPart>> i2 = i.next().getValue().entrySet().iterator();
+			while (i2.hasNext()) {
+				Entry<String, CustomPart> part = i2.next();
+				if (part.getValue().getNumber() > 0) {
+					stage += "  " + part.getValue().getNumber() + "x " + part.getValue().getName() + "\n";
+				}
 			}
 		}
-		stage += "  Initial Mass:\t\t" + Constants.formatDouble(this.combinedMassI) + " tons\n";
-		stage += "  Empty Mass:\t\t" + Constants.formatDouble(this.combinedMassF) + " tons\n";
-		if (this.SI > 0) {
-			stage += "  Specific Impulse:\t\t" + Constants.formatDouble(this.SI) + " s\n";
-		}
-		if (this.combinedThrust > 0) {
-			stage += "  Thrust:\t\t\t" + Constants.formatDouble(this.combinedThrust) + " kN\n";
-		}
-		if (this.DV > 0 ) {
-			stage += "  \u0394v:\t\t\t" + Constants.formatDouble(this.DV) + " m/s\n";
-		}
-		if (this.TWR > 0) {
-			stage += "  Thrust to Weight Ratio:\t" + Constants.formatDouble(this.TWR) + "";
-		}
+		stage += this.getStageString();
 		return stage;
 	}
 
 	/**
 	 * @param stageParts
 	 */
-	public StageMathCustom(CustomParts stageParts, double DWC) {
+	public StageMathCustom(HashMap<CustomPartType, HashMap<String, CustomPart>> stageParts, double DWC) {
 		super();
 		this.stageParts = stageParts;
 		// this.DWC = DWC;
-		this.combineParts();
-		this.calculateTWR();
-		this.calculateSI();
-		this.calculateDV();
-		this.checkMath();
+		this.doMath();
 	}
 	
 	/**
 	 * @return the stageParts
 	 */
-	public CustomParts getStageParts() {
+	public HashMap<CustomPartType, HashMap<String, CustomPart>> getStageParts() {
 		return stageParts;
 	}
 
@@ -77,50 +54,40 @@ public class StageMathCustom {
 	/**
 	 * Calculates the Initial and final mass as well as the combined thrust of the stage via iterating over the stageParts HashMap
 	 */
-	private void combineParts() {
-		Iterator<Entry<Parts, Integer>> i = this.stageParts.entrySet().iterator();
+	protected void combineParts() {
+		Iterator<Entry<CustomPartType, HashMap<String, CustomPart>>> i = this.stageParts.entrySet().iterator();
 		while (i.hasNext()) {
-			Entry<Parts, Integer> part = i.next();
-			this.combinedMassI += part.getKey().getMassI() * part.getValue();
-			this.combinedMassF += part.getKey().getMassF() * part.getValue();
-			this.combinedThrust += part.getKey().getThrust() * part.getValue();
-		}
-	}
-	
-	/**
-	 * Calculates the Thrust to Weight Ration of the Stage
-	 */
-	private void calculateTWR() {
-		try {
-			this.TWR = this.combinedThrust / (this.combinedMassI * Constants.GRAVITY);
-		} catch (ArithmeticException e) {
-			this.TWR = 0;
+			Iterator<Entry<String, CustomPart>> i2 = i.next().getValue().entrySet().iterator();
+			while (i2.hasNext()) {
+				Entry<String, CustomPart> part = i2.next();
+				this.combinedMassI += part.getValue().getMassI() * part.getValue().getNumber();
+				this.combinedMassF += part.getValue().getMassF() * part.getValue().getNumber();
+				this.combinedThrust += part.getValue().getThrust() * part.getValue().getNumber();
+			}
 		}
 	}
 	
 	/**
 	 * Calculate the Specific Impulse of the Stage
 	 */
-	private void calculateSI() {
+	protected void calculateSI() {
+		HashMap<String, CustomPart> tanksEngines = this.stageParts.get(CustomPartType.PROP);
+		double combinedFuelNeed = 0;
+		Iterator<Entry<String, CustomPart>> i = tanksEngines.entrySet().iterator();
+		while (i.hasNext()) {
+			CustomPart part = i.next().getValue();
+			combinedFuelNeed += part.getFuelNeed() * part.getMassPerFuel() * part.getNumber();
+		}
 		try {
-			double lftMassI = this.stageParts.get(Parts.LFT) * Parts.LFT.getMassI();
-			double lftMassF = this.stageParts.get(Parts.LFT) * Parts.LFT.getMassF();
-			double srbMassI = this.stageParts.get(Parts.SRB) * Parts.SRB.getMassI();
-			double srbMassF = this.stageParts.get(Parts.SRB) * Parts.SRB.getMassF();
-			this.SI = (((lftMassI - lftMassF) / (lftMassI + srbMassI - lftMassF - srbMassF)) * (Parts.LFE.getSI() - Parts.SRB.getSI())) + Parts.SRB.getSI();
+			i = tanksEngines.entrySet().iterator();
+			double SI = 0;
+			while (i.hasNext()) {
+				CustomPart part = i.next().getValue();
+				SI += part.getProportonalFuelNeed(combinedFuelNeed) * part.getSI();
+			}
+			this.SI = SI;
 		} catch (ArithmeticException e) {
 			this.SI = 0;
-		}
-	}
-	
-	/**
-	 * Calculates the Delta-V of the Stage
-	 */
-	private void calculateDV() {
-		try {
-			this.DV = this.SI * Math.log(this.combinedMassI / this.combinedMassF);
-		} catch (ArithmeticException e) {
-			this.DV = 0;
 		}
 	}
 	
@@ -128,67 +95,26 @@ public class StageMathCustom {
 	 * Checks the Math, if there are only tanks or only engines in the stage (or neither)
 	 * Thrust to Weight Ratio, Delta-V and Specific Impulse are set to 0 
 	 */
-	private void checkMath() {
-		int getTanks = this.stageParts.get(Parts.LFT) + this.stageParts.get(Parts.SRB);
-		int getEngines = this.stageParts.get(Parts.LFE) + this.stageParts.get(Parts.SRB);
+	protected void checkMath() {
+		HashMap<String, CustomPart> tanksEngines = this.stageParts.get(CustomPartType.PROP);
+		int getTanks = 0;
+		int getEngines = 0;
+		String[] engines = {"SolidRocket", "LiquidEngine"};
+		String[] tanks = {"FuelTank", "SolidRocket"};
+		Iterator<Entry<String, CustomPart>> i = tanksEngines.entrySet().iterator();
+		while (i.hasNext()) {
+			Entry<String, CustomPart> part = i.next();
+			if (Arrays.asList(engines).contains(part.getValue().getModule())) {
+				getEngines += part.getValue().getNumber();
+			}
+			if (Arrays.asList(tanks).contains(part.getValue().getModule())) {
+				getTanks += part.getValue().getNumber();
+			}
+		}
 		if (getTanks <= 0 || getEngines <= 0) {
 			this.TWR = 0;
 			this.DV = 0;
 			this.SI = 0;
 		}
-	}
-	
-	/**
-	 * @return the combinedMassI
-	 */
-	public double getCombinedMassI() {
-		return combinedMassI;
-	}
-
-
-	/**
-	 * @return the combinedMassF
-	 */
-	public double getCombinedMassF() {
-		return combinedMassF;
-	}
-
-
-	/**
-	 * @return the combinedThrust
-	 */
-	public double getCombinedThrust() {
-		return combinedThrust;
-	}
-
-
-	/**
-	 * @return the combinedDV
-	 */
-	public double getDV() {
-		return DV;
-	}
-
-
-	/**
-	 * @return the combinedSI
-	 */
-	public double getSI() {
-		return SI;
-	}
-
-
-	/**
-	 * @return the combinedFuel
-	 */
-	public double getCombinedFuel() {
-		return combinedFuel;
-	}
-	
-	/**
-	 * @return the tWR
-	 */
-	public double getTWR() {
-		return TWR;
 	}
 }

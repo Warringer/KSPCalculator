@@ -19,6 +19,7 @@ public class CustomPart {
 	private CustomPartType type;
 	private String name = "";
 	private SpinnerLabelComponent spinner = null;
+	private String module = "";
 	
 	public CustomPart(String partPath) {
 		super();
@@ -41,6 +42,7 @@ public class CustomPart {
 			default:
 				throw new IOException();
 			}
+			this.module = properties.getProperty("module");
 			this.name = properties.getProperty("title");
 			this.massI = Double.parseDouble(properties.getProperty("mass"));
 			if (properties.containsKey("dryMass")) {
@@ -88,6 +90,10 @@ public class CustomPart {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public double getProportonalFuelNeed(double combinedFuelNeed) {
+		return (this.getNumber() * this.fuelNeed * this.massPerFuel) / combinedFuelNeed;
 	}
 
 	/**
@@ -240,6 +246,14 @@ public class CustomPart {
 	
 	public int getNumber() {
 		return this.spinner.getValue();
+	}
+
+	public void setModule(String module) {
+		this.module = module;
+	}
+
+	public String getModule() {
+		return module;
 	}
 	
 }
