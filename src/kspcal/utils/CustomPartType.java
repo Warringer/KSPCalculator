@@ -2,15 +2,17 @@ package kspcal.utils;
 
 public enum CustomPartType {
 
-	PROP(0),
-	CnC(1),
-	SaA(2),
-	UTILITY(3);
+	PROP(0, "Prop"),
+	CnC(1, "C&C"),
+	SaA(2, "Stru"),
+	UTILITY(3, "Util");
 	
 	private final int type;
+	private final String name;
 	
-	private CustomPartType(int type) {
+	private CustomPartType(int type, String name) {
 		this.type = type;
+		this.name = name;
 	}
 
 	/**
@@ -18,5 +20,12 @@ public enum CustomPartType {
 	 */
 	public int getType() {
 		return type;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 }

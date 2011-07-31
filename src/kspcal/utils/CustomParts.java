@@ -40,7 +40,6 @@ public class CustomParts {
 	
 	private void traverseDirectory(File node) {
 		String file = node.getAbsoluteFile().toString();
-		System.out.println(file);
 		if ( file.contains("cfg") ) {
 			String[] dir = file.split("/");
 			dirmap.add(dir[dir.length - 2]);

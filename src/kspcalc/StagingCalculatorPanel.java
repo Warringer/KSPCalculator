@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import kspcal.utils.Constants;
+import kspcal.utils.*;
 import kspcalc.dialogs.*;
-import kspcalc.math.StageMathVanilla;
+import kspcalc.math.*;
 import kspcalc.stagecalc.*;
 
 
@@ -51,7 +51,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 	private JLabel liftoffWeightOut;
 	private JLabel jLabel1;
 	private JScrollPane jScrollPane1;
-	private ArrayList<StageMathVanilla> stageList;
+	private ArrayList<StageMath> stageList;
 	private Calculator frame;
 
 	public StagingCalculatorPanel(Calculator frame) {
@@ -59,7 +59,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 		this.panel = this;
 		this.frame = frame;
 		this.setSize(425, 300);
-		this.stageList = new ArrayList<StageMathVanilla>();
+		this.stageList = new ArrayList<StageMath>();
 		initGUI();
 	}
 	
@@ -130,7 +130,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 		double twr = 0d;
 		double massNextStage = 0d;
 		String stageContent = "";
-		for (StageMathVanilla stage : stageList) {
+		for (StageMath stage : stageList) {
 			stageContent += "Stage " + i + ":\n" + stage.toString() + "\n";
 			massNextStage = fullMass;
 			fullMass += stage.getCombinedMassI();
@@ -268,6 +268,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 			editStageButton.setText("Edit Stage");
 			editStageButton.setBounds(12, 269, 134, 22);
 			editStageButton.setAction(getEditStageAction());
+			editStageButton.setEnabled(false);
 		}
 		return editStageButton;
 	}
@@ -299,7 +300,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 	/**
 	 * @return the stageList
 	 */
-	public ArrayList<StageMathVanilla> getStageList() {
+	public ArrayList<StageMath> getStageList() {
 		return stageList;
 	}
 

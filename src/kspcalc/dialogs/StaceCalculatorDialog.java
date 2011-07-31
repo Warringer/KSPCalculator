@@ -1,6 +1,5 @@
 package kspcalc.dialogs;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -30,7 +29,7 @@ public class StaceCalculatorDialog extends javax.swing.JDialog {
 	private void initGUI(String title) {
 		try {
 			this.setLayout(null);
-			this.setSize(454, 336);
+			this.setSize(454, 350);
 			try {
 				ImageIcon icon = Constants.getIcon();
 				this.setIconImage(icon.getImage());

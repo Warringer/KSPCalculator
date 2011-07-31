@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 import kspcalc.*;
+import kspcalc.stagecalc.*;
 
 public class EditStageDialog extends javax.swing.JDialog {
 
@@ -97,7 +98,9 @@ public class EditStageDialog extends javax.swing.JDialog {
 					dialog.setVisible(false);
 					panel.getStageDialog("Edit Stage").setVisible(true);
 					int stage = dialog.stageComboBox.getSelectedIndex();
-					panel.getStageCalculator1().setStageCalculator(panel.getStageList().get(stage).getStageParts(), stage);
+					if (panel.getStageCalculator1().getName() == "Vanilla") {
+						panel.getStageCalculator1().setStageCalculator(panel.getStageList().get(stage).getStageParts(), stage);
+					}
 					panel.setEditStageDialog(null);
 					dialog.stageComboBox = null;
 				}

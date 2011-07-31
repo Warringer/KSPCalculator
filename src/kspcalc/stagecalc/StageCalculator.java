@@ -6,7 +6,7 @@ public class StageCalculator {
 	public static StageCalc getStageCalculator() {
 		StageCalc calc;
 		if (KSPConfig.getConfig().hasDirectory()) {
-			calc = new StageCalculatorVanilla();
+			calc = new StageCalculatorCustom();
 		} else {
 			calc = new StageCalculatorVanilla();
 		}

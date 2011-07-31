@@ -36,6 +36,7 @@ public class SpinnerLabelComponent extends JComponent {
 		panel.setLayout(null);
 		panel.setPreferredSize(new java.awt.Dimension(200, 23));
 		label = new JLabel(name);
+		label.setToolTipText(name);
 		panel.add(label);
 		label.setBounds(40, 4, 160, 15);
 		{

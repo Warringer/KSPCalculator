@@ -34,7 +34,7 @@ public class StageMathCustom extends StageMath {
 	/**
 	 * @param stageParts
 	 */
-	public StageMathCustom(HashMap<CustomPartType, HashMap<String, CustomPart>> stageParts, double DWC) {
+	public StageMathCustom(HashMap<CustomPartType, HashMap<String, CustomPart>> stageParts) {
 		super();
 		this.stageParts = stageParts;
 		// this.DWC = DWC;

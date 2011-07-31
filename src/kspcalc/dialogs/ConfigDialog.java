@@ -39,15 +39,7 @@ public class ConfigDialog extends javax.swing.JDialog {
 	/**
 	* Auto-generated main method to display this JDialog
 	*/
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				JFrame frame = new JFrame();
-				ConfigDialog inst = new ConfigDialog(frame);
-				inst.setVisible(true);
-			}
-		});
-	}
+	
 	
 	public ConfigDialog(JFrame frame) {
 		super(frame);
