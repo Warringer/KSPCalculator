@@ -4,6 +4,14 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.8.2.2:
+
+Hopefully now fixed the little filesystem problem...
+
+V0.8.2.1:
+
+Hopefully fixed a little filesystem problem
+
 V0.8.2:
 
 Reinstalled the Images
