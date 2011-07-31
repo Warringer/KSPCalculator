@@ -90,7 +90,6 @@ public class ConfigDialog extends javax.swing.JDialog {
 				private static final long serialVersionUID = 6229588700388403938L;
 
 				public void actionPerformed(ActionEvent evt) {
-					getFileChooser().setSelectedFile(new File(config.getDirectory()));
 					int returnVal = getFileChooser().showOpenDialog(ConfigDialog.this);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						File file = fileChooser.getSelectedFile();
@@ -108,6 +107,9 @@ public class ConfigDialog extends javax.swing.JDialog {
 		if (fileChooser == null) {
 			fileChooser = new JFileChooser();
 			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			if (config.hasDirectory()) {
+				fileChooser.setSelectedFile(new File(config.getDirectory()));
+			}
 		}
 		return fileChooser;
 	}

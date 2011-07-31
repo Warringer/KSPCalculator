@@ -1,6 +1,7 @@
 package kspcalc;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.*;
 import java.net.URL;
 
 import javax.swing.*;
@@ -72,6 +73,7 @@ public class Calculator extends javax.swing.JFrame {
 	* Auto-generated main method to display this JFrame
 	*/
 	public static void main(String[] args) {
+	
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				Calculator inst = new Calculator();
@@ -81,8 +83,20 @@ public class Calculator extends javax.swing.JFrame {
 		});
 	}
 	
+	protected void setLogFile() {
+		File file = new File("sysout.log");
+		try {
+			PrintStream sysoStream = new PrintStream(new FileOutputStream(file));
+			System.setOut(sysoStream);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Calculator() {
 		super();
+		setLogFile();
 		initGUI();
 		orbitDisplay = new OrbitDisplayFrame(100, 100);
 		orbitDisplay.setLocationRelativeTo(null);
