@@ -16,9 +16,9 @@ public class CustomParts {
 			HashMap<String, CustomPart> typeList = new HashMap<String, CustomPart>();
 			parts.put(type, typeList);
 		}
-		traverseDirectory(new File(config.getDirectory() + "/Parts"));
+		traverseDirectory(new File(config.getDirectory() + File.separator + "Parts"));
 		for (String dir: dirmap) {
-			CustomPart part = new CustomPart(config.getDirectory() + "/Parts/" + dir);
+			CustomPart part = new CustomPart(config.getDirectory() + File.separator+ "Parts" + File.separator + dir);
 			HashMap<String, CustomPart> typeList = new HashMap<String, CustomPart>();
 			switch (part.getType()) {
 			case PROP:
@@ -41,7 +41,7 @@ public class CustomParts {
 	private void traverseDirectory(File node) {
 		String file = node.getAbsoluteFile().toString();
 		if ( file.contains("cfg") ) {
-			String[] dir = file.split("/");
+			String[] dir = file.split(File.separator);
 			dirmap.add(dir[dir.length - 2]);
 		}
  

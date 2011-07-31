@@ -1,8 +1,6 @@
 package kspcal.utils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 import kspcalc.components.SpinnerLabelComponent;
@@ -25,7 +23,7 @@ public class CustomPart {
 		super();
 		Properties properties = new Properties();
 		try {
-			properties.load(new FileInputStream(partPath + "/part.cfg"));
+			properties.load(new FileInputStream(partPath + File.separator + "part.cfg"));
 			switch (Integer.parseInt(properties.getProperty("category"))) {
 			case 0:
 				this.type = CustomPartType.PROP;
