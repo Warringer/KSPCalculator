@@ -2,6 +2,7 @@ package kspcal.utils;
 
 import java.io.File;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class CustomParts {
 
@@ -41,7 +42,7 @@ public class CustomParts {
 	private void traverseDirectory(File node) {
 		String file = node.getAbsoluteFile().toString();
 		if ( file.contains("cfg") ) {
-			String[] dir = file.split(File.separator);
+			String[] dir = file.split(Pattern.quote(File.separator));
 			dirmap.add(dir[dir.length - 2]);
 		}
  

@@ -4,6 +4,10 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.8.2.4:
+
+Finally fixed the filesystem problem. Until there is a complain through. :p 
+
 V0.8.2.3:
 
 Fixed a little overlooked problem
