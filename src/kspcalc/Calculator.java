@@ -83,20 +83,20 @@ public class Calculator extends javax.swing.JFrame {
 		});
 	}
 	
-	protected void setLogFile() {
-		File file = new File("sysout.log");
+	protected void setLogFiles() {
 		try {
-			PrintStream sysoStream = new PrintStream(new FileOutputStream(file));
+			PrintStream sysoStream = new PrintStream(new FileOutputStream(new File("sysout.log")));
+			PrintStream errorStream = new PrintStream(new FileOutputStream(new File("error.log")));
 			System.setOut(sysoStream);
+			System.setErr(errorStream);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public Calculator() {
 		super();
-		setLogFile();
+		setLogFiles();
 		initGUI();
 		orbitDisplay = new OrbitDisplayFrame(100, 100);
 		orbitDisplay.setLocationRelativeTo(null);
