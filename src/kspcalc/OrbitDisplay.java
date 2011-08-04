@@ -217,28 +217,33 @@ public class OrbitDisplay extends JComponent {
 		ig.setColor(Color.blue);
 		this.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize / this.zoom, ig);
 		
-		// Paint Orbit
+		ig.setColor(Color.black);
+		// Paint Circular Orbits for the Transfer Orbit
 		if (this.hohmann) {
-			ig.setColor(Color.red);
-		} else {
-			ig.setColor(Color.black);
+			this.paintOrbitChange(ig);
 		}
+		
+		// Paint Orbit
 		if (this.apogeeAlt == this.perigeeAlt) {
 			this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, ig);
 		} else {
 			this.drawEllipse(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, this.b / this.zoom , ig);
 		}
 		
-		// Paint Circular Orbits for the Hohmann Transfer Orbit
-		if (this.hohmann) {
-			ig.setColor(Color.black);
-			this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, ig);
-			this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, ig);
-		}
-		
 		ig.drawString("Zoom Factor: " + this.zoom + "x", 5, this.windowHeight - 30);
 		
 		g.drawImage(image, 0, 0, this);
+	}
+	
+	private void paintOrbitChange(Graphics2D g) {
+		g.setColor(Color.green);
+		this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, g);
+		g.setColor(Color.red);
+		this.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, g);
+		g.setColor(new Color(128,64,0));
+    	this.drawHohmann(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, this.b / this.zoom, g);
+		float dash1[] = {10.0f};
+		g.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f));
 	}
 	
 	private void drawCircle(int x, int y, int radius, Graphics2D g) {
@@ -251,11 +256,7 @@ public class OrbitDisplay extends JComponent {
 
 	private void drawEllipse(int x, int y, int a, int b, Graphics2D g) {
 		int f = (int) Math.sqrt((a*a) - (b*b));
-		if (this.hohmann) {
-			this.drawHohmann(x, y, a, b, g);
-		} else {
-			g.drawOval(x - a + f, y - b, a * 2, b * 2);
-		}
+		g.drawOval(x - a + f, y - b, a * 2, b * 2);
 	}
 	
 	private void drawHohmann(int x, int y, int a, int b, Graphics2D g) {
