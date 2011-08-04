@@ -89,7 +89,7 @@ public class Calculator extends javax.swing.JFrame {
 		try {
 			PrintStream sysoStream = new PrintStream(new FileOutputStream(new File("sysout.log")));
 			PrintStream errorStream = new PrintStream(new FileOutputStream(new File("error.log")));
-			System.setOut(sysoStream);
+			//System.setOut(sysoStream);
 			System.setErr(errorStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -172,8 +172,8 @@ public class Calculator extends javax.swing.JFrame {
 		}
 	}
 	
-	public void setOrbitDisplay(double apo, double peri, boolean hohmann) {
-		orbitDisplay.setOrbits(apo, peri, hohmann);
+	public void setOrbitDisplay(double apo, double peri, boolean hohmann, boolean up) {
+		orbitDisplay.setOrbits(apo, peri, hohmann, up);
 	}
 	
 	private AbstractAction getAboutAction() {
@@ -320,10 +320,7 @@ public class Calculator extends javax.swing.JFrame {
 	                Component p =   ((JTabbedPane) e.getSource()).getSelectedComponent();
 	                Dimension panelDim = p.getPreferredSize();
 
-	                Dimension nd = new Dimension(
-	                        panelDim.width,
-	                        panelDim.height + 40 );
-	                System.out.println(nd);
+	                Dimension nd = new Dimension( panelDim.width, panelDim.height + 40 );
 	                jTabbedPane1.setPreferredSize(nd);
 
 	                Calculator.this.pack();

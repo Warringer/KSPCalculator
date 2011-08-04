@@ -23,7 +23,7 @@ public class CustomPart {
 		super();
 		Properties properties = new Properties();
 		try {
-			System.out.println("Custom Part Path: " + partPath);
+			//System.out.println("Custom Part Path: " + partPath);
 			properties.load(new FileInputStream(partPath + File.separator + "part.cfg"));
 			switch (Integer.parseInt(properties.getProperty("category"))) {
 			case 0:

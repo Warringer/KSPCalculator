@@ -1,6 +1,7 @@
 package kspcalc;
 
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class OrbitDisplay extends JComponent {
 	private int perigeeAlt;					// Perigee Altitude
 	private int a, b;						// Axis of the Orbit
 	private boolean hohmann;				// Hohmann Transfer Orbit?
+	private boolean up;						// Direction of the Hohmann Orbit
 
 	
 	/**
@@ -43,12 +45,14 @@ public class OrbitDisplay extends JComponent {
 		this.calcOrbit();
 	}
 
-	public void setAlts(int apo, int peri, boolean hohmann) {
+	public void setAlts(int apo, int peri, boolean hohmann, boolean up) {
 		this.zoom = 2;
 		this.apogeeAlt = apo + this.planetSize;
 		this.perigeeAlt = peri + this.planetSize;
 		this.hohmann = hohmann;
+		this.up = up;
 		this.calcOrbit();
+		this.repaint();
 	}
 
 	/**
@@ -247,9 +251,22 @@ public class OrbitDisplay extends JComponent {
 
 	private void drawEllipse(int x, int y, int a, int b, Graphics2D g) {
 		int f = (int) Math.sqrt((a*a) - (b*b));
-		g.drawOval(x - a + f, y - b, a * 2, b * 2);
-		System.out.println("x: " + x + ", y: " + y);
-		System.out.println("a: "+ a + ", b: " + b + ", f: " + f);
+		if (this.hohmann) {
+			this.drawHohmann(x, y, a, b, g);
+		} else {
+			g.drawOval(x - a + f, y - b, a * 2, b * 2);
+		}
+	}
+	
+	private void drawHohmann(int x, int y, int a, int b, Graphics2D g) {
+		int f = (int) Math.sqrt((a*a) - (b*b));
+		Arc2D arc = new Arc2D.Double();
+		if (this.up) {
+			arc.setArc(x - a + f, y - b, a * 2, b * 2, 0, -180, Arc2D.OPEN);
+		} else {
+			arc.setArc(x - a + f, y - b, a * 2, b * 2, 0, 180, Arc2D.OPEN); 
+		}
+		g.draw(arc);
 	}
 	
 }

@@ -233,7 +233,7 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 				private static final long serialVersionUID = 6732813570592548674L;
 
 				public void actionPerformed(ActionEvent evt) {
-					panel.frame.setOrbitDisplay(panel.alt / 1000d, panel.alt / 1000d, false);
+					panel.frame.setOrbitDisplay(panel.alt / 1000d, panel.alt / 1000d, false, false);
 				}
 			};
 		}
