@@ -68,7 +68,7 @@ public class LaunchOrbitCalculatorPanel extends javax.swing.JPanel {
 		try {
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
-			setPreferredSize(new Dimension(400, 300));
+			setPreferredSize(new Dimension(500, 400));
 			{
 				launchApoVelOut = new JLabel();
 				this.add(getJLabel11(), new AnchorConstraint(561, 971, 681, 551, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));

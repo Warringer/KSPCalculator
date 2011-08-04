@@ -67,7 +67,7 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 		try {
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
-			setPreferredSize(new Dimension(400, 300));
+			setPreferredSize(new Dimension(500, 400));
 			{
 				orbCalcButton = new JButton();
 				this.add(getShowOrbitButton(), new AnchorConstraint(205, 921, 278, 583, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));

@@ -84,7 +84,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 		try {
 			AnchorLayout thisLayout = new AnchorLayout();
 			this.setLayout(thisLayout);
-			this.setPreferredSize(new java.awt.Dimension(400, 300));
+			this.setPreferredSize(new java.awt.Dimension(500, 400));
 			{
 				hohAltKiloRadio = new JRadioButton();
 				this.add(getShowOrbitButton(), new AnchorConstraint(325, 776, 398, 533, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));

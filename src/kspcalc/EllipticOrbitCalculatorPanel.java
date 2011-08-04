@@ -79,7 +79,7 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 	private void initGUI() {
 		try {
 			this.setLayout(null);
-			this.setPreferredSize(new java.awt.Dimension(400, 325));
+			this.setPreferredSize(new java.awt.Dimension(500, 400));
 			{
 				orbPerOut = new JLabel();
 				this.add(orbPerOut, new AnchorConstraint(931,613,981,371,AnchorConstraint.ANCHOR_REL,AnchorConstraint.ANCHOR_REL,AnchorConstraint.ANCHOR_REL,AnchorConstraint.ANCHOR_REL));

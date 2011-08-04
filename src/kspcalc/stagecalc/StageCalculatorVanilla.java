@@ -1,4 +1,5 @@
 package kspcalc.stagecalc;
+import java.awt.Dimension;
 import java.util.HashMap;
 
 import javax.swing.*;
@@ -56,7 +57,7 @@ public class StageCalculatorVanilla extends javax.swing.JPanel implements StageC
 	
 	private void initGUI() {
 		try {
-			this.setPreferredSize(new java.awt.Dimension(425, 300));
+			this.setPreferredSize(new java.awt.Dimension(500, 400));
 			this.setLayout(null);
 			this.setSize(425, 300);
 			// Setup the Spinners dynamically
@@ -156,6 +157,12 @@ public class StageCalculatorVanilla extends javax.swing.JPanel implements StageC
 	 */
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public Dimension getPrefferedSize() {
+		// TODO Auto-generated method stub
+		return this.getSize();
 	}
 
 }

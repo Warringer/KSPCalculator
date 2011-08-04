@@ -58,14 +58,14 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 		super();
 		this.panel = this;
 		this.frame = frame;
-		this.setSize(425, 300);
+		this.setSize(425, 350);
 		this.stageList = new ArrayList<StageMath>();
 		initGUI();
 	}
 	
 	private void initGUI() {
 		try {
-			this.setPreferredSize(new java.awt.Dimension(425, 300));
+			this.setPreferredSize(new java.awt.Dimension(500, 400));
 			this.setLayout(null);
 			{
 				addStageButton = new JButton();
@@ -108,7 +108,7 @@ public class StagingCalculatorPanel extends javax.swing.JPanel {
 	
 	public JDialog getStageDialog(String title) {
 		if(StageDialog == null) {
-			StageDialog = new StaceCalculatorDialog(frame, panel, title);
+			StageDialog = new StageCalculatorDialog(frame, panel, title);
 		}
 		return StageDialog;
 	}

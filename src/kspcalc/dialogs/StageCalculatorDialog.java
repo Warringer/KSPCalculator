@@ -1,5 +1,6 @@
 package kspcalc.dialogs;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import kspcalc.StagingCalculatorPanel;
 import kspcalc.stagecalc.*;
 
 
-public class StaceCalculatorDialog extends javax.swing.JDialog {
+public class StageCalculatorDialog extends javax.swing.JDialog {
 	
 	/**
 	 * 
@@ -20,7 +21,7 @@ public class StaceCalculatorDialog extends javax.swing.JDialog {
 	private AbstractAction abstractAction1;
 	private JButton jButton1;
 	
-	public StaceCalculatorDialog(JFrame frame, StagingCalculatorPanel panel, String title) {
+	public StageCalculatorDialog(JFrame frame, StagingCalculatorPanel panel, String title) {
 		super(frame);
 		this.panel = panel;
 		initGUI(title);
@@ -28,8 +29,8 @@ public class StaceCalculatorDialog extends javax.swing.JDialog {
 	
 	private void initGUI(String title) {
 		try {
+			Dimension size = new Dimension();
 			this.setLayout(null);
-			this.setSize(454, 350);
 			try {
 				ImageIcon icon = Constants.getIcon();
 				this.setIconImage(icon.getImage());
@@ -38,17 +39,22 @@ public class StaceCalculatorDialog extends javax.swing.JDialog {
 			{
 				panel.setStageCalculator1(StageCalculator.getStageCalculator());
 				this.getContentPane().add((JPanel) panel.getStageCalculator1(), "Center");
-				((JComponent) panel.getStageCalculator1()).setPreferredSize(new java.awt.Dimension(400, 300));
-				((JComponent) panel.getStageCalculator1()).setBounds(0, 0, 444, 306);
+				size = panel.getStageCalculator1().getPrefferedSize();
+				((JComponent) panel.getStageCalculator1()).setPreferredSize(size);
 				{
 					jButton1 = new JButton();
 					((JComponent) panel.getStageCalculator1()).add(jButton1);
 					jButton1.setText("Save Stage");
-					jButton1.setBounds(230, 261, 105, 22);
+					if (size.width > 350) {
+						jButton1.setBounds(350, 261, 105, 22);
+					} else {
+						jButton1.setBounds(250, 261, 105, 22); 
+					}
 					jButton1.setAction(getAbstractAction1());
 				}
 				
 			}
+			this.setSize(size);
 		this.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();

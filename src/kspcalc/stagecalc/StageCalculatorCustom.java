@@ -72,9 +72,9 @@ public class StageCalculatorCustom extends javax.swing.JPanel implements StageCa
 	
 	private void initGUI() {
 		try {
-			setPreferredSize(new Dimension(425, 325));
+			setPreferredSize(new Dimension(500, 650));
 			this.setLayout(null);
-			this.setSize(425, 325);
+			this.setSize(500, 650);
 			this.add(getJTabbedPane1());
 			stageParts = new CustomParts();
 			Iterator<Entry<CustomPartType, HashMap<String, CustomPart>>> i = this.stageParts.getParts().entrySet().iterator();
@@ -94,8 +94,8 @@ public class StageCalculatorCustom extends javax.swing.JPanel implements StageCa
 					spinner.addChangeListener(getSpinnerListener());
 					panel.add(spinner);
 					y += 25;
-					if (j > 9) {
-						jTabbedPane1.addTab(pane.getKey().getName() + " " + k, panel);
+					if (j > 20) {
+						jTabbedPane1.addTab(pane.getKey().getName() + " " + k, null, panel, pane.getKey().getFullName());
 						k++;
 						j = 0;
 						y = 0;
@@ -105,7 +105,7 @@ public class StageCalculatorCustom extends javax.swing.JPanel implements StageCa
 					}
 					j++;
 				}
-				jTabbedPane1.addTab(pane.getKey().getName() + " " + k, panel);
+				jTabbedPane1.addTab(pane.getKey().getName() + " " + k, null, panel, pane.getKey().getFullName());
 			}
 			this.populateLabels();
 		} catch (Exception e) {
@@ -115,19 +115,19 @@ public class StageCalculatorCustom extends javax.swing.JPanel implements StageCa
 	
 	private void populateLabels() {
 		this.getLabel("Stage Parts:", 12, 12);
-		this.getLabel("Stage Weight:", 234, 36);
-		this.getLabel("before Burnout:", 242, 54);
-		this.getLabel("after Burnout:", 242, 85);
-		massIOut = this.getLabel("0.0 tons", 254, 72);
-		massFOut = this.getLabel("0.0 tons", 254, 106);
-		this.getLabel("Thrust:", 234, 127);
-		thrustOut = this.getLabel("0 kNewton", 310, 127);
-		this.getLabel("Specific Impulse:", 234, 148);
-		siOut =this.getLabel("0 s", 310, 163);
-		this.getLabel("Delta-v:", 234, 184);
-		dvOut = this.getLabel("0.0 m/s", 310, 184);
-		this.getLabel("Thrust to Weight Ratio:", 234, 205);
-		twrOut = this.getLabel("0.0", 310, 227);
+		this.getLabel("Stage Weight:", 334, 36);
+		this.getLabel("before Burnout:", 342, 54);
+		this.getLabel("after Burnout:", 342, 85);
+		massIOut = this.getLabel("0.0 tons", 354, 72);
+		massFOut = this.getLabel("0.0 tons", 354, 106);
+		this.getLabel("Thrust:", 334, 127);
+		thrustOut = this.getLabel("0 kNewton", 410, 127);
+		this.getLabel("Specific Impulse:", 334, 148);
+		siOut =this.getLabel("0 s", 410, 163);
+		this.getLabel("Delta-v:", 334, 184);
+		dvOut = this.getLabel("0.0 m/s", 410, 184);
+		this.getLabel("Thrust to Weight Ratio:", 334, 205);
+		twrOut = this.getLabel("0.0", 410, 227);
 	}
 
 	private ChangeListener getSpinnerListener() {
@@ -180,8 +180,7 @@ public class StageCalculatorCustom extends javax.swing.JPanel implements StageCa
 	private JTabbedPane getJTabbedPane1() {
 		if(jTabbedPane1 == null) {
 			jTabbedPane1 = new JTabbedPane();
-			jTabbedPane1.setBounds(12, 30, 214, 283);
-			jTabbedPane1.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+			jTabbedPane1.setBounds(12, 30, 314, 608);
 		}
 		return jTabbedPane1;
 	}
@@ -191,6 +190,12 @@ public class StageCalculatorCustom extends javax.swing.JPanel implements StageCa
 	 */
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public Dimension getPrefferedSize() {
+		// TODO Auto-generated method stub
+		return this.getSize();
 	}
 
 }

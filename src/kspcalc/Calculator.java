@@ -1,17 +1,17 @@
 package kspcalc;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.io.*;
 import java.net.URL;
 
 import javax.swing.*;
+import javax.swing.event.*;
 
 import javax.help.*;
 import javax.help.CSH.DisplayHelpFromSource;
 
-import kspcal.utils.Constants;
-import kspcalc.dialogs.AboutDialog;
-import kspcalc.dialogs.ConfigDialog;
+import kspcal.utils.*;
+import kspcalc.dialogs.*;
 import kspcalc.stagecalc.*;
 
 
@@ -68,7 +68,9 @@ public class Calculator extends javax.swing.JFrame {
 	private AbstractAction ConfigurationAction;
 	private JMenuItem ConfigItem;
 	private JMenu Calc;
-
+	private ChangeListener changeListener;
+	private final Dimension originalTabsDim;
+	
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
@@ -108,6 +110,8 @@ public class Calculator extends javax.swing.JFrame {
 			orbitDisplay.setIconImage(icon.getImage());
 		} catch (NullPointerException e) {}
 		orbitDisplay.setTitle("KSP Calculator - Orbit Display");
+		originalTabsDim = jTabbedPane1.getPreferredSize();
+		System.out.println(originalTabsDim);
 	}
 	
 	private void initGUI() {
@@ -139,7 +143,7 @@ public class Calculator extends javax.swing.JFrame {
 			{
 				jTabbedPane1 = new JTabbedPane();
 				getContentPane().add(jTabbedPane1, BorderLayout.CENTER);
-				jTabbedPane1.setPreferredSize(new java.awt.Dimension(400, 330));
+				jTabbedPane1.setPreferredSize(new java.awt.Dimension(500, 400));
 				{
 					orbitalCalculatorPanel1 = new CircularOrbitalCalculatorPanel(this);
 					jTabbedPane1.addTab("Circular Orbit", null, orbitalCalculatorPanel1, null);
@@ -159,6 +163,7 @@ public class Calculator extends javax.swing.JFrame {
 					jTabbedPane1.addTab("Multi Stage Calculator", null, getStagingCalculatorPanel1(), null);
 				}
 			}
+			jTabbedPane1.addChangeListener(getChangeListener());
 			pack();
 			this.setSize(476, 411);
 		} catch (Exception e) {
@@ -292,12 +297,40 @@ public class Calculator extends javax.swing.JFrame {
 	private AbstractAction getCloseAction1() {
 		if(closeAction1 == null) {
 			closeAction1 = new AbstractAction("Close", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 132453245234524L;
+
 				public void actionPerformed(ActionEvent evt) {
 					System.exit(0);
 				}
 			};
 		}
 		return closeAction1;
+	}
+	
+	private ChangeListener getChangeListener() {
+		if (changeListener == null) {
+			changeListener = new ChangeListener() {
+
+	            @Override
+	            public void stateChanged(ChangeEvent e) {
+
+	                Component p =   ((JTabbedPane) e.getSource()).getSelectedComponent();
+	                Dimension panelDim = p.getPreferredSize();
+
+	                Dimension nd = new Dimension(
+	                        panelDim.width,
+	                        panelDim.height + 40 );
+	                System.out.println(nd);
+	                jTabbedPane1.setPreferredSize(nd);
+
+	                Calculator.this.pack();
+	            }
+			};
+		}
+		return changeListener;
 	}
 
 }
