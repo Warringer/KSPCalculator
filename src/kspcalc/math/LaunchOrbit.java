@@ -2,7 +2,7 @@ package kspcalc.math;
 
 import kspcal.utils.Constants;
 
-public class LaunchOrbit {
+public class LaunchOrbit extends OrbitMath {
 	private double launchBurnVel;	// Burnout Velocity
 	private double launchBurnAlt;	// Burnout Altitude
 	private double launchBurnAng;	// Burnout Angle

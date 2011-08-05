@@ -9,7 +9,7 @@ import kspcal.utils.Constants;
  * @author warringer
  *
  */
-public class HohmannTransferOrbit {
+public class HohmannTransferOrbit extends OrbitMath {
 
 	private double lowOrbit;	// Lower Orbit for Transfer Orbit
 	private double highOrbit;	// Higher Orbit for Transfer Orbit
@@ -94,10 +94,6 @@ public class HohmannTransferOrbit {
 	private void doCircularOrbits() {
 		this.velHigh = this.doCircularOrbitMath(this.highOrbit);
 		this.velLow = this.doCircularOrbitMath(this.lowOrbit);
-	}
-	
-	private double doCircularOrbitMath(double d) {
-		return Math.sqrt(Constants.GM / d);
 	}
 	
 	/**

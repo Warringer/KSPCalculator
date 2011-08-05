@@ -1,8 +1,9 @@
 package kspcalc.math;
 
 import kspcal.utils.Constants;
+import kspcal.utils.EllipticOrbitCalcType;
 
-public class EllipticOrbit {
+public class EllipticOrbit extends OrbitMath {
 	private double ApoVel;	// Apogee Velocity
 	private double PerVel;	// Perigee Velocity
 	private double ApoAlt;	// Apogee Altitude

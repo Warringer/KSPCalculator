@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 import kspcal.utils.Constants;
+import kspcal.utils.EllipticOrbitCalcType;
 import kspcalc.math.EllipticOrbit;
-import kspcalc.math.EllipticOrbitCalcType;
 
 
 /**

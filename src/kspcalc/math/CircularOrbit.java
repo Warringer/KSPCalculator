@@ -2,7 +2,7 @@ package kspcalc.math;
 
 import kspcal.utils.Constants;
 
-public class CircularOrbit {
+public class CircularOrbit extends OrbitMath {
 
 	private double Alt;	// Orbital Altitude
 	private double Vel;	// Orbital Velocity
@@ -30,7 +30,7 @@ public class CircularOrbit {
 	 * Calculate the orbital velocity
 	 */
 	private void orbitalVelocity() {
-		this.Vel = Math.sqrt(Constants.GM / this.Alt);
+		this.Vel = this.doCircularOrbitMath(this.Alt);
 	}
 	
 	/** 
