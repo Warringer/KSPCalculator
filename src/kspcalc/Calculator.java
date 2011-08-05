@@ -1,4 +1,5 @@
 package kspcalc;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -14,21 +15,16 @@ import kspcal.utils.*;
 import kspcalc.dialogs.*;
 import kspcalc.stagecalc.*;
 
-
-
-
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
+ * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
+ * Builder, which is free for non-commercial use. If Jigloo is being used
+ * commercially (ie, by a corporation, company or business for any purpose
+ * whatever) then you should purchase a license for each developer using Jigloo.
+ * Please visit www.cloudgarden.com for details. Use of Jigloo implies
+ * acceptance of these licensing terms. A COMMERCIAL LICENSE HAS NOT BEEN
+ * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
+ * ANY CORPORATE OR COMMERCIAL PURPOSE.
+ */
 public class Calculator extends javax.swing.JFrame {
 
 	/**
@@ -37,10 +33,11 @@ public class Calculator extends javax.swing.JFrame {
 	private static final long serialVersionUID = 3573861286066173188L;
 
 	{
-		//Set Look & Feel
+		// Set Look & Feel
 		try {
-			javax.swing.UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
-		} catch(Exception e) {
+			javax.swing.UIManager
+					.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +56,7 @@ public class Calculator extends javax.swing.JFrame {
 	private JMenuItem AboutItem;
 	private JMenuItem HelpItem;
 	private JMenuBar jMenuBar1;
-	
+
 	private Calculator frame;
 	private ImageIcon icon;
 	private AbstractAction closeAction1;
@@ -70,12 +67,12 @@ public class Calculator extends javax.swing.JFrame {
 	private JMenu Calc;
 	private ChangeListener changeListener;
 	private final Dimension originalTabsDim;
-	
+
 	/**
-	* Auto-generated main method to display this JFrame
-	*/
+	 * Auto-generated main method to display this JFrame
+	 */
 	public static void main(String[] args) {
-	
+
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				Calculator inst = new Calculator();
@@ -84,23 +81,25 @@ public class Calculator extends javax.swing.JFrame {
 			}
 		});
 	}
-	
+
 	protected void setLogFiles() {
 		try {
-			PrintStream sysoStream = new PrintStream(new FileOutputStream(new File("sysout.log")));
-			PrintStream errorStream = new PrintStream(new FileOutputStream(new File("error.log")));
-			//System.setOut(sysoStream);
+			PrintStream sysoStream = new PrintStream(new FileOutputStream(
+					new File("sysout.log")));
+			PrintStream errorStream = new PrintStream(new FileOutputStream(
+					new File("error.log")));
+			// System.setOut(sysoStream);
 			System.setErr(errorStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Calculator() {
 		super();
 		setLogFiles();
 		initGUI();
-		orbitDisplay = new OrbitDisplayFrame(100, 100);
+		orbitDisplay = new OrbitDisplayFrame(100, 100, 0);
 		orbitDisplay.setLocationRelativeTo(null);
 		orbitDisplay.setVisible(false);
 		frame = this;
@@ -108,16 +107,22 @@ public class Calculator extends javax.swing.JFrame {
 			icon = Constants.getIcon();
 			this.setIconImage(icon.getImage());
 			orbitDisplay.setIconImage(icon.getImage());
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		orbitDisplay.setTitle("KSP Calculator - Orbit Display");
 		originalTabsDim = jTabbedPane1.getPreferredSize();
 		System.out.println(originalTabsDim);
 	}
-	
+
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			this.setTitle("KSP Calculator");
+			this.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					System.exit(0);
+				}
+			});
 			{
 				jMenuBar1 = new JMenuBar();
 				setJMenuBar(jMenuBar1);
@@ -145,39 +150,49 @@ public class Calculator extends javax.swing.JFrame {
 				getContentPane().add(jTabbedPane1, BorderLayout.CENTER);
 				jTabbedPane1.setPreferredSize(new java.awt.Dimension(500, 400));
 				{
-					orbitalCalculatorPanel1 = new CircularOrbitalCalculatorPanel(this);
-					jTabbedPane1.addTab("Circular Orbit", null, orbitalCalculatorPanel1, null);
+					orbitalCalculatorPanel1 = new CircularOrbitalCalculatorPanel(
+							this);
+					jTabbedPane1.addTab("Circular Orbit", null,
+							orbitalCalculatorPanel1, null);
 				}
 				{
-					ellipticOrbitCalculatorPanel1 = new EllipticOrbitCalculatorPanel(this);
-					jTabbedPane1.addTab("Elliptic Orbit", null, ellipticOrbitCalculatorPanel1, null);
+					ellipticOrbitCalculatorPanel1 = new EllipticOrbitCalculatorPanel(
+							this);
+					jTabbedPane1.addTab("Elliptic Orbit", null,
+							ellipticOrbitCalculatorPanel1, null);
 				}
 				{
-					hohmannTransferCalculatorPanel1 = new HohmannTransferCalculatorPanel(this);
-					jTabbedPane1.addTab("Hohmann Transfer Orbit", null, hohmannTransferCalculatorPanel1, null);
+					hohmannTransferCalculatorPanel1 = new HohmannTransferCalculatorPanel(
+							this);
+					jTabbedPane1.addTab("Hohmann Transfer Orbit", null,
+							hohmannTransferCalculatorPanel1, null);
 				}
 				{
 					orbitLaunchCalculatorPanel1 = new LaunchOrbitCalculatorPanel();
-					jTabbedPane1.addTab("Launch Orbit", null, orbitLaunchCalculatorPanel1, null);
-					jTabbedPane1.addTab("Stage Calculator", null, (JPanel) getStageCalculator1(), null);
-					jTabbedPane1.addTab("Multi Stage Calculator", null, getStagingCalculatorPanel1(), null);
+					jTabbedPane1.addTab("Launch Orbit", null,
+							orbitLaunchCalculatorPanel1, null);
+					jTabbedPane1.addTab("Stage Calculator", null,
+							(JPanel) getStageCalculator1(), null);
+					jTabbedPane1.addTab("Multi Stage Calculator", null,
+							getStagingCalculatorPanel1(), null);
 				}
 			}
 			jTabbedPane1.addChangeListener(getChangeListener());
 			pack();
 			this.setSize(476, 411);
 		} catch (Exception e) {
-		    //add your error handling code here
+			// add your error handling code here
 			e.printStackTrace();
 		}
 	}
-	
-	public void setOrbitDisplay(double apo, double peri, boolean hohmann, boolean up) {
-		orbitDisplay.setOrbits(apo, peri, hohmann, up);
+
+	public void setOrbitDisplay(double apo, double peri, double biorbAlt,
+			boolean hohmann, boolean up) {
+		orbitDisplay.setOrbits(apo, peri, biorbAlt, hohmann, up);
 	}
-	
+
 	private AbstractAction getAboutAction() {
-		if(AboutAction == null) {
+		if (AboutAction == null) {
 			AboutAction = new AbstractAction("About", null) {
 				/**
 				 * 
@@ -191,9 +206,9 @@ public class Calculator extends javax.swing.JFrame {
 		}
 		return AboutAction;
 	}
-	
+
 	public JDialog getAboutDialog() {
-		if(aboutDialog == null) {
+		if (aboutDialog == null) {
 			aboutDialog = new AboutDialog(this);
 		}
 		return aboutDialog;
@@ -213,36 +228,36 @@ public class Calculator extends javax.swing.JFrame {
 		}
 		return mi;
 	}
-	
+
 	public HelpSet getHelpSet(String helpsetfile) {
-	      HelpSet hs = null;
-	      ClassLoader cl = this.getClass().getClassLoader();
-	      try {
-	        URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
-	        hs = new HelpSet(null, hsURL);
-	      } catch(Exception ee) {
-	        System.out.println("HelpSet: "+ee.getMessage());
-	        System.out.println("HelpSet: "+ helpsetfile + " not found");
-	      }
-	      return hs;
-	   }
-	
+		HelpSet hs = null;
+		ClassLoader cl = this.getClass().getClassLoader();
+		try {
+			URL hsURL = HelpSet.findHelpSet(cl, helpsetfile);
+			hs = new HelpSet(null, hsURL);
+		} catch (Exception ee) {
+			System.out.println("HelpSet: " + ee.getMessage());
+			System.out.println("HelpSet: " + helpsetfile + " not found");
+		}
+		return hs;
+	}
+
 	private StageCalc getStageCalculator1() {
-		if(stageCalculator1 == null) {
+		if (stageCalculator1 == null) {
 			stageCalculator1 = StageCalculator.getStageCalculator();
 		}
 		return stageCalculator1;
 	}
-	
+
 	private StagingCalculatorPanel getStagingCalculatorPanel1() {
-		if(stagingCalculatorPanel1 == null) {
+		if (stagingCalculatorPanel1 == null) {
 			stagingCalculatorPanel1 = new StagingCalculatorPanel(this);
 		}
 		return stagingCalculatorPanel1;
 	}
-	
+
 	private JMenu getCalc() {
-		if(Calc == null) {
+		if (Calc == null) {
 			Calc = new JMenu();
 			Calc.setText("Calculator");
 			Calc.add(getConfigItem());
@@ -251,18 +266,18 @@ public class Calculator extends javax.swing.JFrame {
 		}
 		return Calc;
 	}
-	
+
 	private JMenuItem getConfigItem() {
-		if(ConfigItem == null) {
+		if (ConfigItem == null) {
 			ConfigItem = new JMenuItem();
 			ConfigItem.setText("Calculator");
 			ConfigItem.setAction(getConfigurationAction());
 		}
 		return ConfigItem;
 	}
-	
+
 	private AbstractAction getConfigurationAction() {
-		if(ConfigurationAction == null) {
+		if (ConfigurationAction == null) {
 			ConfigurationAction = new AbstractAction("Configuration", null) {
 				/**
 				 * 
@@ -277,25 +292,25 @@ public class Calculator extends javax.swing.JFrame {
 		}
 		return ConfigurationAction;
 	}
-	
+
 	private JSeparator getJSeparator1() {
-		if(jSeparator1 == null) {
+		if (jSeparator1 == null) {
 			jSeparator1 = new JSeparator();
 		}
 		return jSeparator1;
 	}
-	
+
 	private JMenuItem getCloseItem() {
-		if(CloseItem == null) {
+		if (CloseItem == null) {
 			CloseItem = new JMenuItem();
 			CloseItem.setText("Close");
 			CloseItem.setAction(getCloseAction1());
 		}
 		return CloseItem;
 	}
-	
+
 	private AbstractAction getCloseAction1() {
-		if(closeAction1 == null) {
+		if (closeAction1 == null) {
 			closeAction1 = new AbstractAction("Close", null) {
 				/**
 				 * 
@@ -309,22 +324,24 @@ public class Calculator extends javax.swing.JFrame {
 		}
 		return closeAction1;
 	}
-	
+
 	private ChangeListener getChangeListener() {
 		if (changeListener == null) {
 			changeListener = new ChangeListener() {
 
-	            @Override
-	            public void stateChanged(ChangeEvent e) {
+				@Override
+				public void stateChanged(ChangeEvent e) {
 
-	                Component p =   ((JTabbedPane) e.getSource()).getSelectedComponent();
-	                Dimension panelDim = p.getPreferredSize();
+					Component p = ((JTabbedPane) e.getSource())
+							.getSelectedComponent();
+					Dimension panelDim = p.getPreferredSize();
 
-	                Dimension nd = new Dimension( panelDim.width, panelDim.height + 40 );
-	                jTabbedPane1.setPreferredSize(nd);
+					Dimension nd = new Dimension(panelDim.width,
+							panelDim.height + 40);
+					jTabbedPane1.setPreferredSize(nd);
 
-	                Calculator.this.pack();
-	            }
+					Calculator.this.pack();
+				}
 			};
 		}
 		return changeListener;

@@ -5,6 +5,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+import kspcalc.graphics.OrbitDisplay;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -27,12 +29,14 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 	private OrbitDisplay orbitDisplay1;
 	private double apoAlt;
 	private double perAlt;
+	private double biorbAlt;
 	private OrbitDisplayFrame frame;
 
-	public OrbitDisplayFrame(double apoAlt, double perAlt) {
+	public OrbitDisplayFrame(double apoAlt, double perAlt, double biorbAlt) {
 		super();
 		this.apoAlt = apoAlt;
 		this.perAlt = perAlt;
+		this.biorbAlt = biorbAlt;
 		this.frame = this;
 		initGUI();
 	}
@@ -49,7 +53,7 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 			});
 
 			{
-				orbitDisplay1 = new OrbitDisplay(500, 500, (int) this.apoAlt, (int) this.perAlt);
+				orbitDisplay1 = new OrbitDisplay(500, 500, (int) this.apoAlt, (int) this.perAlt, (int) this.biorbAlt);
 				getContentPane().add(orbitDisplay1, BorderLayout.CENTER);
 			}
 			pack();
@@ -60,8 +64,8 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 		}
 	}
 	
-	public void setOrbits(double apo, double peri, boolean hohmann, boolean up) {
-		orbitDisplay1.setAlts((int) apo, (int) peri, hohmann, up);
+	public void setOrbits(double apo, double peri, double biorbAlt, boolean hohmann, boolean up) {
+		orbitDisplay1.setAlts((int) apo, (int) peri, hohmann, up, (int) biorbAlt);
 		this.setVisible(true);
 	}
 

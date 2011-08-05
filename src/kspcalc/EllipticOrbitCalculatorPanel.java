@@ -472,7 +472,7 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 				private static final long serialVersionUID = -8143578416492442782L;
 
 				public void actionPerformed(ActionEvent evt) {
-					panel.frame.setOrbitDisplay(panel.apo / 1000d, panel.peri / 1000d, false, false);
+					panel.frame.setOrbitDisplay(panel.apo / 1000d, panel.peri / 1000d, 0, false, false);
 				}
 			};
 		}

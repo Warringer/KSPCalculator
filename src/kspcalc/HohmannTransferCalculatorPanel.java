@@ -445,7 +445,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 				private static final long serialVersionUID = 8829065951929157204L;
 
 				public void actionPerformed(ActionEvent evt) {
-					panel.frame.setOrbitDisplay(panel.apo / 1000d, panel.peri / 1000d, true, upwards);
+					panel.frame.setOrbitDisplay(panel.apo / 1000d, panel.peri / 1000d, 0, true, upwards);
 				}
 			};
 		}
