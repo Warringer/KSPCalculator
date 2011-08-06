@@ -262,9 +262,17 @@ public class OrbitDisplay extends JComponent {
 	}
 	
 	private void paintHohmannChange(Graphics2D g) {
-		g.setColor(Color.red);
+		if (this.up) {
+			g.setColor(Color.red);
+		} else {
+			g.setColor(Color.green);
+		}
 		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, g);
-		g.setColor(Color.green);
+		if (this.up) {
+			g.setColor(Color.green);
+		} else {
+			g.setColor(Color.red);
+		}
 		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, g);
 		g.setColor(Color.orange);
     	og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.a, this.b, this.up, this.zoom, g);
@@ -278,9 +286,17 @@ public class OrbitDisplay extends JComponent {
 	}
 	
 	private void paintBiEllipticChange(Graphics2D g) {
-		g.setColor(Color.red);
+		if (!this.up) {
+			g.setColor(Color.red);
+		} else {
+			g.setColor(Color.green);
+		}
 		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, g);
-		g.setColor(Color.green);
+		if (!this.up) {
+			g.setColor(Color.green);
+		} else {
+			g.setColor(Color.red);
+		}
 		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, g);
 		g.setColor(Color.gray);
 		og.drawHelpCircle(this.windowWidth / 2, this.windowHeight / 2, this.biorb / this.zoom, g);
@@ -290,7 +306,7 @@ public class OrbitDisplay extends JComponent {
 		og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.aBiorb[1], this.bBiorb[1], false, zoom, g);
 		g.setColor(Color.black);
 		int dir = 50;
-    	if (!this.up) {
+    	if (this.up) {
     		dir *= -1;
     	}
     	og.drawDVArrow(dir, this.perigeeAlt, zoom ,g);

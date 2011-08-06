@@ -48,6 +48,7 @@ public class Calculator extends javax.swing.JFrame {
 	private EllipticOrbitCalculatorPanel ellipticOrbitCalculatorPanel1;
 	private LaunchOrbitCalculatorPanel orbitLaunchCalculatorPanel1;
 	private OrbitDisplayFrame orbitDisplay;
+	private BiEllipticTransferCalculatorPanel biEllipticTransferCalculatorPanel1;
 	private StagingCalculatorPanel stagingCalculatorPanel1;
 	private StageCalc stageCalculator1;
 	private JMenu Help;
@@ -88,7 +89,7 @@ public class Calculator extends javax.swing.JFrame {
 					new File("sysout.log")));
 			PrintStream errorStream = new PrintStream(new FileOutputStream(
 					new File("error.log")));
-			// System.setOut(sysoStream);
+			System.setOut(sysoStream);
 			System.setErr(errorStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -168,6 +169,7 @@ public class Calculator extends javax.swing.JFrame {
 							hohmannTransferCalculatorPanel1, null);
 				}
 				{
+					jTabbedPane1.addTab("Bi-Elliptic Transfer Orbit", null, getBiEllipticTransferCalculatorPanel1(), null);
 					orbitLaunchCalculatorPanel1 = new LaunchOrbitCalculatorPanel();
 					jTabbedPane1.addTab("Launch Orbit", null,
 							orbitLaunchCalculatorPanel1, null);
@@ -337,7 +339,7 @@ public class Calculator extends javax.swing.JFrame {
 					Dimension panelDim = p.getPreferredSize();
 
 					Dimension nd = new Dimension(panelDim.width,
-							panelDim.height + 40);
+							panelDim.height + 60);
 					jTabbedPane1.setPreferredSize(nd);
 
 					Calculator.this.pack();
@@ -345,6 +347,13 @@ public class Calculator extends javax.swing.JFrame {
 			};
 		}
 		return changeListener;
+	}
+	
+	private BiEllipticTransferCalculatorPanel getBiEllipticTransferCalculatorPanel1() {
+		if(biEllipticTransferCalculatorPanel1 == null) {
+			biEllipticTransferCalculatorPanel1 = new BiEllipticTransferCalculatorPanel(this);
+		}
+		return biEllipticTransferCalculatorPanel1;
 	}
 
 }
