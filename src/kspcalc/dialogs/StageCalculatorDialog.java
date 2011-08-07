@@ -37,7 +37,7 @@ public class StageCalculatorDialog extends javax.swing.JDialog {
 			} catch (NullPointerException e) {}
 			this.setTitle("KSP Calculator - "+ title);
 			{
-				panel.setStageCalculator1(StageCalculator.getStageCalculator());
+				panel.setStageCalculator1(new StageCalculator());
 				this.getContentPane().add((JPanel) panel.getStageCalculator1(), "Center");
 				size = panel.getStageCalculator1().getPrefferedSize();
 				((JComponent) panel.getStageCalculator1()).setPreferredSize(size);

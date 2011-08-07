@@ -246,7 +246,7 @@ public class Calculator extends javax.swing.JFrame {
 
 	private StageCalc getStageCalculator1() {
 		if (stageCalculator1 == null) {
-			stageCalculator1 = StageCalculator.getStageCalculator();
+			stageCalculator1 = new StageCalculator();
 		}
 		return stageCalculator1;
 	}

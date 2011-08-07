@@ -60,11 +60,6 @@ public class CustomPart {
 			if (properties.containsKey("internalFuel")) {
 				this.fuel = Double.parseDouble(properties.getProperty("internalFuel"));
 			}
-			if (this.massI != this.massF) {
-				this.massPerFuel = ((this.massI - this.massF) / this.fuel) * 100;
-			} else {
-				this.massPerFuel = 0.46;
-			}
 			// For solid Rocket Boosters or not variable thrusters
 			if (properties.containsKey("thrust")) {
 				this.thrust = Double.parseDouble(properties.getProperty("thrust"));
@@ -76,11 +71,7 @@ public class CustomPart {
 			if (properties.containsKey("fuelConsumtion")) {
 				this.fuelNeed = Double.parseDouble(properties.getProperty("fuelConsumtion"));
 			}
-			if (this.fuelNeed > 0) {
-				this.SI = (this.thrust * 1000) / (Constants.GRAVITY * this.fuelNeed * this.massPerFuel);
-			} else {
-				this.SI = 0;
-			}
+			this.doMath();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,7 +79,44 @@ public class CustomPart {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+
+	/**
+	 * @param massI
+	 * @param massF
+	 * @param thrust
+	 * @param fuel
+	 * @param fuelNeed
+	 * @param type
+	 * @param name
+	 * @param spinner
+	 * @param module
+	 */
+	public CustomPart(double massI, double massF, double thrust, double fuel,
+			double fuelNeed, CustomPartType type, String name, String module) {
+		super();
+		this.massI = massI;
+		this.massF = massF;
+		this.thrust = thrust;
+		this.fuel = fuel;
+		this.fuelNeed = fuelNeed;
+		this.type = type;
+		this.name = name;
+		this.module = module;
+		this.doMath();
+	}
+
+	private void doMath() {
+		if (this.massI != this.massF) {
+			this.massPerFuel = ((this.massI - this.massF) / this.fuel) * 100;
+		} else {
+			this.massPerFuel = 0.46;
+		}
+		if (this.fuelNeed > 0) {
+			this.SI = (this.thrust * 1000) / (Constants.GRAVITY * this.fuelNeed * this.massPerFuel);
+		} else {
+			this.SI = 0;
+		}
 	}
 	
 	public double getProportonalFuelNeed(double combinedFuelNeed) {

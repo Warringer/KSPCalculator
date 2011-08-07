@@ -9,36 +9,72 @@ public class CustomParts {
 	private HashMap<CustomPartType, HashMap<String, CustomPart>> parts;
 	private ArrayList<String> dirmap;
 	
-	public CustomParts() {
-		KSPConfig config = KSPConfig.getConfig();
-		dirmap = new ArrayList<String>();
+	public CustomParts() {dirmap = new ArrayList<String>();
 		parts = new HashMap<CustomPartType, HashMap<String, CustomPart>>();
 		for (CustomPartType type: CustomPartType.values()) {
 			HashMap<String, CustomPart> typeList = new HashMap<String, CustomPart>();
 			parts.put(type, typeList);
 		}
-		traverseDirectory(new File(config.getDirectory() + File.separator + "Parts"));
-		for (String dir: dirmap) {
-			CustomPart part = new CustomPart(config.getDirectory() + File.separator+ "Parts" + File.separator + dir);
-			HashMap<String, CustomPart> typeList = new HashMap<String, CustomPart>();
-			switch (part.getType()) {
-			case PROP:
-				typeList = parts.get(CustomPartType.PROP);
-				break;
-			case CnC:
-				typeList = parts.get(CustomPartType.CnC);
-				break;
-			case SaA:
-				typeList = parts.get(CustomPartType.SaA);
-				break;
-			case UTILITY:
-				typeList = parts.get(CustomPartType.UTILITY);
-				break;
+		if (KSPConfig.getConfig().hasDirectory()) {
+			KSPConfig config = KSPConfig.getConfig();
+			traverseDirectory(new File(config.getDirectory() + File.separator + "Parts"));
+			for (String dir: dirmap) {
+				CustomPart part = new CustomPart(config.getDirectory() + File.separator+ "Parts" + File.separator + dir);
+				HashMap<String, CustomPart> typeList = new HashMap<String, CustomPart>();
+				switch (part.getType()) {
+				case PROP:
+					typeList = parts.get(CustomPartType.PROP);
+					break;
+				case CnC:
+					typeList = parts.get(CustomPartType.CnC);
+					break;
+				case SaA:
+					typeList = parts.get(CustomPartType.SaA);
+					break;
+				case UTILITY:
+					typeList = parts.get(CustomPartType.UTILITY);
+					break;
+				}
+				typeList.put(dir, part);
 			}
-			typeList.put(dir, part);
+		} else {
+			this.loadGenericParts();
 		}
 	}
 	
+	private void loadGenericParts() {
+		HashMap<String, CustomPart> typeList = new HashMap<String, CustomPart>();
+		CustomPart part;
+		typeList = parts.get(CustomPartType.PROP);
+		part = new CustomPart(2.5, 0.3, 0, 500, 0, CustomPartType.PROP, "FL-T500 Fuel Tank", "FuelTank");
+		typeList.put("fuelTank", part);
+		part = new CustomPart(2, 2, 200, 0, 8, CustomPartType.PROP, "LV-T30 Liquid Fuel Engine", "LiquidEngine");
+		typeList.put("liquidEngine1", part);
+		part = new CustomPart(1.8, 0.36, 130, 100, 4, CustomPartType.PROP, "RT-10 Solid Fuel Booster", "SolidRocket");
+		typeList.put("solidBooster", part);
+		typeList = parts.get(CustomPartType.CnC);
+		part = new CustomPart(1, 1, 0, 0, 0, CustomPartType.CnC, "Command Pod Mk1", "CommandPod");
+		typeList.put("mk1pod", part);
+		part = new CustomPart(0.8, 0.8, 0, 0, 0, CustomPartType.CnC, "S.A.S Module", "SASModule");
+		typeList.put("sasModule", part);
+		typeList = parts.get(CustomPartType.UTILITY);
+		part = new CustomPart(0.3, 0.3, 0, 0, 0, CustomPartType.UTILITY, "Mk16 Parachute", "Parachutes");
+		typeList.put("parachuteSingle", part);
+		typeList = parts.get(CustomPartType.SaA);
+		part = new CustomPart(0.4, 0.4, 0, 0, 0, CustomPartType.SaA, "TT-38K Radial Decoupler", "RadialDecoupler");
+		typeList.put("radialDecoupler", part);
+		part = new CustomPart(0.8, 0.8, 0, 0, 0, CustomPartType.SaA, "TR-18A Stack Decoupler", "Decoupler");
+		typeList.put("stackDecoupler", part);
+		part = new CustomPart(0.05, 0.05, 0, 0, 0, CustomPartType.SaA, "AV-T1 Winglet", "Winglet");
+		typeList.put("winglet", part);
+		part = new CustomPart(0.08, 0.08, 0, 0, 0, CustomPartType.SaA, "AV-R8 Winglet", "Winglet");
+		typeList.put("winglet2", part);
+		part = new CustomPart(0.8, 0.8, 0, 0, 0, CustomPartType.SaA, "TVR-1180C Mk1 Stack Tri-Coupler", "Strut");
+		typeList.put("stackTriCoupler", part);
+		part = new CustomPart(0.05, 0.05, 0, 0, 0, CustomPartType.SaA, "EAS-4 Strut Connector", "StrutConnector");
+		typeList.put("strutConnector", part);
+	}
+
 	private void traverseDirectory(File node) {
 		String file = node.getAbsoluteFile().toString();
 		if ( file.contains("cfg") ) {
