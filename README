@@ -4,6 +4,11 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.9.1:
+
+Fixed a few bugs in the Bi-Elliptic Transfer Orbit Calculator
+Attempted to fix bugs in the Launch Orbit Calculator (remains experimental)
+
 V0.9:
 
 Added a Bi-Ellipstic Transfer Orbit Calculator (may be buggy)

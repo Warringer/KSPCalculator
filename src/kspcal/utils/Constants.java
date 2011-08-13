@@ -31,7 +31,7 @@ public final class Constants {
 	public static final double MASS = 5.29E+22d;
 	
 	// KEarth Version
-	public static final String Version = "0.9";
+	public static final String Version = "0.9.1";
 	
 	public static final double square(double d) {
 		return d * d;
@@ -65,6 +65,13 @@ public final class Constants {
 	
 	public static final String formatKilo(double d) {
 		return format.format(d) + " kilometer";
+	}
+	
+	public static final String formatAlt(double d) {
+		if (d > 50000) {
+			return Constants.formatKilo(d);
+		}
+		return Constants.formatMeter(d);
 	}
 	
 	public static final String formatDouble(double d) {

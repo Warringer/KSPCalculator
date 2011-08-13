@@ -67,18 +67,18 @@ public class BiEllipticTransferOrbit extends OrbitMath {
 		this.injectionVel = doEllipseVel(lowOrbit, a[0]);
 		this.finalVel = doEllipseVel(highOrbit, a[1]);
 		this.velB = doEllipseVel(pointB, a[0]);
-		this.dvB =  this.velB - doEllipseVel(pointB, a[1]);
-		this.dvInit = this.injectionVel - this.velHigh;
-		this.dvExit = this.velLow - this.finalVel;
+		this.dvB =  Math.abs(this.velB - doEllipseVel(pointB, a[1])) * -1;
+		this.dvInit = Math.abs(this.injectionVel - this.velHigh);
+		this.dvExit = Math.abs(this.velLow - this.finalVel) * -1;
 	}
 	
 	private void doDVup() {
 		this.injectionVel = doEllipseVel(highOrbit, a[0]);
 		this.finalVel = doEllipseVel(lowOrbit, a[1]);
 		this.velB = doEllipseVel(pointB, a[1]);
-		this.dvB = this.velB - doEllipseVel(pointB, a[0]);
-		this.dvInit = this.injectionVel - this.velLow;
-		this.dvExit = this.velHigh - this.finalVel;
+		this.dvB = Math.abs(this.velB - doEllipseVel(pointB, a[0]));
+		this.dvInit = Math.abs(this.injectionVel - this.velLow);
+		this.dvExit = Math.abs(this.velHigh - this.finalVel) * -1;
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public class BiEllipticTransferOrbit extends OrbitMath {
 	}
 	
 	public double getCombinedDV() {
-		return this.dvB + this.dvExit + this.dvInit;
+		return Math.abs(this.dvB) + Math.abs(this.dvExit) + this.dvInit;
 	}
 	
 }

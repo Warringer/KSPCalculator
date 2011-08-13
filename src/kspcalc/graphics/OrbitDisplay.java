@@ -301,17 +301,21 @@ public class OrbitDisplay extends JComponent {
 		g.setColor(Color.gray);
 		og.drawHelpCircle(this.windowWidth / 2, this.windowHeight / 2, this.biorb / this.zoom, g);
 		g.setColor(Color.darkGray);
-		og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.aBiorb[0], this.bBiorb[0], true, zoom, g);
+		og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.aBiorb[0], this.bBiorb[0], !this.up, zoom, g);
 		g.setColor(Color.lightGray);
-		og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.aBiorb[1], this.bBiorb[1], false, zoom, g);
+		og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.aBiorb[1], this.bBiorb[1], this.up, zoom, g);
 		g.setColor(Color.black);
-		int dir = 50;
+		int dirinit = 50;
+		int dirchange = dirinit;
+		int dirfinal = dirinit * -1;
     	if (this.up) {
-    		dir *= -1;
+    		dirinit *= -1;
+    		dirchange *= -1;
+    		dirfinal *= -1; 
     	}
-    	og.drawDVArrow(dir, this.perigeeAlt, zoom ,g);
-    	og.drawDVArrow(dir * -1, this.apogeeAlt, zoom, g);
-    	og.drawDVArrow(dir * -1, -this.biorb, zoom, g);
+    	og.drawDVArrow(dirinit, this.perigeeAlt, zoom ,g);
+    	og.drawDVArrow(dirfinal, this.apogeeAlt, zoom, g);
+    	og.drawDVArrow(dirchange, -this.biorb, zoom, g);
 	}
 	
 }

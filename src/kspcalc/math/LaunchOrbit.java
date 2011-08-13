@@ -21,8 +21,8 @@ public class LaunchOrbit extends OrbitMath {
 			double launchBurnAng) {
 		super();
 		this.launchBurnVel = launchBurnVel;
-		this.launchBurnAlt = launchBurnAlt +Constants.RADIUS;
-		this.launchBurnAng = launchBurnAng;
+		this.launchBurnAlt = launchBurnAlt + Constants.RADIUS;
+		this.launchBurnAng = launchBurnAng * (Math.PI / 180);
 		this.doMath();
 	}
 	
@@ -30,16 +30,10 @@ public class LaunchOrbit extends OrbitMath {
 	 * Does the Math.
 	 */
 	private void doMath() {
-		this.doHelpers();
-		this.doAlts();
-	}
-	
-	/**
-	 * Calculates a few helper variables
-	 */
-	private void doHelpers() {
 		this.c = (2d * Constants.GM) / (this.launchBurnAlt * this.launchBurnVel * this.launchBurnVel);
+		this.doAlts();
 		this.a = this.launchApoAlt + this.launchPerAlt;
+		this.doVels();
 	}
 	
 	/**
@@ -61,7 +55,6 @@ public class LaunchOrbit extends OrbitMath {
 	/**
 	 * Calculates the Velocities at Perigee and Apogee
 	 */
-	@SuppressWarnings("unused")
 	private void doVels() {
 		this.launchPerVel = Math.sqrt((2d * Constants.GM * this.launchApoAlt) / (this.launchPerAlt * this.a));
 		this.launchApoVel = Math.sqrt((2d * Constants.GM * this.launchPerAlt) / (this.launchApoAlt * this.a));
@@ -85,14 +78,14 @@ public class LaunchOrbit extends OrbitMath {
 	 * @return the launchApoAlt
 	 */
 	public double getLaunchApoAlt() {
-		return launchApoAlt;
+		return launchApoAlt - Constants.RADIUS;
 	}
 
 	/**
 	 * @return the launchApoVel
 	 */
 	public double getLaunchApoVel() {
-		return launchApoVel;
+		return launchApoVel - Constants.RADIUS;
 	}
 	
 	

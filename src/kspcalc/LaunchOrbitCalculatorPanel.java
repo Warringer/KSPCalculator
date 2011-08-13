@@ -247,14 +247,8 @@ public class LaunchOrbitCalculatorPanel extends javax.swing.JPanel {
 					LaunchOrbit launch = new LaunchOrbit(launchVel, launchAlt, launchAng);
 					double launchPerAlt = launch.getLaunchPerAlt();
 					double launchApoAlt = launch.getLaunchApoAlt();
-					String launchPAlt = Constants.formatMeter(launchPerAlt);
-					String launchAAlt = Constants.formatMeter(launchApoAlt);
-					if (kilometer) {
-						launchPerAlt /= 1000d;
-						launchApoAlt /= 1000d;
-						launchPAlt = Constants.formatKilo(launchPerAlt);
-						launchAAlt = Constants.formatKilo(launchApoAlt);
-					}
+					String launchPAlt = Constants.formatAlt(launchPerAlt);
+					String launchAAlt = Constants.formatAlt(launchApoAlt);
 					panel.launchPerAltOut.setText(launchPAlt);
 					panel.launchApoAltOut.setText(launchAAlt);
 					panel.launchPerVelOut.setText(Constants.formatVel(launch.getLaunchPerVel()));
