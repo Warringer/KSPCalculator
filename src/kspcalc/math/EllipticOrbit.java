@@ -113,7 +113,7 @@ public class EllipticOrbit extends OrbitMath {
 	}
 	
 	private void doEMath() {
-		this.E = (this.PerAlt * Constants.square(this.PerVel)) / Constants.GM - 1d;
+		this.E = Math.abs((this.PerAlt * Constants.square(this.PerVel)) / Constants.GM - 1d);
 	}
 
 	/**
@@ -151,5 +151,19 @@ public class EllipticOrbit extends OrbitMath {
 		return PerAlt;
 	}
 	
+	public boolean isHyperbolic() {
+		return (this.E > 1); 
+	}
 	
+	public boolean isParabolic() {
+		return (this.E == 1);
+	}
+	
+	public boolean isElliptic() {
+		return (this.E < 1) && (this.E > 0); 
+	}
+	
+	public boolean isCircular() {
+		return (this.E == 0);
+	}
 }

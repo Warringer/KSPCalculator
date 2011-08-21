@@ -1,8 +1,7 @@
 package kspcalc;
 
 import com.cloudgarden.layout.*;
-
-
+import java.awt.BorderLayout;
 
 import java.awt.event.ActionEvent;
 import javax.swing.*;
@@ -58,6 +57,12 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 	private JLabel jLabel1;
 
 	private EllipticOrbitCalculatorPanel panel;
+	private JLabel jLabel10;
+	private AbstractAction closeAction1;
+	private JButton closeButton;
+	private JLabel jLabel9;
+	private JLabel jLabel8;
+	private JDialog NotifyWindow;
 	private AbstractAction showOrbitAction;
 	private JButton showOrbitButton;
 	private JLabel eOut;
@@ -411,24 +416,38 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 						}
 					}
 					EllipticOrbit elliptic = new EllipticOrbit(firstValue, secondValue, panel.inputType);
-					double perAlt = elliptic.getPerAlt() - Constants.RADIUS;
-					double apoAlt = elliptic.getApoAlt() - Constants.RADIUS;
-					String perAltOut = Constants.formatMeter(perAlt);
-					String apoAltOut = Constants.formatMeter(apoAlt);
-					panel.apo = apoAlt;
-					panel.peri = perAlt;
-					if (kilometer) {
-						perAlt /= 1000d;
-						apoAlt /= 1000d;
-						perAltOut = Constants.formatKilo(perAlt);
-						apoAltOut = Constants.formatKilo(apoAlt);
+					if (elliptic.isElliptic()) {
+						double perAlt = elliptic.getPerAlt() - Constants.RADIUS;
+						double apoAlt = elliptic.getApoAlt() - Constants.RADIUS;
+						String perAltOut = Constants.formatMeter(perAlt);
+						String apoAltOut = Constants.formatMeter(apoAlt);
+						panel.apo = apoAlt;
+						panel.peri = perAlt;
+						if (kilometer) {
+							perAlt /= 1000d;
+							apoAlt /= 1000d;
+							perAltOut = Constants.formatKilo(perAlt);
+							apoAltOut = Constants.formatKilo(apoAlt);
+						}
+						panel.perAltOut.setText(perAltOut);
+						panel.apoAltOut.setText(apoAltOut);
+						panel.perVelOut.setText(Constants.formatVel(elliptic.getPerVel()));
+						panel.apoVelOut.setText(Constants.formatVel(elliptic.getApoVel()));
+						panel.orbPerOut.setText(Constants.formatPer(elliptic.getPeriod()));
+						panel.eOut.setText(Constants.formatDouble(elliptic.getE()));
+					} else if (elliptic.isHyperbolic()) {
+						showNotifyWindow(elliptic, "hyperbolic");
+					} else if (elliptic.isParabolic()) {
+						showNotifyWindow(elliptic, "parabolic");
+					} else if (elliptic.isCircular()) {
+						showNotifyWindow(elliptic, "circular");
 					}
-					panel.perAltOut.setText(perAltOut);
-					panel.apoAltOut.setText(apoAltOut);
-					panel.perVelOut.setText(Constants.formatVel(elliptic.getPerVel()));
-					panel.apoVelOut.setText(Constants.formatVel(elliptic.getApoVel()));
-					panel.orbPerOut.setText(Constants.formatPer(elliptic.getPeriod()));
-					panel.eOut.setText(Constants.formatDouble(elliptic.getE()));
+				}
+
+				private void showNotifyWindow(EllipticOrbit elliptic, String type) {
+					getNotifyWindow().setVisible(true);
+					jLabel9.setText(type + " with an eccentricity of:");
+					jLabel10.setText(Constants.formatDouble(elliptic.getE()));
 				}
 			};
 		}
@@ -477,6 +496,74 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 			};
 		}
 		return showOrbitAction;
+	}
+	
+	private JDialog getNotifyWindow() {
+		if(NotifyWindow == null) {
+			NotifyWindow = new JDialog();
+			NotifyWindow.getContentPane().setLayout(null);
+			NotifyWindow.setPreferredSize(new java.awt.Dimension(271, 138));
+			NotifyWindow.getContentPane().add(getJLabel8());
+			NotifyWindow.getContentPane().add(getJLabel9());
+			NotifyWindow.getContentPane().add(getCloseButton());
+			NotifyWindow.getContentPane().add(getJLabel10());
+			NotifyWindow.setLocationRelativeTo(null);
+			NotifyWindow.setSize(271, 138);
+		}
+		return NotifyWindow;
+	}
+	
+	private JLabel getJLabel8() {
+		if(jLabel8 == null) {
+			jLabel8 = new JLabel();
+			jLabel8.setText("The Trajectory you have entered is");
+			jLabel8.setBounds(12, 12, 245, 15);
+		}
+		return jLabel8;
+	}
+	
+	private JLabel getJLabel9() {
+		if(jLabel9 == null) {
+			jLabel9 = new JLabel();
+			jLabel9.setText("hyperbolic with an eccentricity of:");
+			jLabel9.setBounds(12, 33, 233, 15);
+		}
+		return jLabel9;
+	}
+	
+	private JButton getCloseButton() {
+		if(closeButton == null) {
+			closeButton = new JButton();
+			closeButton.setText("Close");
+			closeButton.setBounds(179, 79, 67, 22);
+			closeButton.setAction(getCloseAction1());
+		}
+		return closeButton;
+	}
+	
+	private AbstractAction getCloseAction1() {
+		if(closeAction1 == null) {
+			closeAction1 = new AbstractAction("Close", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public void actionPerformed(ActionEvent evt) {
+					getNotifyWindow().setVisible(false);
+				}
+			};
+		}
+		return closeAction1;
+	}
+	
+	private JLabel getJLabel10() {
+		if(jLabel10 == null) {
+			jLabel10 = new JLabel();
+			jLabel10.setText("0");
+			jLabel10.setBounds(12, 54, 209, 15);
+		}
+		return jLabel10;
 	}
 
 }

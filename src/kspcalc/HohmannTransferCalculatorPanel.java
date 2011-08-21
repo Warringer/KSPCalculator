@@ -452,4 +452,5 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 		return showOrbitAction;
 	}
 
+
 }

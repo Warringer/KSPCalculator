@@ -15,5 +15,9 @@ public class OrbitMath {
 	protected double doCircularOrbitMath(double d) {
 		return Math.sqrt(Constants.GM / d);
 	}
+	
+	protected double doEscapeVel(double d) {
+		return  Math.sqrt((2d * Constants.GM) / d);
+	}
 
 }
