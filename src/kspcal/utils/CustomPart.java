@@ -108,7 +108,7 @@ public class CustomPart {
 
 	private void doMath() {
 		if (this.massI != this.massF) {
-			this.massPerFuel = ((this.massI - this.massF) / this.fuel) * 100;
+			this.massPerFuel = ((this.massI - this.massF) / this.fuel) * 1000;
 		} else {
 			this.massPerFuel = 0.46;
 		}

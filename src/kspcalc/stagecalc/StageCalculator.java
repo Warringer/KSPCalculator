@@ -72,7 +72,7 @@ public class StageCalculator extends javax.swing.JPanel implements StageCalc {
 	
 	private void initGUI() {
 		try {
-			setPreferredSize(new Dimension(500, 650));
+			setPreferredSize(new Dimension(525, 650));
 			this.setLayout(null);
 			this.setSize(500, 650);
 			this.add(getJTabbedPane1());

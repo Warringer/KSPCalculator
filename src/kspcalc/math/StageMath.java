@@ -90,7 +90,7 @@ public abstract class StageMath {
 	 */
 	protected void calculateDV() {
 		try {
-			this.DV = this.SI * Math.log(this.combinedMassI / this.combinedMassF);
+			this.DV = this.SI * Constants.GRAVITY * Math.log(this.combinedMassI / this.combinedMassF);
 		} catch (ArithmeticException e) {
 			this.DV = 0;
 		}

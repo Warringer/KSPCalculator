@@ -4,6 +4,10 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.9.3:
+
+Corrected an error that has gotten into the Delta-v calculation.
+
 V0.9.2:
 
 Made Sure that the Calculator recognizes Hyperbolic Trajectories when they are entered in the Elliptic Orbit Calculator
