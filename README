@@ -4,6 +4,10 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.9.4:
+
+Corrected a bug that I overlooked in the 0.9.3 bugfix.
+
 V0.9.3:
 
 Corrected an error that has gotten into the Delta-v calculation.

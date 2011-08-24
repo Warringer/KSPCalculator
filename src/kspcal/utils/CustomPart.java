@@ -110,7 +110,7 @@ public class CustomPart {
 		if (this.massI != this.massF) {
 			this.massPerFuel = ((this.massI - this.massF) / this.fuel) * 1000;
 		} else {
-			this.massPerFuel = 0.46;
+			this.massPerFuel = ((2.5 - 0.3) / 500) * 1000;
 		}
 		if (this.fuelNeed > 0) {
 			this.SI = (this.thrust * 1000) / (Constants.GRAVITY * this.fuelNeed * this.massPerFuel);
