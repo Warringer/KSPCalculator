@@ -18,8 +18,11 @@ public final class Constants {
 	// KEarth Radius
 	public static final double RADIUS = 600000d;
 	
-	// BEarth Athmospheric Thickness
-	public static final double ATHMOSPHERE = 35000d;
+	// KEarth Lower Athmospheric Thickness
+	public static final double LOW_ATHMOSPHERE = 35000d;
+	
+	// KEarth Upper Athmosphere Thickness
+	public static final double UP_ATHMOSPHERE = 35000d;
 	
 	// KEarth Gravity
 	public static final double GRAVITY = 9.80665d;
@@ -31,7 +34,7 @@ public final class Constants {
 	public static final double MASS = 5.29E+22d;
 	
 	// KEarth Version
-	public static final String Version = "0.9.4";
+	public static final String Version = "0.9.5";
 	
 	public static final double square(double d) {
 		return d * d;

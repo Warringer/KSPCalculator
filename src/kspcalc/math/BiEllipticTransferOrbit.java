@@ -19,7 +19,8 @@ public class BiEllipticTransferOrbit extends OrbitMath {
 	private double timeBegin, timeEnd;	// Transfer Times 
 	private double period;  			// Transfer Orbit Period
 	private boolean upwards;			// Transfer Orbit Direction, true = upwards, false = downwards
-	private double[] a;					// Transfer Orbit semi-major axis
+	
+	private HohmannTransferOrbit up, down;
 	
 	/**
 	 * @param lowOrbit
@@ -33,52 +34,35 @@ public class BiEllipticTransferOrbit extends OrbitMath {
 		this.highOrbit = highOrbit + Constants.RADIUS;
 		this.pointB = pointB + Constants.RADIUS;
 		this.upwards = upwards;
+		if (upwards) {
+			this.up = new HohmannTransferOrbit(this.lowOrbit, this.pointB, true);
+			this.down = new HohmannTransferOrbit(this.highOrbit, this.pointB, false);
+		} else {
+			this.up = new HohmannTransferOrbit(this.highOrbit, this.pointB, true);
+			this.down = new HohmannTransferOrbit(this.lowOrbit, this.pointB, false);
+		}
 		this.doMath();
 	}
 	
 	private void doMath() {
-		this.doA();
 		this.doTimes();
 		this.doCircularOrbits();
 		this.doDV();
 	}
 	
-	private void doA() {
-		this.a = new double[2];
-		this.a[0] = (this.lowOrbit + this.pointB) / 2;
-		this.a[1] = (this.highOrbit + this.pointB) / 2;
-	}
-	
 	private void doTimes() {
-		this.timeBegin = Math.PI * Math.sqrt(Constants.cube(this.a[0]) / Constants.GM);
-		this.timeEnd = Math.PI * Math.sqrt(Constants.cube(this.a[1]) / Constants.GM);
+		this.timeBegin = this.up.getHalfPeriod();
+		this.timeEnd = this.down.getHalfPeriod();
 		this.period = this.timeBegin + this.timeEnd;
 	}
 	
 	private void doDV() {
-		if (this.upwards) {
-			this.doDVup();
-		} else {
-			this.doDVdown();
-		}
-	}
-	
-	private void doDVdown() {
-		this.injectionVel = doEllipseVel(lowOrbit, a[0]);
-		this.finalVel = doEllipseVel(highOrbit, a[1]);
-		this.velB = doEllipseVel(pointB, a[0]);
-		this.dvB =  Math.abs(this.velB - doEllipseVel(pointB, a[1])) * -1;
-		this.dvInit = Math.abs(this.injectionVel - this.velHigh);
-		this.dvExit = Math.abs(this.velLow - this.finalVel) * -1;
-	}
-	
-	private void doDVup() {
-		this.injectionVel = doEllipseVel(highOrbit, a[0]);
-		this.finalVel = doEllipseVel(lowOrbit, a[1]);
-		this.velB = doEllipseVel(pointB, a[1]);
-		this.dvB = Math.abs(this.velB - doEllipseVel(pointB, a[0]));
-		this.dvInit = Math.abs(this.injectionVel - this.velLow);
-		this.dvExit = Math.abs(this.velHigh - this.finalVel) * -1;
+		this.injectionVel = this.up.getHohVelInjection();
+		this.finalVel = this.down.getHohVelExit();
+		this.velB = this.up.getHohVelExit();
+		this.dvInit = this.up.getDVInit();
+		this.dvExit = this.down.getDVExit();
+		this.dvB = Math.abs(this.velB - this.down.getHohVelInjection());
 	}
 	
 	/**
@@ -141,19 +125,19 @@ public class BiEllipticTransferOrbit extends OrbitMath {
 	 * @return the timeBegin
 	 */
 	public double getTimeBegin() {
-		return timeBegin / 60;
+		return timeBegin;
 	}
 	/**
 	 * @return the timeEnd
 	 */
 	public double getTimeEnd() {
-		return timeEnd / 60;
+		return timeEnd;
 	}
 	/**
 	 * @return the period
 	 */
 	public double getPeriod() {
-		return period / 60;
+		return period;
 	}
 	
 	public double getInitVel() {

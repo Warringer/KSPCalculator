@@ -4,6 +4,11 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.9.5:
+
+Corrected Bi-Elliptic Transfer Orbit Calculations
+Added Upper Athomsphere into the Graphic Model
+
 V0.9.4:
 
 Corrected a bug that I overlooked in the 0.9.3 bugfix.

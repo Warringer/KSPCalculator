@@ -21,7 +21,8 @@ public class OrbitDisplay extends JComponent {
 	private int windowHeight;
 	private int zoom;						
 	private int planetSize;					// Planetary Size
-	private int atmosphereThickness;		// Athomsphere Thickness 
+	private int lowAtmosphereThickness;		// Lower Athomsphere Thickness
+	private int upAtmosphereThickness;		// Upper Athomsphere Thickness
 	private int apogeeAlt;					// Apogee Altitude
 	private int perigeeAlt;					// Perigee Altitude
 	private int a, b;						// Axis of the Orbit
@@ -39,7 +40,8 @@ public class OrbitDisplay extends JComponent {
 		super();
 		this.og = new OrbitalGraphics(height, width);
 		this.planetSize = (int) (Constants.RADIUS / 1000d);
-		this.atmosphereThickness =  (int) (Constants.ATHMOSPHERE / 1000d);
+		this.lowAtmosphereThickness =  (int) (Constants.LOW_ATHMOSPHERE / 1000d);
+		this.upAtmosphereThickness = (int) (Constants.UP_ATHMOSPHERE / 1000d);
 		this.windowHeight = height;
 		this.windowWidth = width;
 		this.zoom = 2;
@@ -142,22 +144,32 @@ public class OrbitDisplay extends JComponent {
 
 
 	/**
-	 * @return the atmosphereThickness
+	 * @return the lowatmosphereThickness
 	 */
-	public int getAtmosphereThickness() {
-		return atmosphereThickness;
+	public int getLowAtmosphereThickness() {
+		return lowAtmosphereThickness;
 	}
-
-
 
 	/**
 	 * @param atmosphereThickness the atmosphereThickness to set
 	 */
-	public void setAtmosphereThickness(int atmosphereThickness) {
-		this.atmosphereThickness = atmosphereThickness;
+	public void setLowAtmosphereThickness(int atmosphereThickness) {
+		this.lowAtmosphereThickness = atmosphereThickness;
 	}
 
-
+	/**
+	 * @param atmosphereThickness the atmosphereThickness to set
+	 */
+	public void setUpAtmosphereThickness(int atmosphereThickness) {
+		this.upAtmosphereThickness = atmosphereThickness;
+	}
+	
+	/**
+	 * @return the lowatmosphereThickness
+	 */
+	public int getUpAtmosphereThickness() {
+		return upAtmosphereThickness;
+	}
 
 	/**
 	 * @return the apogeeAlt
@@ -235,13 +247,14 @@ public class OrbitDisplay extends JComponent {
 		
 		// Paint Athmosphere
 		ig.setColor(Color.cyan);
-		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, (this.planetSize + this.atmosphereThickness) / this.zoom, ig);
+		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, (this.planetSize + this.lowAtmosphereThickness + this.upAtmosphereThickness) / this.zoom, ig);
+		ig.setColor(Color.blue);
+		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, (this.planetSize + this.lowAtmosphereThickness) / this.zoom, ig);
 		
 		// Paint Planet
-		ig.setColor(Color.blue);
+		ig.setColor(Color.black);
 		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize / this.zoom, ig);
 		
-		ig.setColor(Color.black);
 		// Paint Circular Orbits for the Transfer Orbit
 		if (this.hohmann) {
 			this.paintHohmannChange(ig);
