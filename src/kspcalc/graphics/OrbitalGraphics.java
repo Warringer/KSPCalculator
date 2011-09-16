@@ -17,42 +17,46 @@ public class OrbitalGraphics {
 		this.windowWidth = windowWidth;
 	}
 
-	public void drawCircle(int x, int y, int radius, Graphics2D g) {
+	public void drawCircle(int x, int y, int radius, int zoom, Graphics2D g) {
+		radius /= zoom;
 		g.drawOval(x - radius, y - radius, radius*2, radius*2);
+		//g.drawOval(x - radius, y - radius, 10, 10);
 	}
 	
-	public void filledCircle(int x, int y, int radius, Graphics2D g) {
+	public void filledCircle(int x, int y, int radius, int zoom, Graphics2D g) {
+		radius /= zoom;
 		g.fillOval(x - radius, y - radius, radius * 2, radius * 2);
 	}
 
-	public void drawEllipse(int x, int y, int a, int b, Graphics2D g) {
-		int f = (int) Math.sqrt((a*a) - (b*b));
-		g.drawOval(x - a + f, y - b, a * 2, b * 2);
+	public void drawEllipse(int x, int y, int a, int b, int zoom, Graphics2D g) {
+		int f = (int) Math.sqrt((a*a) - (b*b));			// Get the focus point of the Ellipse
+		g.drawOval(x - ((a - f) / zoom), y - (b / zoom), a * 2 / zoom, b * 2 / zoom);
+		/*g.drawOval(x - ((a - f) / zoom), y - (b / zoom), 10, 10);
+		System.out.println("a=" + a + " ; b=" + b + " ; x=" + x + " ; y=" + y + " ; f=" + f);
+		System.out.println((x - ((a - f) / zoom)) + " " + (y - (b / zoom)) + " " +  a * 2 / zoom +" "+ b * 2 / zoom);//*/
 	}
 	
 	public void drawTransferEllipse(int x, int y, int a, int b, boolean up, int zoom, Graphics2D g) {
-		a = a / zoom;
-		b = b / zoom;
 		int f = (int) Math.sqrt((a*a) - (b*b));
 		Arc2D arc = new Arc2D.Double();
 		if (up) {
-			arc.setArc(x - a + f, y - b, a * 2, b * 2, 0, -180, Arc2D.OPEN);
+			arc.setArc(x - ((a - f) / zoom), y - (b / zoom), a * 2 / zoom, b * 2 / zoom, 0, -180, Arc2D.OPEN);
 		} else {
-			arc.setArc(x - a + f, y - b, a * 2, b * 2, 0, 180, Arc2D.OPEN); 
+			arc.setArc(x - ((a - f) / zoom), y - (b / zoom), a * 2 / zoom, b * 2 / zoom, 0, 180, Arc2D.OPEN); 
 		}
 		g.draw(arc);
 		float dash1[] = {10.0f};
 		float filled[] = {1f};
 		g.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f));
-		this.drawEllipse(windowWidth / 2, windowHeight / 2, a / zoom, b / zoom , g);
+		this.drawEllipse(windowWidth / 2, windowHeight / 2, a, b, zoom, g);
 		g.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, filled, 0.0f));
 	}
 	
-	public void drawHelpCircle(int x, int y, int radius, Graphics2D g) {
+	public void drawHelpCircle(int x, int y, int radius, int zoom, Graphics2D g) {
 		float dash1[] = {10.0f};
 		float filled[] = {1f};
 		g.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f));
-		this.drawCircle(x, y, radius, g);
+		this.drawCircle(x, y, radius, zoom, g);
 		g.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, filled, 0.0f));
 	}
 

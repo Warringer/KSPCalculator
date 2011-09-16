@@ -246,15 +246,16 @@ public class OrbitDisplay extends JComponent {
 		        RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		// Paint Athmosphere
-		ig.setColor(Color.cyan);
-		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, (this.planetSize + this.lowAtmosphereThickness + this.upAtmosphereThickness) / this.zoom, ig);
-		ig.setColor(Color.blue);
-		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, (this.planetSize + this.lowAtmosphereThickness) / this.zoom, ig);
+		ig.setColor(new Color(126, 250, 250, 128));
+		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize + this.lowAtmosphereThickness + this.upAtmosphereThickness , this.zoom, ig);
+		ig.setColor(new Color(90, 214, 214, 128));
+		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize + this.lowAtmosphereThickness , this.zoom, ig);
 		
 		// Paint Planet
-		ig.setColor(Color.black);
-		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize / this.zoom, ig);
+		ig.setColor(new Color(83, 83, 252));
+		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize , this.zoom, ig);
 		
+		ig.setColor(Color.black);
 		// Paint Circular Orbits for the Transfer Orbit
 		if (this.hohmann) {
 			this.paintHohmannChange(ig);
@@ -263,9 +264,9 @@ public class OrbitDisplay extends JComponent {
 		} else {
 			// Paint Orbit
 			if (this.apogeeAlt == this.perigeeAlt) {
-				og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, ig);
+				og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.a , this.zoom, ig);
 			} else {
-				og.drawEllipse(this.windowWidth / 2, this.windowHeight / 2, this.a / this.zoom, this.b / this.zoom , ig);
+				og.drawEllipse(this.windowWidth / 2, this.windowHeight / 2, this.a, this.b , this.zoom, ig);
 			}
 		}
 		
@@ -280,14 +281,14 @@ public class OrbitDisplay extends JComponent {
 		} else {
 			g.setColor(Color.green);
 		}
-		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, g);
+		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt , this.zoom, g);
 		if (this.up) {
 			g.setColor(Color.green);
 		} else {
 			g.setColor(Color.red);
 		}
-		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, g);
-		g.setColor(Color.orange);
+		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt , this.zoom, g);
+		g.setColor(Color.gray);
     	og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.a, this.b, this.up, this.zoom, g);
     	g.setColor(Color.black);
     	int dir = 50;
@@ -304,15 +305,15 @@ public class OrbitDisplay extends JComponent {
 		} else {
 			g.setColor(Color.green);
 		}
-		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt / this.zoom, g);
+		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.apogeeAlt, this.zoom, g);
 		if (!this.up) {
 			g.setColor(Color.green);
 		} else {
 			g.setColor(Color.red);
 		}
-		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt / this.zoom, g);
+		og.drawCircle(this.windowWidth / 2, this.windowHeight / 2, this.perigeeAlt, this.zoom, g);
 		g.setColor(Color.gray);
-		og.drawHelpCircle(this.windowWidth / 2, this.windowHeight / 2, this.biorb / this.zoom, g);
+		og.drawHelpCircle(this.windowWidth / 2, this.windowHeight / 2, this.biorb, this.zoom, g);
 		g.setColor(Color.darkGray);
 		og.drawTransferEllipse(this.windowWidth / 2, this.windowHeight / 2, this.aBiorb[0], this.bBiorb[0], !this.up, zoom, g);
 		g.setColor(Color.lightGray);

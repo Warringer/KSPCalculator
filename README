@@ -8,6 +8,7 @@ V0.9.5:
 
 Corrected Bi-Elliptic Transfer Orbit Calculations
 Added Upper Athomsphere into the Graphic Model
+Reduced the Orbital display inaccuracy a little when in elliptical display  
 
 V0.9.4:
 
