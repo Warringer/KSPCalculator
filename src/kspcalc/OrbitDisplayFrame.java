@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+import kspcal.utils.CelestrialBody;
 import kspcalc.graphics.OrbitDisplay;
 
 
@@ -30,14 +31,16 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 	private double apoAlt;
 	private double perAlt;
 	private double biorbAlt;
+	private CelestrialBody body;
 	private OrbitDisplayFrame frame;
 
-	public OrbitDisplayFrame(double apoAlt, double perAlt, double biorbAlt) {
+	public OrbitDisplayFrame(double apoAlt, double perAlt, double biorbAlt, CelestrialBody body) {
 		super();
 		this.apoAlt = apoAlt;
 		this.perAlt = perAlt;
 		this.biorbAlt = biorbAlt;
 		this.frame = this;
+		this.body = body;
 		initGUI();
 	}
 	
@@ -53,7 +56,7 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 			});
 
 			{
-				orbitDisplay1 = new OrbitDisplay(500, 500, (int) this.apoAlt, (int) this.perAlt, (int) this.biorbAlt);
+				orbitDisplay1 = new OrbitDisplay(500, 500, (int) this.apoAlt, (int) this.perAlt, (int) this.biorbAlt, body);
 				getContentPane().add(orbitDisplay1, BorderLayout.CENTER);
 			}
 			pack();
@@ -64,8 +67,8 @@ public class OrbitDisplayFrame extends javax.swing.JFrame {
 		}
 	}
 	
-	public void setOrbits(double apo, double peri, double biorbAlt, boolean hohmann, boolean up) {
-		orbitDisplay1.setAlts((int) apo, (int) peri, hohmann, up, (int) biorbAlt);
+	public void setOrbits(double apo, double peri, double biorbAlt, boolean hohmann, boolean up, CelestrialBody body) {
+		orbitDisplay1.setAlts((int) apo, (int) peri, hohmann, up, (int) biorbAlt, body);
 		this.setVisible(true);
 	}
 

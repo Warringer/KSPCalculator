@@ -68,6 +68,7 @@ public class Calculator extends javax.swing.JFrame {
 	private JMenu Calc;
 	private ChangeListener changeListener;
 	private final Dimension originalTabsDim;
+	public CelestrialBody body = CelestrialBody.KEarth;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -100,7 +101,7 @@ public class Calculator extends javax.swing.JFrame {
 		super();
 		setLogFiles();
 		initGUI();
-		orbitDisplay = new OrbitDisplayFrame(100, 100, 0);
+		orbitDisplay = new OrbitDisplayFrame(100, 100, 0, body);
 		orbitDisplay.setLocationRelativeTo(null);
 		orbitDisplay.setVisible(false);
 		frame = this;
@@ -169,8 +170,8 @@ public class Calculator extends javax.swing.JFrame {
 							hohmannTransferCalculatorPanel1, null);
 				}
 				{
-					jTabbedPane1.addTab("Bi-Elliptic Transfer Orbit", null, getBiEllipticTransferCalculatorPanel1(), null);
-					orbitLaunchCalculatorPanel1 = new LaunchOrbitCalculatorPanel();
+//					jTabbedPane1.addTab("Bi-Elliptic Transfer Orbit", null, getBiEllipticTransferCalculatorPanel1(), null);
+					orbitLaunchCalculatorPanel1 = new LaunchOrbitCalculatorPanel(this);
 					jTabbedPane1.addTab("Launch Orbit", null,
 							orbitLaunchCalculatorPanel1, null);
 					jTabbedPane1.addTab("Stage Calculator", null,
@@ -190,7 +191,7 @@ public class Calculator extends javax.swing.JFrame {
 
 	public void setOrbitDisplay(double apo, double peri, double biorbAlt,
 			boolean hohmann, boolean up) {
-		orbitDisplay.setOrbits(apo, peri, biorbAlt, hohmann, up);
+		orbitDisplay.setOrbits(apo, peri, biorbAlt, hohmann, up, body);
 	}
 
 	private AbstractAction getAboutAction() {

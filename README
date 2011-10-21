@@ -4,6 +4,12 @@ It can calculate Circular Orbits, Hohmann Transfer Orbits and Launch Orbits (exp
 
 Changelog:
 
+V0.10:
+
+Removed Bi-Elliptic Transfer Orbit Calculator until further notice
+Added support for more celestrial bodies in the orbit calculations
+Added new Stock Parts
+
 V0.9.5:
 
 Corrected Bi-Elliptic Transfer Orbit Calculations

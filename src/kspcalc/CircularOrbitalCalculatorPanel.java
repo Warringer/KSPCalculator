@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 import kspcalc.math.*;
 
@@ -48,6 +49,9 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 
 	private boolean kilometer;
 	private CircularOrbitalCalculatorPanel panel;
+	private JLabel jLabel5;
+	private AbstractAction celestrialBodyAction;
+	private JComboBox celestrialBodySelector;
 	private AbstractAction showOrbitAction;
 	private JButton showOrbitButton;
 	/**
@@ -70,10 +74,12 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 			setPreferredSize(new Dimension(500, 400));
 			{
 				orbCalcButton = new JButton();
-				this.add(getShowOrbitButton(), new AnchorConstraint(205, 921, 278, 583, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-				this.add(orbCalcButton, new AnchorConstraint(91, 861, 165, 613, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getJLabel5(), new AnchorConstraint(111, 669, 148, 595, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getJComboBox1(), new AnchorConstraint(91, 977, 166, 669, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getShowOrbitButton(), new AnchorConstraint(601, 363, 673, 25, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(orbCalcButton, new AnchorConstraint(498, 273, 573, 25, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				orbCalcButton.setText("Calculate");
-				orbCalcButton.setPreferredSize(new java.awt.Dimension(99, 22));
+				orbCalcButton.setPreferredSize(new java.awt.Dimension(124, 30));
 				orbCalcButton.setAction(getOrbCalcAction());
 			}
 			{
@@ -200,7 +206,7 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 						if (panel.kilometer) { 
 							altitude *= 1000d;
 						}
-						CircularOrbit cirOrb = new CircularOrbit(altitude);
+						CircularOrbit cirOrb = new CircularOrbit(altitude, panel.frame.body);
 						panel.alt = altitude;
 						panel.orbVelOut.setText(Constants.formatVel(cirOrb.getVel()));
 						panel.orbPerOut.setText(Constants.formatPer(cirOrb.getPer()));
@@ -218,7 +224,7 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 		if(showOrbitButton == null) {
 			showOrbitButton = new JButton();
 			showOrbitButton.setText("Show Orbit");
-			showOrbitButton.setPreferredSize(new java.awt.Dimension(135, 22));
+			showOrbitButton.setPreferredSize(new java.awt.Dimension(169, 29));
 			showOrbitButton.setAction(getShowOrbitAction());
 		}
 		return showOrbitButton;
@@ -238,6 +244,45 @@ public class CircularOrbitalCalculatorPanel extends javax.swing.JPanel {
 			};
 		}
 		return showOrbitAction;
+	}
+	
+	private JComboBox getJComboBox1() {
+		if(celestrialBodySelector == null) {
+			ComboBoxModel jComboBox1Model = 
+				new DefaultComboBoxModel(CelestrialBody.values());
+			celestrialBodySelector = new JComboBox();
+			celestrialBodySelector.setModel(jComboBox1Model);
+			celestrialBodySelector.setPreferredSize(new java.awt.Dimension(154, 30));
+			celestrialBodySelector.setAction(getCelestrialBodyAction());
+		}
+		return celestrialBodySelector;
+	}
+	
+	private JLabel getJLabel5() {
+		if(jLabel5 == null) {
+			jLabel5 = new JLabel();
+			jLabel5.setText("over");
+			jLabel5.setPreferredSize(new java.awt.Dimension(37, 15));
+		}
+		return jLabel5;
+	}
+	
+	private AbstractAction getCelestrialBodyAction() {
+		if(celestrialBodyAction == null) {
+			celestrialBodyAction = new AbstractAction("", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8368840134494145941L;
+
+				public void actionPerformed(ActionEvent evt) {
+					JComboBox cb = (JComboBox)evt.getSource();
+				    CelestrialBody body = (CelestrialBody)cb.getSelectedItem();
+				    panel.frame.body = body;
+				}
+			};
+		}
+		return celestrialBodyAction;
 	}
 
 }

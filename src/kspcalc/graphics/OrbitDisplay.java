@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 
 
@@ -31,17 +32,19 @@ public class OrbitDisplay extends JComponent {
 	private OrbitalGraphics og;				// Orbital Graphics helper class
 	private int biorb;						// Bi Orbital Max Altitude
 	private int[] aBiorb, bBiorb;			// Axis of BiOrbital Ellipses
+	private CelestrialBody body;
 
 	
 	/**
 	 * 
 	 */
-	public OrbitDisplay(int width, int height, int apo, int peri, int biorb) {
+	public OrbitDisplay(int width, int height, int apo, int peri, int biorb, CelestrialBody body) {
 		super();
+		this.body = body;
 		this.og = new OrbitalGraphics(height, width);
-		this.planetSize = (int) (Constants.RADIUS / 1000d);
-		this.lowAtmosphereThickness =  (int) (Constants.LOW_ATHMOSPHERE / 1000d);
-		this.upAtmosphereThickness = (int) (Constants.UP_ATHMOSPHERE / 1000d);
+		this.planetSize = (int) (body.getRadius() / 1000d);
+		this.lowAtmosphereThickness =  (int) (body.getLowAthmos() / 1000d);
+		this.upAtmosphereThickness = (int) (body.getHighAthmos() / 1000d);
 		this.windowHeight = height;
 		this.windowWidth = width;
 		this.zoom = 2;
@@ -56,8 +59,12 @@ public class OrbitDisplay extends JComponent {
 		this.calcOrbit();
 	}
 
-	public void setAlts(int apo, int peri, boolean hohmann, boolean up, int biorb) {
+	public void setAlts(int apo, int peri, boolean hohmann, boolean up, int biorb, CelestrialBody body) {
 		this.zoom = 2;
+		this.body = body;
+		this.planetSize = (int) (body.getRadius() / 1000d);
+		this.lowAtmosphereThickness =  (int) (body.getLowAthmos() / 1000d);
+		this.upAtmosphereThickness = (int) (body.getHighAthmos() / 1000d);
 		this.apogeeAlt = apo + this.planetSize;
 		this.perigeeAlt = peri + this.planetSize;
 		this.hohmann = hohmann;
@@ -246,10 +253,12 @@ public class OrbitDisplay extends JComponent {
 		        RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		// Paint Athmosphere
-		ig.setColor(new Color(126, 250, 250, 128));
-		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize + this.lowAtmosphereThickness + this.upAtmosphereThickness , this.zoom, ig);
-		ig.setColor(new Color(90, 214, 214, 128));
-		og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize + this.lowAtmosphereThickness , this.zoom, ig);
+		if (body.hasAthmos()) {
+			ig.setColor(new Color(126, 250, 250, 128));
+			og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize + this.lowAtmosphereThickness + this.upAtmosphereThickness , this.zoom, ig);
+			ig.setColor(new Color(90, 214, 214, 128));
+			og.filledCircle(this.windowWidth / 2, this.windowHeight / 2, this.planetSize + this.lowAtmosphereThickness , this.zoom, ig);
+		}
 		
 		// Paint Planet
 		ig.setColor(new Color(83, 83, 252));

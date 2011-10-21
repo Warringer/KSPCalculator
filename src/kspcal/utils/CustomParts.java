@@ -52,11 +52,17 @@ public class CustomParts {
 		typeList.put("liquidEngine1", part);
 		part = new CustomPart(1.8, 0.36, 130, 100, 4, CustomPartType.PROP, "RT-10 Solid Fuel Booster", "SolidRocket");
 		typeList.put("solidBooster", part);
+		part = new CustomPart(0.9, 0.9, 0, 0, 0, CustomPartType.PROP, "FL-R25 RCS Fuel Tank", "RCSFuelTank");
+		typeList.put("rcsTank", part);
 		typeList = parts.get(CustomPartType.CnC);
 		part = new CustomPart(1, 1, 0, 0, 0, CustomPartType.CnC, "Command Pod Mk1", "CommandPod");
 		typeList.put("mk1pod", part);
 		part = new CustomPart(0.8, 0.8, 0, 0, 0, CustomPartType.CnC, "S.A.S Module", "SASModule");
 		typeList.put("sasModule", part);
+		part = new CustomPart(0.8, 0.8, 0, 0, 0, CustomPartType.CnC, "Advanced S.A.S Module", "SASModule");
+		typeList.put("advSASModule", part);
+		part = new CustomPart(0.05, 0.05, 0, 0, 0, CustomPartType.CnC, "RV-105 RCS Thruster Block", "RCSModule");
+		typeList.put("rcsBlock", part);
 		typeList = parts.get(CustomPartType.UTILITY);
 		part = new CustomPart(0.3, 0.3, 0, 0, 0, CustomPartType.UTILITY, "Mk16 Parachute", "Parachutes");
 		typeList.put("parachuteSingle", part);

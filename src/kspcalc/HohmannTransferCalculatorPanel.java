@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 import kspcalc.math.*;
 
@@ -61,6 +62,9 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 	private JLabel jLabel3;
 	
 	private HohmannTransferCalculatorPanel panel;	// This Panel!
+	private AbstractAction celeBodyAction;
+	private JLabel jLabel9;
+	private JComboBox celeBodyBox;
 	private Calculator frame;	// Display Frame
 	private boolean kilometer;	// Altitude in Kilometers?
 	private boolean upwards;	// Transfer Orbit direction?
@@ -87,6 +91,8 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 			this.setPreferredSize(new java.awt.Dimension(500, 400));
 			{
 				hohAltKiloRadio = new JRadioButton();
+				this.add(getJLabel9(), new AnchorConstraint(111, 573, 148, 497, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+				this.add(getCeleBodyBox(), new AnchorConstraint(91, 891, 166, 597, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getShowOrbitButton(), new AnchorConstraint(325, 776, 398, 533, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransFinalVel(), new AnchorConstraint(728, 971, 775, 668, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getHohTransInitVel(), new AnchorConstraint(581, 348, 631, 58, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
@@ -318,7 +324,7 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 						}
 						panel.apo = hiAltitude;
 						panel.peri = loAltitude;
-						HohmannTransferOrbit hohmann = new HohmannTransferOrbit(loAltitude, hiAltitude, panel.upwards);
+						HohmannTransferOrbit hohmann = new HohmannTransferOrbit(loAltitude, hiAltitude, panel.upwards, frame.body);
 						panel.hohTransInjVelOut.setText("Final: " + Constants.formatVel(hohmann.getHohVelInjection()));
 						panel.hohTargetInjVelOut.setText("Initial: " + Constants.formatVel(hohmann.getHohVelExit()));
 						panel.hohTransInjDVOut.setText("\u0394v: " + Constants.formatVel(hohmann.getDVInit()));
@@ -451,6 +457,44 @@ public class HohmannTransferCalculatorPanel extends javax.swing.JPanel {
 		}
 		return showOrbitAction;
 	}
+	
+	private JComboBox getCeleBodyBox() {
+		if(celeBodyBox == null) {
+			ComboBoxModel celeBodyBoxModel = 
+				new DefaultComboBoxModel(CelestrialBody.values());
+			celeBodyBox = new JComboBox();
+			celeBodyBox.setModel(celeBodyBoxModel);
+			celeBodyBox.setPreferredSize(new java.awt.Dimension(147, 30));
+			celeBodyBox.setAction(getCeleBodyAction());
+		}
+		return celeBodyBox;
+	}
+	
+	private JLabel getJLabel9() {
+		if(jLabel9 == null) {
+			jLabel9 = new JLabel();
+			jLabel9.setText("over");
+			jLabel9.setPreferredSize(new java.awt.Dimension(38, 15));
+		}
+		return jLabel9;
+	}
+	
+	private AbstractAction getCeleBodyAction() {
+		if(celeBodyAction == null) {
+			celeBodyAction = new AbstractAction("", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 3685535265492283506L;
 
+				public void actionPerformed(ActionEvent evt) {
+					JComboBox cb = (JComboBox)evt.getSource();
+				    CelestrialBody body = (CelestrialBody)cb.getSelectedItem();
+				    panel.frame.body = body;
+				}
+			};
+		}
+		return celeBodyAction;
+	}
 
 }

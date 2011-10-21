@@ -1,5 +1,6 @@
 package kspcalc.math;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 
 public class CircularOrbit extends OrbitMath {
@@ -11,9 +12,9 @@ public class CircularOrbit extends OrbitMath {
 	
 	
 	
-	public CircularOrbit(double alt) {
-		super();
-		Alt = alt + Constants.RADIUS;
+	public CircularOrbit(double alt, CelestrialBody body) {
+		super(body);
+		Alt = alt + body.getRadius();
 		this.doMath();
 	}
 	
@@ -30,21 +31,21 @@ public class CircularOrbit extends OrbitMath {
 	 * Calculate the orbital velocity
 	 */
 	private void orbitalVelocity() {
-		this.Vel = this.doCircularOrbitMath(this.Alt);
+		this.Vel = this.doCircularOrbitMath(Alt);
 	}
 	
 	/** 
 	 * Calculates the orbital period
 	 */
 	private void orbitalPeriod() {
-		this.Per = 2d * Math.PI * (this.Alt) / (this.Vel * 60d);
+		this.Per = 2d * Math.PI * (Alt) / (Vel * 60d);
 	}
 	
 	/**
 	 * Calculates the escape velocity
 	 */
 	private void escapeVelocity() {
-		this.escVel = Math.sqrt((2d * Constants.GM) / (this.Alt));
+		this.escVel = Math.sqrt((2 * body.getGm()) / Alt);
 	}
 	
 	
@@ -58,7 +59,7 @@ public class CircularOrbit extends OrbitMath {
 	 * @param alt the alt to set
 	 */
 	public void setAlt(double alt) {
-		Alt = alt + Constants.RADIUS;
+		Alt = alt + body.getRadius();
 		this.doMath();
 	}
 	/**

@@ -1,5 +1,6 @@
 package kspcalc.math;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 import kspcal.utils.EllipticOrbitCalcType;
 
@@ -28,8 +29,8 @@ public class EllipticOrbit extends OrbitMath {
 	 * @param calcType
 	 */
 	public EllipticOrbit(double firstValue, double secondValue,
-			EllipticOrbitCalcType calcType) {
-		super();
+			EllipticOrbitCalcType calcType, CelestrialBody body) {
+		super(body);
 		this.calcType = calcType;
 		try {
 			this.doMath(firstValue, secondValue);
@@ -42,8 +43,8 @@ public class EllipticOrbit extends OrbitMath {
 	private void doMath(double firstValue, double secondValue) throws Exception {
 		switch (this.calcType) {
 		case PERALT_APOALT:
-			this.PerAlt = firstValue + Constants.RADIUS;
-			this.ApoAlt = secondValue + Constants.RADIUS;
+			this.PerAlt = firstValue + body.getRadius();
+			this.ApoAlt = secondValue + body.getRadius();
 			this.doPerAltApoAltMath();
 			break;
 		case PERVEL_APOVEL:
@@ -52,12 +53,12 @@ public class EllipticOrbit extends OrbitMath {
 			this.doPerVelApoVelMath();
 			break;
 		case PERALT_PERVEL:
-			this.PerAlt = firstValue + Constants.RADIUS;
+			this.PerAlt = firstValue + body.getRadius();
 			this.PerVel = secondValue;
 			this.doPerAltPerVelMath();
 			break;
 		case APOALT_APOVEL:
-			this.ApoAlt = firstValue + Constants.RADIUS;
+			this.ApoAlt = firstValue + body.getRadius();
 			this.ApoVel = secondValue;
 			this.doApoAltApoVelMath();
 			break;
@@ -69,7 +70,7 @@ public class EllipticOrbit extends OrbitMath {
 	}
 	
 	private void doPeroid() {
-		this.period = 2d * Math.PI * Math.sqrt(Constants.cube(this.a / 2d) / Constants.GM) / 60d;
+		this.period = 2d * Math.PI * Math.sqrt(Constants.cube(this.a / 2d) / body.getGm()) / 60d;
 	}
 	
 	private void doPerAltApoAltMath() {
@@ -97,23 +98,23 @@ public class EllipticOrbit extends OrbitMath {
 	}
 	
 	private void doPerVelMath() {
-		this.PerVel = Math.sqrt( (2d * Constants.GM * this.ApoAlt) / (this.PerAlt * this.a) );
+		this.PerVel = Math.sqrt( (2d * body.getGm() * this.ApoAlt) / (this.PerAlt * this.a) );
 	}
 	
 	private void doApoVelMath() {
-		this.ApoVel = Math.sqrt( (2d * Constants.GM * this.PerAlt) / (this.ApoAlt * this.a) );
+		this.ApoVel = Math.sqrt( (2d * body.getGm() * this.PerAlt) / (this.ApoAlt * this.a) );
 	}
 	
 	private void doPerAltMath() {
-		this.PerAlt = this.ApoAlt / ( ( (2d * Constants.GM) / (this.ApoAlt * Constants.square(this.ApoVel)) ) - 1d);
+		this.PerAlt = this.ApoAlt / ( ( (2d * body.getGm()) / (this.ApoAlt * Constants.square(this.ApoVel)) ) - 1d);
 	}
 	
 	private void doApoAltMath() {
-		this.ApoAlt = this.PerAlt / ( ( (2d * Constants.GM) / (this.PerAlt * Constants.square(this.PerVel)) ) - 1d);
+		this.ApoAlt = this.PerAlt / ( ( (2d * body.getGm()) / (this.PerAlt * Constants.square(this.PerVel)) ) - 1d);
 	}
 	
 	private void doEMath() {
-		this.E = Math.abs((this.PerAlt * Constants.square(this.PerVel)) / Constants.GM - 1d);
+		this.E = Math.abs((this.PerAlt * Constants.square(this.PerVel)) / body.getGm() - 1d);
 	}
 
 	/**

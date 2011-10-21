@@ -1,5 +1,6 @@
 package kspcalc.math;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 
 public class LaunchOrbit extends OrbitMath {
@@ -18,10 +19,10 @@ public class LaunchOrbit extends OrbitMath {
 	 * @param launchBurnAng
 	 */
 	public LaunchOrbit(double launchBurnVel, double launchBurnAlt,
-			double launchBurnAng) {
-		super();
+			double launchBurnAng, CelestrialBody body) {
+		super(body);
 		this.launchBurnVel = launchBurnVel;
-		this.launchBurnAlt = launchBurnAlt + Constants.RADIUS;
+		this.launchBurnAlt = launchBurnAlt + body.getRadius();
 		this.launchBurnAng = launchBurnAng * (Math.PI / 180);
 		this.doMath();
 	}
@@ -30,7 +31,7 @@ public class LaunchOrbit extends OrbitMath {
 	 * Does the Math.
 	 */
 	private void doMath() {
-		this.c = (2d * Constants.GM) / (this.launchBurnAlt * this.launchBurnVel * this.launchBurnVel);
+		this.c = (2d * body.getGm()) / (this.launchBurnAlt * this.launchBurnVel * this.launchBurnVel);
 		this.doAlts();
 		this.a = this.launchApoAlt + this.launchPerAlt;
 		this.doVels();
@@ -56,8 +57,8 @@ public class LaunchOrbit extends OrbitMath {
 	 * Calculates the Velocities at Perigee and Apogee
 	 */
 	private void doVels() {
-		this.launchPerVel = Math.sqrt((2d * Constants.GM * this.launchApoAlt) / (this.launchPerAlt * this.a));
-		this.launchApoVel = Math.sqrt((2d * Constants.GM * this.launchPerAlt) / (this.launchApoAlt * this.a));
+		this.launchPerVel = Math.sqrt((2d * body.getGm() * this.launchApoAlt) / (this.launchPerAlt * this.a));
+		this.launchApoVel = Math.sqrt((2d * body.getGm() * this.launchPerAlt) / (this.launchApoAlt * this.a));
 	}
 
 	/**
@@ -78,14 +79,14 @@ public class LaunchOrbit extends OrbitMath {
 	 * @return the launchApoAlt
 	 */
 	public double getLaunchApoAlt() {
-		return launchApoAlt - Constants.RADIUS;
+		return launchApoAlt - body.getRadius();
 	}
 
 	/**
 	 * @return the launchApoVel
 	 */
 	public double getLaunchApoVel() {
-		return launchApoVel - Constants.RADIUS;
+		return launchApoVel - body.getRadius();
 	}
 	
 	

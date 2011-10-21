@@ -3,6 +3,7 @@
  */
 package kspcalc.math;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 
 /**
@@ -25,10 +26,10 @@ public class HohmannTransferOrbit extends OrbitMath {
 	private double atx;					// Transfer Orbit semi-major axis
 	
 	public HohmannTransferOrbit(double lowOrbit, double highOrbit,
-			boolean upwards) {
-		super();
-		this.lowOrbit = lowOrbit + Constants.RADIUS;
-		this.highOrbit = highOrbit + Constants.RADIUS;
+			boolean upwards, CelestrialBody body) {
+		super(body);
+		this.lowOrbit = lowOrbit + body.getRadius();
+		this.highOrbit = highOrbit + body.getRadius();
 		this.upwards = upwards;
 		this.doMath();
 	}
@@ -54,7 +55,7 @@ public class HohmannTransferOrbit extends OrbitMath {
 	 * Calculates the orbital period
 	 */
 	private void doPeroid() {
-		this.period = 2d * Math.PI * Math.sqrt(Constants.cube(this.atx) / Constants.GM) / 60d;
+		this.period = 2d * Math.PI * Math.sqrt(Constants.cube(this.atx) / body.getGm()) / 60d;
 	}
 	
 	/** 
@@ -72,8 +73,8 @@ public class HohmannTransferOrbit extends OrbitMath {
 	 * Calculates the Orbit when going from lower to higher orbit
 	 */
 	private void doOrbitUp() {
-		this.hohVelInjection = Math.sqrt(Constants.GM * ((2d / (this.lowOrbit)) - (1d / this.atx)));
-		this.hohVelFinal = Math.sqrt(Constants.GM * ((2d / (this.highOrbit)) - (1d / this.atx)));
+		this.hohVelInjection = Math.sqrt(body.getGm() * ((2d / (this.lowOrbit)) - (1d / this.atx)));
+		this.hohVelFinal = Math.sqrt(body.getGm() * ((2d / (this.highOrbit)) - (1d / this.atx)));
 		this.dvInit = Math.abs(this.hohVelInjection - this.velLow);
 		this.dvExit = Math.abs(this.hohVelFinal - this.velHigh);
 	}
@@ -82,8 +83,8 @@ public class HohmannTransferOrbit extends OrbitMath {
 	 * Calculates the Orbit when going from higher to lower orbit
 	 */
 	private void doOrbitDown() {
-		this.hohVelInjection = Math.sqrt(Constants.GM * ((2d / (this.highOrbit)) - (1d / this.atx)));
-		this.hohVelFinal = Math.sqrt(Constants.GM * ((2d / (this.lowOrbit)) - (1d / this.atx)));
+		this.hohVelInjection = Math.sqrt(body.getGm()* ((2d / (this.highOrbit)) - (1d / this.atx)));
+		this.hohVelFinal = Math.sqrt(body.getGm() * ((2d / (this.lowOrbit)) - (1d / this.atx)));
 		this.dvInit = Math.abs(this.hohVelInjection - this.velHigh);
 		this.dvExit = Math.abs(this.hohVelFinal - this.velLow);
 	}

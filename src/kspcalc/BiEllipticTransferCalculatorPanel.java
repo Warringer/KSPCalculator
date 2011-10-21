@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 import kspcalc.math.BiEllipticTransferOrbit;
 
@@ -51,6 +52,9 @@ public class BiEllipticTransferCalculatorPanel extends javax.swing.JPanel {
 	private AbstractAction altKiloAction;
 	private AbstractAction altMeterAction;
 	private JRadioButton altMeterRadio;
+	private AbstractAction celeBodyAction;
+	private JLabel jLabel1;
+	private JComboBox celeBodyBox;
 	private AbstractAction showOrbitsAction;
 	private JLabel fullTimeOut;
 	private JLabel downTimeOut;
@@ -164,6 +168,8 @@ public class BiEllipticTransferCalculatorPanel extends javax.swing.JPanel {
 		try {
 			JLabel jLabel = new JLabel();
 			this.add(jLabel);
+			this.add(getCeleBodyBox());
+			this.add(getJLabel1());
 			jLabel.setText(text);
 			jLabel.setBounds(x, y, width, hight);
 		} catch (NullPointerException e) {}
@@ -284,7 +290,7 @@ public class BiEllipticTransferCalculatorPanel extends javax.swing.JPanel {
 						highAlt *= 1000d;
 						pointBAlt *= 1000d;
 					}
-					BiEllipticTransferOrbit calc = new BiEllipticTransferOrbit(lowAlt, highAlt, pointBAlt, upwards);
+					BiEllipticTransferOrbit calc = new BiEllipticTransferOrbit(lowAlt, highAlt, pointBAlt, upwards, frame.body);
 					biInitVelOut.setText("Initial: " + Constants.formatVel(calc.getInitVel()));
 					biInitDVOut.setText("\u0394v: " + Constants.formatVel(calc.getDvInit()));
 					biInitAfterVelOut.setText("Final: " + Constants.formatVel(calc.getInjectionVel()));
@@ -435,6 +441,45 @@ public class BiEllipticTransferCalculatorPanel extends javax.swing.JPanel {
 			};
 		}
 		return showOrbitsAction;
+	}
+	
+	private JComboBox getCeleBodyBox() {
+		if(celeBodyBox == null) {
+			ComboBoxModel celeBodyBoxModel = 
+				new DefaultComboBoxModel(CelestrialBody.values());
+			celeBodyBox = new JComboBox();
+			celeBodyBox.setModel(celeBodyBoxModel);
+			celeBodyBox.setBounds(276, 112, 125, 27);
+			celeBodyBox.setAction(getCeleBodyAction());
+		}
+		return celeBodyBox;
+	}
+	
+	private JLabel getJLabel1() {
+		if(jLabel1 == null) {
+			jLabel1 = new JLabel();
+			jLabel1.setText("over");
+			jLabel1.setBounds(232, 117, 38, 17);
+		}
+		return jLabel1;
+	}
+	
+	private AbstractAction getCeleBodyAction() {
+		if(celeBodyAction == null) {
+			celeBodyAction = new AbstractAction("", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 8536078752977532826L;
+
+				public void actionPerformed(ActionEvent evt) {
+					JComboBox cb = (JComboBox)evt.getSource();
+				    CelestrialBody body = (CelestrialBody)cb.getSelectedItem();
+				    frame.body = body;
+				}
+			};
+		}
+		return celeBodyAction;
 	}
 
 }

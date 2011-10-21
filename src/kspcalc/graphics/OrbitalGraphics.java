@@ -3,6 +3,8 @@ package kspcalc.graphics;
 import java.awt.*;
 import java.awt.geom.*;
 
+import kspcal.utils.CelestrialBody;
+
 public class OrbitalGraphics {
 	private int windowHeight;
 	private int windowWidth;

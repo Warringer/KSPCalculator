@@ -51,16 +51,19 @@ public class LaunchOrbitCalculatorPanel extends javax.swing.JPanel {
 
 	private boolean kilometer;
 	private LaunchOrbitCalculatorPanel panel;
+	private JComboBox celestrialBodyCombo;
 	private JLabel jLabel11;
 	private JLabel jLabel10;
 	private AbstractAction launchCalculateAction;
 	private AbstractAction launchAltKiloAction;
 	private AbstractAction launchAltMeterAction;
+	private Calculator frame;
 
-	public LaunchOrbitCalculatorPanel() {
+	public LaunchOrbitCalculatorPanel(Calculator frame) {
 		super();
 		kilometer = false;
 		panel = this;
+		this.frame = frame;
 		initGUI();
 	}
 	
@@ -71,6 +74,7 @@ public class LaunchOrbitCalculatorPanel extends javax.swing.JPanel {
 			setPreferredSize(new Dimension(500, 400));
 			{
 				launchApoVelOut = new JLabel();
+				this.add(getCelestrialBodyCombo(), new AnchorConstraint(98, 955, 153, 675, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getJLabel11(), new AnchorConstraint(561, 971, 681, 551, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(getJLabel10(), new AnchorConstraint(101, 683, 151, 541, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				this.add(launchApoVelOut, new AnchorConstraint(801, 551, 851, 256, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
@@ -244,7 +248,7 @@ public class LaunchOrbitCalculatorPanel extends javax.swing.JPanel {
 					if (kilometer) {
 						launchAlt *= 1000d;
 					}
-					LaunchOrbit launch = new LaunchOrbit(launchVel, launchAlt, launchAng);
+					LaunchOrbit launch = new LaunchOrbit(launchVel, launchAlt, launchAng, panel.frame.body);
 					double launchPerAlt = launch.getLaunchPerAlt();
 					double launchApoAlt = launch.getLaunchApoAlt();
 					String launchPAlt = Constants.formatAlt(launchPerAlt);
@@ -276,6 +280,18 @@ public class LaunchOrbitCalculatorPanel extends javax.swing.JPanel {
 			jLabel11.setFont(new java.awt.Font("Andale Mono",0,20));
 		}
 		return jLabel11;
+	}
+	
+	private JComboBox getCelestrialBodyCombo() {
+		if(celestrialBodyCombo == null) {
+			ComboBoxModel celestrialBodyComboModel = 
+				new DefaultComboBoxModel(
+						new String[] { "Item One", "Item Two" });
+			celestrialBodyCombo = new JComboBox();
+			celestrialBodyCombo.setModel(celestrialBodyComboModel);
+			celestrialBodyCombo.setPreferredSize(new java.awt.Dimension(140, 22));
+		}
+		return celestrialBodyCombo;
 	}
 
 }

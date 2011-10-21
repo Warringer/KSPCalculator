@@ -1,5 +1,6 @@
 package kspcalc.math;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 
 public class BiEllipticTransferOrbit extends OrbitMath {
@@ -28,18 +29,15 @@ public class BiEllipticTransferOrbit extends OrbitMath {
 	 * @param pointB
 	 */
 	public BiEllipticTransferOrbit(double lowOrbit, double highOrbit,
-			double pointB, boolean upwards) {
-		super();
-		this.lowOrbit = lowOrbit + Constants.RADIUS;
-		this.highOrbit = highOrbit + Constants.RADIUS;
-		this.pointB = pointB + Constants.RADIUS;
+			double pointB, boolean upwards, CelestrialBody body) {
+		super(body);
 		this.upwards = upwards;
 		if (upwards) {
-			this.up = new HohmannTransferOrbit(this.lowOrbit, this.pointB, true);
-			this.down = new HohmannTransferOrbit(this.highOrbit, this.pointB, false);
+			this.up = new HohmannTransferOrbit(this.lowOrbit, this.pointB, true, body);
+			this.down = new HohmannTransferOrbit(this.highOrbit, this.pointB, false, body);
 		} else {
-			this.up = new HohmannTransferOrbit(this.highOrbit, this.pointB, true);
-			this.down = new HohmannTransferOrbit(this.lowOrbit, this.pointB, false);
+			this.up = new HohmannTransferOrbit(this.highOrbit, this.pointB, true, body);
+			this.down = new HohmannTransferOrbit(this.lowOrbit, this.pointB, false, body);
 		}
 		this.doMath();
 	}

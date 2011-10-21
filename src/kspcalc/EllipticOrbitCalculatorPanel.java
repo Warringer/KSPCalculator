@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
+import kspcal.utils.CelestrialBody;
 import kspcal.utils.Constants;
 import kspcal.utils.EllipticOrbitCalcType;
 import kspcalc.math.EllipticOrbit;
@@ -57,6 +58,9 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 	private JLabel jLabel1;
 
 	private EllipticOrbitCalculatorPanel panel;
+	private AbstractAction celeBodyAction;
+	private JLabel jLabel11;
+	private JComboBox celeBodyBox;
 	private JLabel jLabel10;
 	private AbstractAction closeAction1;
 	private JButton closeButton;
@@ -244,6 +248,8 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 				this.add(getJLabel7());
 				this.add(getEOut());
 				this.add(getShowOrbitButton());
+				this.add(getCeleBodyBox());
+				this.add(getJLabel11());
 				perAltApoAltRadio
 						.setText("Perigee Altitude and Apogee Altitude");
 				perAltApoAltRadio.setPreferredSize(new java.awt.Dimension(284,
@@ -415,10 +421,10 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 							break;
 						}
 					}
-					EllipticOrbit elliptic = new EllipticOrbit(firstValue, secondValue, panel.inputType);
+					EllipticOrbit elliptic = new EllipticOrbit(firstValue, secondValue, panel.inputType, frame.body);
 					if (elliptic.isElliptic()) {
-						double perAlt = elliptic.getPerAlt() - Constants.RADIUS;
-						double apoAlt = elliptic.getApoAlt() - Constants.RADIUS;
+						double perAlt = elliptic.getPerAlt() - frame.body.getRadius();
+						double apoAlt = elliptic.getApoAlt() - frame.body.getRadius();
 						String perAltOut = Constants.formatMeter(perAlt);
 						String apoAltOut = Constants.formatMeter(apoAlt);
 						panel.apo = apoAlt;
@@ -564,6 +570,45 @@ public class EllipticOrbitCalculatorPanel extends javax.swing.JPanel {
 			jLabel10.setBounds(12, 54, 209, 15);
 		}
 		return jLabel10;
+	}
+	
+	private JComboBox getCeleBodyBox() {
+		if(celeBodyBox == null) {
+			ComboBoxModel celeBodyBoxModel = 
+				new DefaultComboBoxModel(CelestrialBody.values());
+			celeBodyBox = new JComboBox();
+			celeBodyBox.setModel(celeBodyBoxModel);
+			celeBodyBox.setBounds(325, 95, 133, 21);
+			celeBodyBox.setAction(getCeleBodyAction());
+		}
+		return celeBodyBox;
+	}
+	
+	private JLabel getJLabel11() {
+		if(jLabel11 == null) {
+			jLabel11 = new JLabel();
+			jLabel11.setText("over");
+			jLabel11.setBounds(325, 75, 37, 15);
+		}
+		return jLabel11;
+	}
+	
+	private AbstractAction getCeleBodyAction() {
+		if(celeBodyAction == null) {
+			celeBodyAction = new AbstractAction("", null) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1808855715905633293L;
+
+				public void actionPerformed(ActionEvent evt) {
+					JComboBox cb = (JComboBox)evt.getSource();
+				    CelestrialBody body = (CelestrialBody)cb.getSelectedItem();
+				    panel.frame.body = body;
+				}
+			};
+		}
+		return celeBodyAction;
 	}
 
 }
