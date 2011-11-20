@@ -3,8 +3,8 @@ package kspcal.utils;
 public enum CelestrialBody {
 	
 	KEarth(600d, 35d, 35d, 5.29E+22d ,9.80665d, "KEarth"),
-	Mun(56, 0, 0, 4.7E+19, 1.66, "Mun"),
-	Sun(6.54e+04, 0, 0, 1.756567e+28, 27.94, "Sun");
+	Mun(200, 0, 0, 8.267125E+20, 1.379, "Mun"),
+	Sun(6.54e+04, 0, 0, 1.756567e+28, 27.94, "Kerbol");
 	
 	private double radius;
 	private double lowAthmos;
