@@ -54,6 +54,8 @@ public class CustomParts {
 		typeList.put("solidBooster", part);
 		part = new CustomPart(0.9, 0.9, 0, 0, 0, CustomPartType.PROP, "FL-R25 RCS Fuel Tank", "RCSFuelTank");
 		typeList.put("rcsTank", part);
+		part = new CustomPart(2, 2, 175, 0, 7, CustomPartType.PROP, "LV-T45 Liquid Fuel Engine", "LiquidEngine");
+		typeList.put("liquidEngine2", part);
 		typeList = parts.get(CustomPartType.CnC);
 		part = new CustomPart(1, 1, 0, 0, 0, CustomPartType.CnC, "Command Pod Mk1", "CommandPod");
 		typeList.put("mk1pod", part);
